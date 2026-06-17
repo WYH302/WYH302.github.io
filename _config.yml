@@ -1,0 +1,32 @@
+title: "Academic Homepage Draft"
+name: "Academic Homepage Draft"
+description: "Safe draft academic homepage for GitHub Pages."
+url: "https://WYH302.github.io"
+baseurl: ""
+repository: "WYH302/WYH302.github.io"
+lang: "en-US"
+
+author:
+  name: "Academic Homepage Draft"
+  avatar: "assets/images/profile-placeholder.svg"
+  bio: "Safe draft homepage. Replace with verified academic information before formal use."
+  location: ""
+  employer: ""
+  email: ""
+  github: "WYH302"
+  googlescholar: ""
+  orcid: ""
+  linkedin: ""
+
+collections:
+  posts:
+    output: true
+  publications:
+    output: true
+  portfolio:
+    output: true
+
+exclude:
+  - README.md
+  - package.json
+  - scripts/

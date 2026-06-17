@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.jekyll-cache/
+.sass-cache/
+_site/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.log
