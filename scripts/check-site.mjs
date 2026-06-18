@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const outputDirectory = path.join(root, "_site");
 const ignoredDirectories = new Set([
   ".git",
   "node_modules",
@@ -12,6 +13,31 @@ const ignoredDirectories = new Set([
   "playwright-report",
   "test-results",
 ]);
+
+const requiredSourceFiles = [
+  "index.html",
+  "projects/index.html",
+  "publications/index.html",
+  "blog/index.html",
+  "posts/multimodal-agents-computational-imaging/index.html",
+  "checklist/index.html",
+  "cv/index.html",
+  "contact/index.html",
+  "robots.txt",
+  "sitemap.xml",
+  "site.webmanifest",
+  "assets/css/styles.css",
+  "assets/images/research-hero.png",
+  "assets/images/research-systems.png",
+  "assets/images/favicon.svg",
+  "assets/files/cv.pdf",
+  "README.md",
+  "SECURITY.md",
+];
+
+const requiredPublishedFiles = requiredSourceFiles.filter(
+  (file) => !["README.md", "SECURITY.md"].includes(file),
+);
 
 function walk(directory) {
   const entries = fs.readdirSync(directory, { withFileTypes: true });
@@ -106,24 +132,17 @@ for (const filePath of htmlFiles) {
   placeholderCount += placeholders ? placeholders.length : 0;
 }
 
-const requiredFiles = [
-  "index.html",
-  "projects/index.html",
-  "publications/index.html",
-  "blog/index.html",
-  "checklist/index.html",
-  "cv/index.html",
-  "contact/index.html",
-  "assets/css/styles.css",
-  "assets/images/profile-placeholder.svg",
-  "assets/files/cv.pdf",
-  "README.md",
-  "SECURITY.md",
-];
-
-for (const file of requiredFiles) {
+for (const file of requiredSourceFiles) {
   if (!allFiles.some((filePath) => relative(filePath) === file)) {
     failures.push(`missing required file: ${file}`);
+  }
+}
+
+if (fs.existsSync(outputDirectory)) {
+  for (const file of requiredPublishedFiles) {
+    if (!fs.existsSync(path.join(outputDirectory, file))) {
+      failures.push(`missing published file in _site: ${file}`);
+    }
   }
 }
 

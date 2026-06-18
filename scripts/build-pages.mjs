@@ -14,8 +14,12 @@ const publishEntries = [
   "checklist",
   "contact",
   "cv",
+  "posts/multimodal-agents-computational-imaging",
   "projects",
   "publications",
+  "robots.txt",
+  "sitemap.xml",
+  "site.webmanifest",
 ];
 
 function copyEntry(entry) {

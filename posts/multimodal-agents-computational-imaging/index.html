@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multimodal Agents for Computational Imaging | Yonghao Wu</title>
+    <meta name="description" content="A concise public research note by Yonghao Wu on multimodal agents for computational imaging.">
+    <meta name="author" content="Yonghao Wu">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/posts/multimodal-agents-computational-imaging/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Multimodal Agents for Computational Imaging">
+    <meta property="og:description" content="A research agenda note connecting multimodal perception, tool-using agents, and computational imaging systems.">
+    <meta property="og:url" content="https://wyh302.github.io/posts/multimodal-agents-computational-imaging/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
+    <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260618-visual">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu</a>
+        <nav aria-label="Primary navigation">
+          <ul class="nav-list">
+            <li><a href="../../">About</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../publications/">Publications</a></li>
+            <li><a aria-current="page" href="../../blog/">Blog</a></li>
+            <li><a href="../../cv/">CV</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">Research note · 2026-06-19</p>
+      <h1>Multimodal agents for computational imaging</h1>
+      <p class="lead">
+        This note outlines a public research direction: connecting multimodal
+        perception, tool-using agents, and computational imaging systems. It is
+        a research agenda note, not a claim of completed experimental results.
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../assets/images/research-hero.png?v=20260618-visual"
+          alt="Abstract computational imaging setup with optical wavefronts and a multimodal AI graph"
+          width="1600"
+          height="980"
+        >
+      </figure>
+
+      <h2>Motivation</h2>
+      <p>
+        Computational imaging systems often combine physical measurements,
+        reconstruction algorithms, and downstream perception models. As
+        multimodal foundation models and agentic workflows mature, a natural
+        question is whether an intelligent system can reason about the sensing
+        process itself: what to measure, how to reconstruct, which tools to
+        call, and when the result is reliable enough for a downstream decision.
+      </p>
+
+      <h2>Research questions</h2>
+      <ul class="detail-list">
+        <li>How can multimodal models represent optical measurements, sparse observations, and reconstructed visual content in one reasoning loop?</li>
+        <li>How can agents use tools such as simulators, reconstruction modules, segmentation models, and evaluation scripts without hiding uncertainty?</li>
+        <li>How can a system decide when to request more measurements, change a sensing strategy, or defer a prediction?</li>
+      </ul>
+
+      <h2>Possible direction</h2>
+      <p>
+        One promising direction is to treat the imaging pipeline as an
+        inspectable workflow. A multimodal agent can coordinate measurement
+        selection, reconstruction, visual analysis, and reporting, while each
+        step remains traceable. In this framing, the agent is not a black-box
+        replacement for physics or signal processing. It is a controller and
+        reasoning layer that helps connect physical priors, learned models, and
+        human-facing explanations.
+      </p>
+
+      <h2>Practical caution</h2>
+      <p>
+        The main risk is overclaiming autonomy. A useful research prototype
+        should report uncertainty, preserve intermediate artifacts, and separate
+        model-generated suggestions from verified measurements. For public
+        academic communication, method notes should distinguish proposals,
+        ongoing work, and validated results.
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu.</p>
+        <p><a href="../../contact/">Contact</a> | <a href="../../cv/">CV</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

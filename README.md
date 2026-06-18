@@ -1,43 +1,39 @@
-# Academic Research Homepage
+# Yonghao Wu Academic Homepage
 
-This repository is a GitHub Pages-ready academic personal website. It is built
-as a static site so it can be published without a backend, database, login
-system, or theme download step.
+This repository contains Yonghao Wu's GitHub Pages academic personal website:
 
-The site is designed for PhD applications and research visibility:
+https://wyh302.github.io/
 
-- Clear English homepage
-- Research interests
-- Selected projects
-- Publications, preprints, and working papers
-- CV download entry
-- Contact and academic profile links
-- A small, high-quality research blog
+The site is a static HTML/CSS system for PhD application visibility and public
+research communication. It can be deployed directly with GitHub Pages and does
+not require a backend, database, login system, or theme download step.
 
-## Replace Before Publishing
+## Site Structure
 
-Search the repository for these placeholders and replace them with real,
-publicly shareable information:
+- `index.html`: English academic homepage
+- `projects/`: selected research and engineering projects
+- `publications/`: conservative research output and manuscript status page
+- `blog/`: public research notes
+- `cv/`: public web CV and PDF CV entry
+- `contact/`: public academic contact information
+- `assets/`: CSS, generated research visuals, favicon, and public PDF CV
+- `sitemap.xml`, `robots.txt`, `site.webmanifest`: publication support files
 
-- `[Your Name]`
-- `[Your Department]`
-- `[Your University]`
-- `[Your Field]`
-- `[Advisor Name]`
-- `[Research Area 1]`
-- `[Research Area 2]`
-- `[Research Area 3]`
-- `yourusername`
-- `your_email@university.edu`
+## Publication Safety
 
-Then replace these files:
+The public pages intentionally omit private or high-risk information:
 
-- `assets/images/profile-placeholder.svg` with a formal profile photo
-- `assets/files/cv.pdf` with your real public CV PDF
+- phone number
+- birth date
+- original Word resume
+- project budget and internal metrics
+- unverified patent numbers
+- unpublished internal datasets or restricted collaborator details
 
-Do not invent publications, awards, affiliations, advisor names, or accepted
-papers. It is better to label work honestly as "working paper", "course
-project", "poster", or "research experience" than to overstate it.
+Publication and manuscript status labels are intentionally conservative. Items
+reported in the source CV but not yet linked to public bibliographic records are
+marked as pending public verification rather than presented as final published
+papers.
 
 ## Local Preview
 
@@ -63,9 +59,8 @@ Then open:
 http://localhost:8080
 ```
 
-`npm run build` creates `_site/`, the directory uploaded by the included GitHub
-Actions workflow. `_site/` is a generated artifact and is intentionally ignored
-by git.
+`npm run build` creates `_site/`, a generated artifact that is intentionally
+ignored by git.
 
 If `npm` is not available, any static web server works. For example:
 
@@ -75,16 +70,17 @@ python -m http.server 8080
 
 ## Publish With GitHub Pages
 
-1. Create a GitHub repository named `<yourusername>.github.io`.
-2. Push these files to that repository.
-3. In GitHub, open `Settings -> Pages`.
-4. Choose GitHub Actions if you want to use the included workflow, or publish
-   from the default branch if you prefer GitHub's static file serving.
-5. Visit `https://<yourusername>.github.io` after the Pages build finishes.
+This repository is published from the default branch to:
 
-For a custom domain, configure it in `Settings -> Pages` first, then configure
-DNS at your domain provider. Keep the official GitHub Pages documentation as
-the source of truth for DNS records and HTTPS settings.
+https://wyh302.github.io/
+
+After editing content:
+
+1. Run `npm.cmd run check`.
+2. Run `npm.cmd run build`.
+3. Review `git diff`.
+4. Commit and push to `main`.
+5. Verify the live site with a cache-busting query string.
 
 ## Safety Checklist
 

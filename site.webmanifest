@@ -1,0 +1,17 @@
+{
+  "name": "Yonghao Wu Academic Homepage",
+  "short_name": "Yonghao Wu",
+  "description": "Academic homepage of Yonghao Wu.",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#f7f6f2",
+  "theme_color": "#8c1515",
+  "icons": [
+    {
+      "src": "/assets/images/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

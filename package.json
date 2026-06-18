@@ -5,7 +5,7 @@
   "description": "A static GitHub Pages academic personal homepage.",
   "scripts": {
     "build": "node scripts/build-pages.mjs",
-    "check": "node scripts/check-site.mjs",
+    "check": "node scripts/build-pages.mjs && node scripts/check-site.mjs",
     "serve": "node scripts/serve.mjs"
   }
 }
