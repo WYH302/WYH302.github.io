@@ -184,16 +184,19 @@ p {
 }
 
 .profile-band {
-  background: var(--paper);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(247, 246, 242, 0.88)),
+    radial-gradient(circle at 82% 16%, rgba(38, 76, 102, 0.18), transparent 34%),
+    radial-gradient(circle at 18% 88%, rgba(123, 93, 32, 0.12), transparent 30%);
   border-bottom: 1px solid var(--line);
 }
 
 .profile-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 272px;
-  gap: 3.5rem;
-  align-items: start;
-  padding: 4.2rem 0 3.8rem;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
+  gap: 3.25rem;
+  align-items: center;
+  padding: 4.8rem 0 4.25rem;
 }
 
 .profile-copy {
@@ -203,6 +206,26 @@ p {
 .lead {
   color: var(--ink-soft);
   font-size: 1.08rem;
+}
+
+.focus-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.3rem;
+}
+
+.focus-strip span {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 0.22rem 0.62rem;
+  border: 1px solid rgba(38, 76, 102, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--accent-blue);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .eyebrow {
@@ -225,12 +248,28 @@ p {
 }
 
 .profile-panel {
-  padding: 1rem;
+  padding: 0.85rem;
   border: 1px solid var(--line);
   border-top: 4px solid var(--accent);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  overflow: hidden;
+}
+
+.hero-figure {
+  margin: 0;
+}
+
+.hero-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  object-fit: cover;
 }
 
 .profile-image {
@@ -246,6 +285,7 @@ p {
 
 .fact-list {
   margin: 0;
+  padding: 0.2rem 0.45rem 0;
 }
 
 .fact-list div {
@@ -429,6 +469,21 @@ p {
   max-width: 920px;
 }
 
+.page-visual {
+  margin: 1.7rem 0 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+  box-shadow: var(--shadow);
+}
+
+.page-visual img {
+  width: 100%;
+  aspect-ratio: 128 / 76;
+  object-fit: cover;
+}
+
 .page-body {
   padding: 2.8rem 0;
 }
@@ -559,6 +614,10 @@ p {
 
   .profile-panel {
     max-width: 360px;
+  }
+
+  .hero-panel {
+    max-width: 520px;
   }
 }
 
