@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build-pages.mjs",
     "check": "node scripts/build-pages.mjs && node scripts/check-site.mjs",
+    "audit": "node scripts/build-pages.mjs && node scripts/check-site.mjs && node scripts/audit-site.mjs",
     "serve": "node scripts/serve.mjs"
   }
 }
