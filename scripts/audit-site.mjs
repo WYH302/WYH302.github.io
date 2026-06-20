@@ -104,6 +104,21 @@ function extractPdfText(pdfPath) {
   return { ok: false, lastError };
 }
 
+function runGit(args, label) {
+  const result = spawnSync("git", args, {
+    cwd: root,
+    encoding: "utf8",
+  });
+
+  if (result.status !== 0) {
+    const detail = [result.stdout, result.stderr].filter(Boolean).join("\n").trim();
+    failures.push(`${label} failed${detail ? `: ${detail}` : ""}`);
+    return "";
+  }
+
+  return result.stdout.trim();
+}
+
 for (const route of requiredRoutes) {
   if (!exists(route)) {
     failures.push(`missing published route: ${route}`);
@@ -189,6 +204,26 @@ for (const filePath of publishedTextFiles) {
       failures.push(`${relativePath}: forbidden public text matched ${pattern}`);
     }
   }
+}
+
+runGit(["diff", "--check"], "git diff --check");
+runGit(["diff", "--cached", "--check"], "git diff --cached --check");
+
+const trackedOfficeDocs = runGit(["ls-files", "--", "*.doc", "*.docx"], "tracked Office document scan")
+  .split(/\r?\n/)
+  .filter(Boolean);
+if (trackedOfficeDocs.length > 0) {
+  failures.push(`raw Office resume/source documents are tracked: ${trackedOfficeDocs.join(", ")}`);
+}
+
+const unignoredOfficeDocs = runGit(
+  ["ls-files", "--others", "--exclude-standard", "--", "*.doc", "*.docx"],
+  "unignored Office document scan",
+)
+  .split(/\r?\n/)
+  .filter(Boolean);
+if (unignoredOfficeDocs.length > 0) {
+  failures.push(`raw Office resume/source documents are not ignored: ${unignoredOfficeDocs.join(", ")}`);
 }
 
 if (failures.length > 0) {
