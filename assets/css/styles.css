@@ -457,6 +457,34 @@ p {
   font-weight: 800;
 }
 
+.item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.mini-button {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.24rem 0.68rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: #fff8f6;
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.mini-button:hover {
+  border-color: var(--accent-strong);
+  background: var(--accent);
+  color: #ffffff;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
