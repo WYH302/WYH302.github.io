@@ -270,12 +270,29 @@ p {
   margin: 0;
 }
 
+.photo-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(96px, 0.42fr);
+  gap: 0.7rem;
+  align-items: stretch;
+}
+
 .hero-image {
   width: 100%;
   aspect-ratio: 16 / 10;
   border: 1px solid var(--line);
   border-radius: 4px;
   object-fit: cover;
+}
+
+.life-photo {
+  aspect-ratio: 4 / 5;
+  object-position: center top;
+}
+
+.secondary-photo {
+  height: 100%;
+  opacity: 0.94;
 }
 
 .profile-image {
@@ -683,6 +700,10 @@ p {
   .hero-panel {
     max-width: 520px;
   }
+
+  .photo-pair {
+    grid-template-columns: 1fr 0.5fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -735,5 +756,13 @@ p {
 
   .action-row .button {
     width: 100%;
+  }
+
+  .photo-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .secondary-photo {
+    display: none;
   }
 }

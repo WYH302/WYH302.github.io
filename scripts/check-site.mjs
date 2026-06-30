@@ -29,8 +29,10 @@ const requiredSourceFiles = [
   "assets/css/styles.css",
   "assets/images/research-hero.png",
   "assets/images/research-systems.png",
+  "assets/images/profile-photo.jpg",
+  "assets/images/lifephoto-1.png",
+  "assets/images/lifephoto-2.png",
   "assets/images/favicon.svg",
-  "assets/files/cv.pdf",
   "README.md",
   "SECURITY.md",
 ];

@@ -20,8 +20,10 @@ const requiredRoutes = [
   "assets/css/styles.css",
   "assets/images/research-hero.png",
   "assets/images/research-systems.png",
+  "assets/images/profile-photo.jpg",
+  "assets/images/lifephoto-1.png",
+  "assets/images/lifephoto-2.png",
   "assets/images/favicon.svg",
-  "assets/files/cv.pdf",
 ];
 
 const publicHtmlRoutes = [
@@ -41,12 +43,9 @@ const forbiddenPublishedPaths = [
 
 const sensitivePatterns = [
   /Academic Homepage Draft/i,
-  /13580662074/,
-  /2001\.07/,
   /\bRMB\b/i,
   /\bmAP\b/i,
   /Under Review/i,
-  /\bCN\d{6,}[A-Z]\b/,
   /Guangzhou Road Major/i,
   /your_email@university\.edu/i,
   /yourusername/i,
@@ -54,14 +53,6 @@ const sensitivePatterns = [
 ];
 
 const failures = [];
-const pdfTextCandidates = [
-  process.env.PDFTOTEXT_PATH,
-  "pdftotext.exe",
-  "pdftotext",
-  "D:\\texlive\\2026\\bin\\windows\\pdftotext.exe",
-  "C:\\texlive\\2026\\bin\\windows\\pdftotext.exe",
-].filter(Boolean);
-
 function read(file) {
   return fs.readFileSync(file, "utf8");
 }
@@ -82,26 +73,6 @@ function walk(directory) {
     }
     return [fullPath];
   });
-}
-
-function extractPdfText(pdfPath) {
-  let lastError = "pdftotext.exe was not found";
-
-  for (const command of pdfTextCandidates) {
-    const result = spawnSync(command, [pdfPath, "-"], {
-      encoding: "utf8",
-    });
-
-    if (result.status === 0) {
-      return { ok: true, stdout: result.stdout, command };
-    }
-
-    lastError = result.error
-      ? `${command}: ${result.error.message}`
-      : `${command}: exit ${result.status}${result.stderr ? ` ${result.stderr.trim()}` : ""}`;
-  }
-
-  return { ok: false, lastError };
 }
 
 function runGit(args, label) {
@@ -165,31 +136,6 @@ for (const route of publicHtmlRoutes) {
 const manifest = JSON.parse(read(path.join(site, "site.webmanifest")));
 if (manifest.name !== "Yonghao Wu Academic Homepage") {
   failures.push("site.webmanifest: unexpected app name");
-}
-
-const cvPdf = fs.statSync(path.join(site, "assets/files/cv.pdf"));
-if (cvPdf.size < 20_000) {
-  failures.push("assets/files/cv.pdf: PDF appears too small to be a real CV");
-}
-
-const pdfTextResult = extractPdfText(path.join(site, "assets/files/cv.pdf"));
-
-if (!pdfTextResult.ok) {
-  failures.push(
-    "assets/files/cv.pdf: unable to extract PDF text. Install pdftotext.exe or set PDFTOTEXT_PATH. " +
-      `Last error: ${pdfTextResult.lastError}`,
-  );
-} else {
-  const pdfText = pdfTextResult.stdout;
-  if (!/Yonghao Wu/.test(pdfText) || !/South China Normal University/.test(pdfText)) {
-    failures.push("assets/files/cv.pdf: expected public CV identity text not found");
-  }
-
-  for (const pattern of sensitivePatterns) {
-    if (pattern.test(pdfText)) {
-      failures.push(`assets/files/cv.pdf: forbidden public text matched ${pattern}`);
-    }
-  }
 }
 
 const publishedTextFiles = walk(site).filter((file) =>

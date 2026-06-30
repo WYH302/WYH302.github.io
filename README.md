@@ -19,19 +19,19 @@ not require a backend, database, login system, or theme download step.
 - `assets/`: CSS, generated research visuals, favicon, and public PDF CV
 - `sitemap.xml`, `robots.txt`, `site.webmanifest`: publication support files
 
-## Publication Safety
+## Publication Policy
 
-The public pages intentionally omit private or high-risk information:
+The public website is kept broadly synchronized with the English academic CV,
+with the Chinese resume following the same core profile. Private source files
+and restricted materials are not published:
 
-- phone number
-- birth date
-- original Word resume
+- original Word resume and private resume-generation sources
+- raw input photos outside the curated website assets
 - project budget and internal metrics
-- unverified patent numbers
 - unpublished internal datasets or restricted collaborator details
 
 Publication and manuscript status labels are intentionally conservative. Items
-reported in the source CV but not yet linked to public bibliographic records are
+accepted but not yet linked to public bibliographic records are
 marked as pending public verification rather than presented as final published
 papers.
 
