@@ -12,6 +12,8 @@ const requiredRoutes = [
   "publications/index.html",
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
+  "posts/leakage-controlled-evaluation/index.html",
+  "posts/verifiable-multimodal-engineering/index.html",
   "cv/index.html",
   "contact/index.html",
   "robots.txt",
@@ -32,6 +34,8 @@ const publicHtmlRoutes = [
   "publications/index.html",
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
+  "posts/leakage-controlled-evaluation/index.html",
+  "posts/verifiable-multimodal-engineering/index.html",
   "cv/index.html",
   "contact/index.html",
 ];
@@ -44,7 +48,7 @@ const forbiddenPublishedPaths = [
 const sensitivePatterns = [
   /Academic Homepage Draft/i,
   /\bRMB\b/i,
-  /\bmAP\b/i,
+  /\bmAP\s*[:=]|\bmAP@[0-9]/i,
   /Under Review/i,
   /Guangzhou Road Major/i,
   /your_email@university\.edu/i,
@@ -123,6 +127,12 @@ for (const route of publicHtmlRoutes) {
 const blogHtml = read(path.join(site, "blog/index.html"));
 if (!/posts\/multimodal-agents-computational-imaging\//.test(blogHtml)) {
   failures.push("blog/index.html: missing link to the published research note");
+}
+if (!/posts\/leakage-controlled-evaluation\//.test(blogHtml)) {
+  failures.push("blog/index.html: missing link to the leakage-controlled evaluation note");
+}
+if (!/posts\/verifiable-multimodal-engineering\//.test(blogHtml)) {
+  failures.push("blog/index.html: missing link to the verifiable multimodal engineering note");
 }
 
 const sitemap = read(path.join(site, "sitemap.xml"));

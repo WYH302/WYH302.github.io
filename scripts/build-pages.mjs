@@ -15,6 +15,8 @@ const publishEntries = [
   "contact",
   "cv",
   "posts/multimodal-agents-computational-imaging",
+  "posts/leakage-controlled-evaluation",
+  "posts/verifiable-multimodal-engineering",
   "projects",
   "publications",
   "robots.txt",

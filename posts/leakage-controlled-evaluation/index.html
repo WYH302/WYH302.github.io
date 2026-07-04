@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Why Leakage-Controlled Evaluation Matters | Yonghao Wu (Leon)</title>
+    <meta name="description" content="A public method note by Yonghao Wu (Leon) on leakage-controlled evaluation protocols for machine learning research.">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/posts/leakage-controlled-evaluation/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Why Leakage-Controlled Evaluation Matters">
+    <meta property="og:description" content="A method note on train-only statistics, chronological protocols, retrieval-memory boundaries, and conservative reporting.">
+    <meta property="og:url" content="https://wyh302.github.io/posts/leakage-controlled-evaluation/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
+    <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu (Leon)</a>
+        <nav aria-label="Primary navigation">
+          <ul class="nav-list">
+            <li><a href="../../">About</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../publications/">Publications</a></li>
+            <li><a aria-current="page" href="../../blog/">Blog</a></li>
+            <li><a href="../../cv/">CV</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">Method note | 2026-07-03</p>
+      <h1>Why leakage-controlled evaluation matters</h1>
+      <p class="lead">
+        This note explains one habit that appears across several of my current
+        manuscripts: treat evaluation protocol design as part of the method,
+        not as a final formatting detail.
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../assets/images/research-hero.png?v=20260618-visual"
+          alt="Abstract research diagram with sensing, reconstruction, model evaluation, and audit paths"
+          width="1600"
+          height="980"
+        >
+      </figure>
+
+      <h2>The problem</h2>
+      <p>
+        A model can look better for reasons that have little to do with the
+        proposed method. Normalization statistics may be computed on the full
+        dataset. Retrieval memory may contain future samples. A time-series
+        split may let events from the same storm, market period, or scene leak
+        into both training and evaluation. These details can be small in code
+        and large in interpretation.
+      </p>
+
+      <h2>Protocol-first habits</h2>
+      <ul class="detail-list">
+        <li>Use train-only statistics for normalization, calibration, and memory construction.</li>
+        <li>Prefer chronological or entity-level splits when samples are temporally or structurally coupled.</li>
+        <li>Document what information is available at prediction time, especially for retrieval and adaptation methods.</li>
+        <li>Report condition-dependent effects instead of forcing every result into a single improvement narrative.</li>
+      </ul>
+
+      <h2>Why it matters for current work</h2>
+      <p>
+        Leakage control is especially important in hurricane forecasting,
+        trajectory prediction, financial forecasting, test-time adaptation, and
+        retrieval-augmented models. These settings often have hidden structure:
+        storms contain multiple horizons, trajectories share scene geometry,
+        financial sequences are chronological, and adaptation methods can
+        accidentally observe the wrong distributional signal.
+      </p>
+
+      <h2>Practical standard</h2>
+      <p>
+        My preferred public-facing standard is simple: state the split, state
+        what is train-only, state what information the model sees at inference,
+        and describe negative or conditional findings plainly. A careful
+        protocol is not a decoration around a result. It is part of the result.
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">Contact</a> | <a href="../../cv/">CV</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

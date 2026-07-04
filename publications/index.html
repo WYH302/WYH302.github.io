@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://wyh302.github.io/publications/">
     <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
     <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../assets/css/styles.css?v=20260618-visual">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260703-site">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -41,9 +41,24 @@
           <h1>Publications / Manuscripts / Working Papers</h1>
           <p class="lead">
             Published and accepted papers are listed separately from current
-            manuscripts and research drafts. Current manuscripts are not
-            presented as fully published papers.
+            manuscripts and research drafts. Submitted manuscripts include
+            target venue labels for transparency, but they are not presented as
+            accepted publications.
           </p>
+          <dl class="hero-stats compact" aria-label="Publication page summary">
+            <div>
+              <dt>4</dt>
+              <dd>Published or accepted papers</dd>
+            </div>
+            <div>
+              <dt>8</dt>
+              <dd>Current submitted manuscripts</dd>
+            </div>
+            <div>
+              <dt>11</dt>
+              <dd>Selected research-in-progress directions</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
@@ -55,10 +70,24 @@
             available. Current manuscripts and research drafts should not be
             read as accepted or fully published papers.
           </article>
+          <div class="evidence-grid" aria-label="Publication status conventions">
+            <article class="evidence-item">
+              <strong>Published.</strong>
+              <span>Items with public venue metadata, article information, DOI, or acceptance date.</span>
+            </article>
+            <article class="evidence-item">
+              <strong>Submitted manuscript.</strong>
+              <span>Submission venue is listed for transparency; acceptance is not implied.</span>
+            </article>
+            <article class="evidence-item">
+              <strong>Research in progress.</strong>
+              <span>Directions and drafts are described as ongoing work, with claims kept method-level unless evaluated.</span>
+            </article>
+          </div>
 
           <div class="section-heading">
             <p class="eyebrow">Publications</p>
-            <h2>Published and Accepted Papers</h2>
+            <h2>PublishedPapers</h2>
           </div>
 
           <article class="feature-item">
@@ -71,7 +100,7 @@
               specific object-of-interest imaging technology.
             </p>
             <p class="item-actions">
-              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for related code and projects">GitHub</a>
+              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for broader related code and projects">GitHub Profile</a>
             </p>
             <div class="tag-row" aria-label="Publication tags">
               <span class="tag">published article</span>
@@ -110,7 +139,7 @@
               identification.
             </p>
             <p class="item-actions">
-              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for related code and projects">GitHub</a>
+              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for broader related code and projects">GitHub Profile</a>
             </p>
             <div class="tag-row" aria-label="Publication tags">
               <span class="tag">published article</span>
@@ -130,7 +159,7 @@
               behavior monitoring using multidimensional similarity metrics.
             </p>
             <p class="item-actions">
-              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for related code and projects">GitHub</a>
+              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for broader related code and projects">GitHub Profile</a>
             </p>
             <div class="tag-row" aria-label="Publication tags">
               <span class="tag">published article</span>
@@ -140,18 +169,20 @@
             </div>
           </article>
 
-          <div class="section-heading">
+          <div class="section-heading" id="current-manuscripts">
             <p class="eyebrow">Manuscripts</p>
             <h2>Current Manuscripts</h2>
           </div>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
+            <p class="item-meta">Submitted manuscript | First author | Image and Vision Computing | Not a publication</p>
             <h2>MC-SAM: Stable Adaptation of Segment Anything for Camouflaged Scene Segmentation</h2>
             <p>
-              Research manuscript on SAM-based camouflaged object segmentation
-              using stable prompt coupling, manifold-constrained adaptation,
-              and threshold calibration.
+              Studies parameter-efficient SAM adaptation for camouflaged
+              object segmentation with a frozen 636M backbone and 5.1M
+              trainable parameters. COD10K, NC4K, CAMO, and CHAMELEON
+              experiments report COD10K differences versus MM-SAM of +0.8%
+              S-measure, +5.0% E-measure, +6.2% weighted F, and -21.7% MAE.
             </p>
             <p class="item-actions">
               <a class="mini-button" href="https://github.com/WYH302/Manifold-Constrained-Hyper-Connections-and-Prompting-for-SAM-in-Camouflaged-Scene-Segmentation" aria-label="GitHub repository for MC-SAM">GitHub</a>
@@ -159,35 +190,41 @@
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">Image and Vision Computing</span>
               <span class="tag">segmentation</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
-            <h2>Selective-SEA: Confidence-Gated Expert Selection for Few-Shot Fluorescence EEM Classification</h2>
+            <p class="item-meta">Submitted manuscript | First author | IEEE BIBM 2026 | Not a publication</p>
+            <h2>MECR: Evidence-Context Refinement for Few-Shot Fluorescence EEM Classification</h2>
             <p>
-              Research manuscript on an auditable training-time expert
-              selection protocol for heterogeneous few-shot fluorescence EEM
-              spectroscopy data.
+              Proposes MECR, a two-stage framework that aggregates multi-scale
+              spectral evidence and fuses target-level chemical context to
+              refine probability distributions. Public-16 experiments across
+              four source families, 16 targets, and 80 folds report 0.9199
+              Macro-F1, 0.9397 accuracy, and 0.1763 NLL.
             </p>
             <p class="item-actions">
-              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for related code and projects">GitHub</a>
+              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for broader related code and projects">GitHub Profile</a>
             </p>
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">IEEE BIBM 2026</span>
               <span class="tag">spectroscopy</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
+            <p class="item-meta">Submitted manuscript | First author | CIKM 2026 | Not a publication</p>
             <h2>Auditable Neural Equation-DAG Export for Scientific Data Mining</h2>
             <p>
-              Research manuscript developing an EML-KAN exp-log edge-function
-              network and a checkpoint-to-equation-DAG export workflow for
-              scientific model interpretation.
+              Frames checkpoint-to-equation-DAG export as an audit problem
+              using EML-KAN rather than post-hoc symbolic search. Evaluation
+              covers 10 equation-native functions, 36 Feynman clean12 runs,
+              SRSD splits, and export-length diagnostics alongside fidelity
+              checks.
             </p>
             <p class="item-actions">
               <a class="mini-button" href="https://github.com/WYH302/Auditable-Neural-Equation-DAG-Export-for-Scientific-Data-Mining" aria-label="GitHub repository for the neural equation-DAG manuscript">GitHub</a>
@@ -195,17 +232,19 @@
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">CIKM 2026</span>
               <span class="tag">auditable AI</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
+            <p class="item-meta">Submitted manuscript | First author | CIKM 2026 | Not a publication</p>
             <h2>TyphoFormer++: Hurricane Track Forecasting under a Strict HURDAT2 Protocol</h2>
             <p>
-              Research manuscript on a leakage-controlled HURDAT2 evaluation
-              protocol and constant-velocity residual forecasting framework for
-              hurricane track prediction.
+              Defines a leakage-controlled HURDAT2 protocol with storm-level
+              splits, train-only statistics, and observed-coordinate decoding.
+              Local 2022-2024 Atlantic evaluation reports 34.15, 86.71,
+              156.20, and 230.53 km at 6, 12, 18, and 24 hours.
             </p>
             <p class="item-actions">
               <a class="mini-button" href="https://github.com/WYH302/TyphoFormer-for-Hurricane-Track-Forecasting" aria-label="GitHub repository for TyphoFormer">GitHub</a>
@@ -213,17 +252,20 @@
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">CIKM 2026</span>
               <span class="tag">forecasting</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
+            <p class="item-meta">Submitted manuscript | First author | CIKM 2026 | Not a publication</p>
             <h2>When Does Retrieval Help Missing-History Trajectory Prediction?</h2>
             <p>
-              Research manuscript proposing a retrieval-augmented conditional
-              trajectory prediction framework under controlled leakage-free
-              protocols.
+              Studies retrieval for missing-history pedestrian prediction
+              using train-only memory and history-only retrieval keys.
+              ETH/UCY Easy/Hard experiments audit leakage controls and report
+              condition-dependent effects, with Hard cases showing weak
+              history-future alignment.
             </p>
             <p class="item-actions">
               <a class="mini-button" href="https://github.com/WYH302/A-Leakage-Controlled-Diagnostic-Study" aria-label="GitHub repository for the retrieval trajectory diagnostic study">GitHub</a>
@@ -231,55 +273,61 @@
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">CIKM 2026</span>
               <span class="tag">trajectory prediction</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | Second author | Not a publication</p>
+            <p class="item-meta">Submitted manuscript | Second author | ICAIF 2026 | Not a publication</p>
             <h2>Noise Refined is News Aligned: ARGS for Financial Edge-Streaming Forecasting</h2>
             <p>
-              Current manuscript introducing the Adaptive Regime-Aware Gating
-              System (ARGS), a compact GHA-based white-box processor for
-              edge-streaming financial forecasting that extracts residual
-              volatility signals to guide regime-aware risk responses across
-              SPY and TSLA evaluations.
+              Contributed to ARGS, a compact GHA-based white-box processor for
+              financial edge-streaming forecasting. SPY and TSLA experiments
+              are evaluated under the manuscript protocol through return,
+              Sharpe ratio, and maximum-drawdown diagnostics.
             </p>
             <p class="item-actions">
-              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for related code and projects">GitHub</a>
+              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for broader related code and projects">GitHub Profile</a>
             </p>
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">ICAIF 2026</span>
               <span class="tag">financial forecasting</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
+            <p class="item-meta">Submitted manuscript | First author | ACL 2026 | Not a publication</p>
             <h2>PressureTest-Biz: A Matched-Scenario Benchmark for Business Decision Stress Response in Large Language Models</h2>
             <p>
-              Research manuscript constructing 4,000 matched scenario prompts
-              to evaluate how cognitive load and resource scarcity shift LLM
-              business decision boundaries.
+              Constructs PressureTest-Biz from 1,000 business cases and 4,000
+              matched pressure prompts. Across three target models and three
+              judges, the analysis covers 12,000 responses and 36,000 records
+              and reports a DeepSeek-chat BRisk shift from 0.0312 to 0.1490,
+              while Gemini and GPT remain near floor.
             </p>
             <p class="item-actions">
-              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for related code and projects">GitHub</a>
+              <a class="mini-button" href="https://github.com/WYH302" aria-label="GitHub profile for broader related code and projects">GitHub Profile</a>
             </p>
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">ACL 2026</span>
               <span class="tag">LLM evaluation</span>
             </div>
           </article>
 
           <article class="feature-item">
-            <p class="item-meta">Current manuscript | First author | Not a publication</p>
-            <h2>De-Civ Lite: Pre-Storage Claim Anchoring under AI-Generated Content Pollution</h2>
+            <p class="item-meta">Submitted manuscript | First author | CIKM 2026 Short Paper Track | Not a publication</p>
+            <h2>De-Civ Lite: False-Acceptance-Aware Claim Anchoring</h2>
             <p>
-              Research manuscript proposing a pre-storage claim anchoring
-              mechanism for knowledge verification and false-acceptance control
-              under AI-generated content pollution.
+              Studies pre-storage claim routing before durable AI or knowledge
+              base storage, including accept, reject, revise, and defer
+              actions. DeCivClaim-450 simulations report 0.7550 accuracy and
+              0.0831 false-acceptance rate with 10-human and four-LLM replay
+              checks.
             </p>
             <p class="item-actions">
               <a class="mini-button" href="https://github.com/WYH302/decivclaim-reproducibility-anonymous-research-artifact" aria-label="GitHub repository for De-Civ Lite">GitHub</a>
@@ -287,6 +335,7 @@
             <div class="tag-row" aria-label="Manuscript tags">
               <span class="tag">current manuscript</span>
               <span class="tag">not accepted</span>
+              <span class="tag">CIKM 2026 short</span>
               <span class="tag">knowledge verification</span>
             </div>
           </article>
@@ -296,13 +345,12 @@
             <h2>Selected Research in Progress</h2>
           </div>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>PASTA++: Part-Aware Sketch-to-3D Shape Generation</h2>
+            <h2>PASTA++: Stable Part-Aware Sketch-to-3D Generation</h2>
             <p>
-              Research in progress on stable and controllable part-aware
-              sketch-to-3D shape generation using dynamic multimodal fusion and
-              latent structure optimization.
+              Uses dynamic multimodal fusion and latent-structure optimization
+              to improve controllability, stability, and part-level consistency.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -311,12 +359,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>Flow Matching-Enabled Ultra-High-Ratio Compressive Imaging</h2>
+            <h2>Flow-Matched Ultra-High-Ratio Compressive Imaging</h2>
             <p>
-              Research in progress on flow matching and denoising diffusion for
-              compressive imaging in the measurement domain.
+              Moves diffusion-style reconstruction into the measurement domain,
+              using flow matching to stabilize high-compression recovery.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -325,13 +373,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>Enhanced Proximal Algorithm Unrolling for Flexible Single-Pixel Imaging Reconstruction</h2>
+            <h2>Physical-Perceptual Proximal Unrolling for Single-Pixel Imaging</h2>
             <p>
-              Research in progress on proximal algorithm unrolling,
-              physical-perceptual constraints, and flexible single-pixel
-              imaging reconstruction.
+              Unrolls proximal reconstruction with physics constraints and
+              perceptual losses for flexible single-pixel imaging settings.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -340,12 +387,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>MedVSR++: Medical Video Super-Resolution with Test-Time Adaptation</h2>
+            <h2>MedVSR++: Test-Time Adaptation for Medical Video Super-Resolution</h2>
             <p>
-              Research in progress on medical video super-resolution,
-              test-time adaptation, and spatiotemporal consistency constraints.
+              Combines test-time adaptation with spatiotemporal consistency
+              constraints to improve clinical-domain generalization.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -354,15 +401,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>Latent-Space Computational Imaging with Flow-Matched and Low-Rank Structural Priors</h2>
+            <h2>Latent Computational Imaging with Flow and Low-Rank Priors</h2>
             <p>
-              Research in progress on latent-space computational imaging,
-              using a CVPR 2025 framework as the technical baseline and
-              extending it with BiFlow-style bidirectional modeling, dynamic
-              low-rank constraints, flow-matching objectives, and multi-branch
-              reconstruction.
+              Extends a CVPR 2025 latent-imaging baseline with bidirectional
+              flow modeling, dynamic low-rank constraints, and multi-branch reconstruction.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -371,13 +415,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>Language-Conditioned Persona Drift in Multilingual Large Language Models</h2>
+            <h2>Language-Conditioned Persona Drift in Multilingual LLMs</h2>
             <p>
-              Research in progress designing LangPersona-SJT to test whether
-              multilingual LLMs keep stable moral-persona profiles across
-              English, Chinese, Japanese, and Russian prompts.
+              Introduces LangPersona-SJT to test whether English, Chinese,
+              Japanese, and Russian prompts preserve one moral-persona profile.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -386,12 +429,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>OptiKV-Fabric: Optical-Interconnect-Aware KV Cache Scheduling for Agentic LLM Serving</h2>
+            <h2>OptiKV-Fabric: Optical-Interconnect-Aware KV Cache Scheduling</h2>
             <p>
-              Research in progress on KV cache placement, routing, prefetching,
-              and eviction under optical-interconnect-aware serving settings.
+              Studies trace-driven KV placement, routing, prefetching, and
+              eviction for agentic LLM serving on optical-interconnect fabrics.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -400,13 +443,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
             <h2>Task-Organization Matching in LLM Multi-Agent Systems</h2>
             <p>
-              Research in progress proposing a task-conditioned framework for
-              choosing multi-agent collaboration structures under budget and
-              risk constraints.
+              Selects collaboration structures from task properties, budget,
+              and risk instead of using a fixed organization for every task.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -415,13 +457,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>FailSafe-Fi: Risk-Aware WiFi Sensing Stream Compilation for Long-Term AI Memory</h2>
+            <h2>FailSafe-Fi: Risk-Aware WiFi Sensing for Long-Term Memory</h2>
             <p>
-              Research in progress on compiling continuous WiFi sensing streams
-              into queryable long-term RF event memory while reducing
-              unreliable memory formation.
+              Compiles continuous WiFi sensing streams into queryable RF event
+              memory while suppressing unreliable memory formation.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -430,12 +471,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>Embodied Value Grounding: From Bodily Feedback to Meaning Formation in Autonomous Intelligence</h2>
+            <h2>Embodied Value Grounding for Autonomous Intelligence</h2>
             <p>
-              Research in progress on how autonomous agents can form value
-              categories from bodily state changes and action consequences.
+              Models how agents derive value categories from bodily-state
+              changes, action consequences, and recurring environmental feedback.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>
@@ -444,12 +485,12 @@
             </div>
           </article>
 
-          <article class="feature-item">
+          <article class="feature-item research-progress-item">
             <p class="item-meta">Research in progress | First author</p>
-            <h2>Safety-Constrained Dynamic Coupling for Non-Stop Modular Passenger Trains</h2>
+            <h2>Safety-Constrained Dynamic Coupling for Modular Passenger Trains</h2>
             <p>
-              Research in progress on simulation-based dynamic coupling envelope
-              screening for abortable coupling safety boundaries.
+              Screens simulation-based coupling envelopes to identify abortable
+              safety boundaries for non-stop modular passenger-train operations.
             </p>
             <div class="tag-row" aria-label="Research in progress tags">
               <span class="tag">research in progress</span>

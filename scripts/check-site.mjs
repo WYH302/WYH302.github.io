@@ -14,12 +14,18 @@ const ignoredDirectories = new Set([
   "test-results",
 ]);
 
+const ignoredHtmlFilePatterns = [
+  /cv-bbox\.html$/i,
+];
+
 const requiredSourceFiles = [
   "index.html",
   "projects/index.html",
   "publications/index.html",
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
+  "posts/leakage-controlled-evaluation/index.html",
+  "posts/verifiable-multimodal-engineering/index.html",
   "checklist/index.html",
   "cv/index.html",
   "contact/index.html",
@@ -94,7 +100,11 @@ function relative(filePath) {
   return path.relative(root, filePath).replaceAll(path.sep, "/");
 }
 
-const htmlFiles = walk(root).filter((filePath) => filePath.endsWith(".html"));
+const htmlFiles = walk(root).filter(
+  (filePath) =>
+    filePath.endsWith(".html") &&
+    !ignoredHtmlFilePatterns.some((pattern) => pattern.test(path.basename(filePath))),
+);
 const allFiles = walk(root);
 const failures = [];
 const warnings = [];

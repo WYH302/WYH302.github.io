@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verifiable Multimodal Engineering Systems | Yonghao Wu (Leon)</title>
+    <meta name="description" content="A public engineering note by Yonghao Wu (Leon) on verifiable multimodal systems for sensing, industrial compilation, and agentic workflows.">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/posts/verifiable-multimodal-engineering/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Verifiable Multimodal Engineering Systems">
+    <meta property="og:description" content="A project-facing note on constraints, intermediate artifacts, and auditable outputs in multimodal engineering systems.">
+    <meta property="og:url" content="https://wyh302.github.io/posts/verifiable-multimodal-engineering/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu (Leon)</a>
+        <nav aria-label="Primary navigation">
+          <ul class="nav-list">
+            <li><a href="../../">About</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../publications/">Publications</a></li>
+            <li><a aria-current="page" href="../../blog/">Blog</a></li>
+            <li><a href="../../cv/">CV</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">Engineering note | 2026-07-03</p>
+      <h1>Verifiable multimodal engineering systems</h1>
+      <p class="lead">
+        Multimodal systems become more useful when their outputs can be checked:
+        not just viewed, but traced back through constraints, intermediate
+        artifacts, and explicit decision rules.
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../assets/images/research-systems.png?v=20260618-visual"
+          alt="Abstract system visual connecting radar, vision, language, and verification outputs"
+          width="1280"
+          height="760"
+        >
+      </figure>
+
+      <h2>From signals to accountable outputs</h2>
+      <p>
+        Several project lines share the same engineering pattern: raw inputs
+        arrive from different modalities, then the system must produce a result
+        that a human can inspect. Examples include radar signals and live video
+        in infrastructure monitoring, natural-language cutting orders and
+        defect images in industrial nesting, or event traces in agentic
+        workflows.
+      </p>
+
+      <h2>Design principle</h2>
+      <p>
+        The system should expose enough structure that a reader can ask:
+        which input produced this output, which constraint was active, which
+        model made the prediction, and what artifact can be audited afterward?
+        This is why I prefer pipelines that preserve intermediate results
+        rather than only showing a final generated answer.
+      </p>
+
+      <h2>Reusable pattern</h2>
+      <ul class="detail-list">
+        <li>Represent inputs by modality and timestamp, not just by final feature tensors.</li>
+        <li>Separate learned inference from rule-based or geometric feasibility checks.</li>
+        <li>Keep output certificates, alarms, traces, or replay logs close to the final interface.</li>
+        <li>Describe contribution and evidence type plainly when presenting the system publicly.</li>
+      </ul>
+
+      <h2>Academic value</h2>
+      <p>
+        Verifiability changes how a project reads. It makes the work less like
+        a demo and more like a research object: something with a problem
+        setting, assumptions, constraints, implementation decisions, and
+        inspectable outputs. That is the standard I want this website's project
+        page to reflect.
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">Contact</a> | <a href="../../cv/">CV</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
