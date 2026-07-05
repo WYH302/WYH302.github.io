@@ -13,6 +13,7 @@ const requiredRoutes = [
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
   "posts/leakage-controlled-evaluation/index.html",
+  "posts/two-high-one-low-social-expectations/index.html",
   "posts/verifiable-multimodal-engineering/index.html",
   "cv/index.html",
   "contact/index.html",
@@ -35,6 +36,7 @@ const publicHtmlRoutes = [
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
   "posts/leakage-controlled-evaluation/index.html",
+  "posts/two-high-one-low-social-expectations/index.html",
   "posts/verifiable-multimodal-engineering/index.html",
   "cv/index.html",
   "contact/index.html",
@@ -130,6 +132,9 @@ if (!/posts\/multimodal-agents-computational-imaging\//.test(blogHtml)) {
 }
 if (!/posts\/leakage-controlled-evaluation\//.test(blogHtml)) {
   failures.push("blog/index.html: missing link to the leakage-controlled evaluation note");
+}
+if (!/posts\/two-high-one-low-social-expectations\//.test(blogHtml)) {
+  failures.push("blog/index.html: missing link to the two-high-one-low social essay");
 }
 if (!/posts\/verifiable-multimodal-engineering\//.test(blogHtml)) {
   failures.push("blog/index.html: missing link to the verifiable multimodal engineering note");

@@ -17,7 +17,7 @@
   </url>
   <url>
     <loc>https://wyh302.github.io/blog/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -28,6 +28,11 @@
   <url>
     <loc>https://wyh302.github.io/posts/leakage-controlled-evaluation/</loc>
     <lastmod>2026-07-03</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wyh302.github.io/posts/two-high-one-low-social-expectations/</loc>
+    <lastmod>2026-07-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>

@@ -25,6 +25,7 @@ const requiredSourceFiles = [
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
   "posts/leakage-controlled-evaluation/index.html",
+  "posts/two-high-one-low-social-expectations/index.html",
   "posts/verifiable-multimodal-engineering/index.html",
   "checklist/index.html",
   "cv/index.html",
