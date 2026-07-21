@@ -12,6 +12,7 @@ const requiredRoutes = [
   "publications/index.html",
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
+  "posts/language-as-lossy-compression/index.html",
   "posts/leakage-controlled-evaluation/index.html",
   "posts/two-high-one-low-social-expectations/index.html",
   "posts/verifiable-multimodal-engineering/index.html",
@@ -35,6 +36,7 @@ const publicHtmlRoutes = [
   "publications/index.html",
   "blog/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
+  "posts/language-as-lossy-compression/index.html",
   "posts/leakage-controlled-evaluation/index.html",
   "posts/two-high-one-low-social-expectations/index.html",
   "posts/verifiable-multimodal-engineering/index.html",
@@ -129,6 +131,9 @@ for (const route of publicHtmlRoutes) {
 const blogHtml = read(path.join(site, "blog/index.html"));
 if (!/posts\/multimodal-agents-computational-imaging\//.test(blogHtml)) {
   failures.push("blog/index.html: missing link to the published research note");
+}
+if (!/posts\/language-as-lossy-compression\//.test(blogHtml)) {
+  failures.push("blog/index.html: missing link to the language compression essay");
 }
 if (!/posts\/leakage-controlled-evaluation\//.test(blogHtml)) {
   failures.push("blog/index.html: missing link to the leakage-controlled evaluation note");

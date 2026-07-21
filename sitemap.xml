@@ -17,12 +17,17 @@
   </url>
   <url>
     <loc>https://wyh302.github.io/blog/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://wyh302.github.io/posts/multimodal-agents-computational-imaging/</loc>
     <lastmod>2026-06-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wyh302.github.io/posts/language-as-lossy-compression/</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>

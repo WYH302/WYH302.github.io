@@ -15,6 +15,7 @@ const publishEntries = [
   "contact",
   "cv",
   "posts/multimodal-agents-computational-imaging",
+  "posts/language-as-lossy-compression",
   "posts/leakage-controlled-evaluation",
   "posts/two-high-one-low-social-expectations",
   "posts/verifiable-multimodal-engineering",
