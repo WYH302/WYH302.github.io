@@ -23,6 +23,7 @@ const requiredSourceFiles = [
   "projects/index.html",
   "publications/index.html",
   "blog/index.html",
+  "posts/language-gravity-ai-bias-compression/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
   "posts/language-as-lossy-compression/index.html",
   "posts/leakage-controlled-evaluation/index.html",

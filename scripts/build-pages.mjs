@@ -14,6 +14,7 @@ const publishEntries = [
   "checklist",
   "contact",
   "cv",
+  "posts/language-gravity-ai-bias-compression",
   "posts/multimodal-agents-computational-imaging",
   "posts/language-as-lossy-compression",
   "posts/leakage-controlled-evaluation",

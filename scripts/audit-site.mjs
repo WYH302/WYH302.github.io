@@ -11,6 +11,7 @@ const requiredRoutes = [
   "projects/index.html",
   "publications/index.html",
   "blog/index.html",
+  "posts/language-gravity-ai-bias-compression/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
   "posts/language-as-lossy-compression/index.html",
   "posts/leakage-controlled-evaluation/index.html",
@@ -35,6 +36,7 @@ const publicHtmlRoutes = [
   "projects/index.html",
   "publications/index.html",
   "blog/index.html",
+  "posts/language-gravity-ai-bias-compression/index.html",
   "posts/multimodal-agents-computational-imaging/index.html",
   "posts/language-as-lossy-compression/index.html",
   "posts/leakage-controlled-evaluation/index.html",
@@ -129,6 +131,9 @@ for (const route of publicHtmlRoutes) {
 }
 
 const blogHtml = read(path.join(site, "blog/index.html"));
+if (!/posts\/language-gravity-ai-bias-compression\//.test(blogHtml)) {
+  failures.push("blog/index.html: missing link to the language gravity essay");
+}
 if (!/posts\/multimodal-agents-computational-imaging\//.test(blogHtml)) {
   failures.push("blog/index.html: missing link to the published research note");
 }
