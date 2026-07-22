@@ -13,6 +13,7 @@ test-results/
 *.log
 *.doc
 *.docx
+*-bbox.html
 Masters_recommendletter/
 Overseas_recommendletter/
 Undergraduate_recommendletter/

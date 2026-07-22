@@ -1,6 +1,7 @@
 import path from "node:path";
 
 export const postSlugs = [
+  "three-pillars-programming-ai-economics",
   "language-gravity-ai-bias-compression",
   "language-as-lossy-compression",
   "multimodal-agents-computational-imaging",

@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { injectLanguageMarkup } from "./bilingual-markup.mjs";
 import { bilingualRoutePairs } from "./bilingual-routes.mjs";
+import { publishEntries } from "./publish-manifest.mjs";
 import {
   assertSafePublishSource,
   assetExtensions,
@@ -12,29 +13,6 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputDirectory = path.join(root, "_site");
-
-const publishEntries = [
-  ".nojekyll",
-  "404.html",
-  "index.html",
-  "assets",
-  "blog",
-  "checklist",
-  "contact",
-  "cv",
-  "posts/language-gravity-ai-bias-compression",
-  "posts/multimodal-agents-computational-imaging",
-  "posts/language-as-lossy-compression",
-  "posts/leakage-controlled-evaluation",
-  "posts/two-high-one-low-social-expectations",
-  "posts/verifiable-multimodal-engineering",
-  "projects",
-  "publications",
-  "robots.txt",
-  "sitemap.xml",
-  "site.webmanifest",
-  "zh",
-];
 
 function injectLanguageNavigation(route, pair, language) {
   const filePath = path.join(outputDirectory, route);

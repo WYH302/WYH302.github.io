@@ -40,6 +40,9 @@ export function assertSafePublishSource(sourcePath, repositoryRoot, allowedExten
 
   const fileName = path.basename(sourcePath).toLowerCase();
   const extension = path.extname(fileName);
+  if (fileName.endsWith("-bbox.html")) {
+    throw new Error(`Refusing to publish generated OCR HTML: ${relativePath}`);
+  }
   if (
     fileName === ".env" ||
     fileName.startsWith(".env.") ||

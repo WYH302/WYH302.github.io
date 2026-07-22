@@ -15,6 +15,7 @@ const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), "publish-safety-"));
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const files = new Map([
   ["page.html", "<main></main>"],
+  ["resume-cv-bbox.html", "email@example.com 13500000000"],
   ["image.png", "image"],
   ["config.json", "{\"token\":\"secret\"}"],
   ["notes.txt", "private notes"],
@@ -53,6 +54,20 @@ test("rejects sensitive extensions and environment files", () => {
     () => assertSafePublishSource(path.join(temporaryRoot, ".env.local"), temporaryRoot),
     /sensitive file type/,
   );
+});
+
+test("rejects OCR bounding-box HTML exports", () => {
+  assert.throws(
+    () => assertSafePublishSource(
+      path.join(temporaryRoot, "resume-cv-bbox.html"),
+      temporaryRoot,
+      htmlExtensions,
+    ),
+    /generated OCR HTML/,
+  );
+
+  const gitignore = fs.readFileSync(path.join(repositoryRoot, ".gitignore"), "utf8");
+  assert.match(gitignore, /^\*-bbox\.html$/m);
 });
 
 test("rejects symbolic links in publish sources", () => {

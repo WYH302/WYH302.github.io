@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Are the Three Pillars of Programming Collapsing? AI, Oversupply, and the Economics of “Good-Enough” Code | Yonghao Wu (Leon)</title>
+    <meta name="description" content="Domain knowledge, debugging intuition, and code taste have not disappeared, but AI is changing how the market prices them. An essay on automation, oversupply, Jevons paradox, and programmer value.">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/posts/three-pillars-programming-ai-economics/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Are the Three Pillars of Programming Collapsing? AI, Oversupply, and the Economics of “Good-Enough” Code">
+    <meta property="og:description" content="AI has not erased experience, debugging, or architecture. It is lowering the price of the parts that can be retrieved, scanned, and standardized.">
+    <meta property="og:url" content="https://wyh302.github.io/posts/three-pillars-programming-ai-economics/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260722-bilingual">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu (Leon)</a>
+        <nav aria-label="Primary navigation">
+          <ul class="nav-list">
+            <li><a href="../../">About</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../publications/">Publications</a></li>
+            <li><a aria-current="page" href="../../blog/">Blog</a></li>
+            <li><a href="../../cv/">CV</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">AI and work | 2026-07-23</p>
+      <h1>Are the three pillars of programming collapsing? AI, oversupply, and the economics of “good-enough” code</h1>
+      <p class="lead">
+        Domain knowledge, debugging intuition, and code taste once supported much of a programmer's professional premium. AI has not erased them. It is lowering the price of the parts that can be retrieved, scanned, and standardized. The more useful question now is: which parts of a programmer's work will companies still pay for?
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../assets/images/research-systems.png?v=20260618-visual"
+          alt="Abstract system diagram made of modules, connections, and feedback loops, representing AI-assisted software engineering"
+          width="1280"
+          height="760"
+        >
+      </figure>
+
+      <p>
+        Programmers tend to place their professional value in three abilities: understanding the domain rules that documentation leaves incomplete, finding the cause when a system fails, and organizing code so that it remains clear and durable. All three still matter. Useful does not mean scarce, however, and scarcity does not guarantee that buyers will keep paying the old price.
+      </p>
+
+      <p>
+        A moat is only as wide as the cost of replacing it. Language models and coding agents are separating these abilities into smaller pieces, then turning the reproducible pieces into cheap services. They are changing the boundary between ordinary execution and work that commands a premium.
+      </p>
+
+      <h2>The first pillar: domain knowledge becomes context engineering</h2>
+      <p>
+        Experience in payment idempotency, ledger reconciliation, healthcare compliance, or supply-chain exceptions once created a substantial information gap. A newcomer did not know what to search for or when a general rule in the documentation would fail.
+      </p>
+
+      <p>
+        Language models reduce the value of remembering more facts. A model can retrieve standards, read code history, and assemble constraints from project instructions such as <code>AGENTS.md</code>. Teams can place incident reviews, business terminology, and checklists in an agent's context. Knowledge that once lived in individual memory starts to function as shared infrastructure.
+      </p>
+
+      <p>
+        Experience has not become worthless. Models can access what people recorded, while the hardest constraints often remain unwritten: why one partner follows a special rule, which metric is temporarily reliable, how a regulator's language applies to a particular product, and who bears the cost of failure. The premium moves from “I know the answer” to “I can complete the constraints, recognize exceptions, and take responsibility for the judgment.”
+      </p>
+
+      <h2>The second pillar: debugging becomes instrumented search</h2>
+      <p>
+        Traditional debugging rewards a diagnostic instinct that resembles a physician reading symptoms. An experienced engineer can glance at logs, latency curves, and recent releases, then choose the right starting point. That instinct was valuable partly because humans lacked a fast way to read all the available evidence.
+      </p>
+
+      <p>
+        Sentry, Datadog, distributed tracing, and MCP tools have changed the cost of search. An agent can read stacks, compare changes, run tests, query metrics, and check hypotheses along the call graph. Work that once demanded patience and memory can now run in batches. The personal advantage of “searching logs and trying a few fixes” will narrow.
+      </p>
+
+      <p>
+        Machine scanning stops at the boundary of observability. A stack trace cannot reveal missing instrumentation, misleading metrics, cross-team business agreements, or the user impact of a rollback. Valuable debugging work moves earlier in the system: designing observability, deciding when evidence is sufficient, separating cause from correlation, and containing damage under uncertainty.
+      </p>
+
+      <h2>The third pillar: code taste faces commercial pricing</h2>
+      <p>
+        The claim that “code is for models now, so humans no longer need to read it” is attractive and inaccurate. People still read code during incidents, audits, security reviews, and handoffs. Models also benefit from clean boundaries, stable interfaces, and predictable names. Disorganized code consumes more context, spreads changes across more files, and raises verification costs.
+      </p>
+
+      <p>
+        Buyers' willingness to pay is changing. A disposable script, short-lived prototype, or low-risk internal tool often needs to run and remain easy to replace. A team will not buy textbook architecture for every page. Long-lived infrastructure, financial ledgers, and clinical systems have different economics. Design costs avoided today can return during the next migration, audit, or outage.
+      </p>
+
+      <p>
+        The market will separate code into two broad classes. One optimizes for low cost and fast replacement. The other holds persistent state and real liability, so it needs stricter design and verification. Code taste will survive, but elegance detached from lifetime, risk, and maintenance cost is difficult to sell on its own.
+      </p>
+
+      <h2>The evidence does not give one universal answer</h2>
+      <p>
+        Coding agents are taking on more execution. Anthropic analyzed 500,000 coding interactions from April 2025 and classified 79% of Claude Code conversations as “automation.” That label describes an interaction pattern that can still include error reports, human review, and repeated correction. It cannot be converted into a percentage of jobs that are ready for replacement. <a href="https://www.anthropic.com/research/impact-software-development">The original report documents these limits</a>.
+      </p>
+
+      <p>
+        Productivity studies are less tidy. In <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR's randomized study</a>, 16 experienced open-source developers completed 246 tasks in repositories they knew well. Tasks using early-2025 AI tools took 19% longer on average. METR later marked that result as outdated. Its <a href="https://metr.org/blog/2026-02-24-uplift-update/">2026 follow-up</a> found signals of a possible speedup, but participant-selection effects prevented a reliable estimate of the current magnitude. Neither number justifies a verdict on the whole industry.
+      </p>
+
+      <p>
+        <a href="https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report">DORA 2025</a>, an observational study of nearly 5,000 technology professionals, associated AI adoption with higher delivery throughput and product performance, while also associating it with lower delivery stability. Correlation does not prove causation. The result still shows why writing faster and delivering better belong to different scorecards. Tests, version control, and feedback loops determine whether a local speed gain becomes a system gain.
+      </p>
+
+      <h2>Jevons paradox will not protect every job</h2>
+      <p>
+        One optimistic argument invokes Jevons paradox: cheaper software production will lead society to consume more software, so demand for programmers will rise. The first part is plausible. School departments, small shops, and individuals will commission tools that were once too expensive to build.
+      </p>
+
+      <p>
+        More demand for software does not produce the same percentage increase in developer jobs. Employment depends on customers' price sensitivity, the division of work between AI and people, and whether a company spends its saved capacity on expansion or cost reduction. In some standardized tasks, one employee can complete work that once required several people. “One person replaces ten” remains a cost model, not a general statistic.
+      </p>
+
+      <p>
+        Copywriting and basic UI work offer a useful comparison. Generative tools lower the price of standardized deliverables and give more people access to competent output. Demand may grow while supply grows faster, reducing the bargaining power of ordinary work. Programming tasks that are easy to specify, check, and copy may follow the same path.
+      </p>
+
+      <h2>An abundance of competent generalists changes who captures profit</h2>
+      <p>
+        AI helps more people cross the entry threshold. Product managers can build prototypes, researchers can write data pipelines, and independent developers can maintain products that once needed a small team. Society may receive more software without each worker earning more. When competent output becomes abundant, customers treat it as the default rather than paying a scarcity premium.
+      </p>
+
+      <p>
+        Gains may also concentrate at both ends. Companies controlling models, cloud platforms, and distribution collect infrastructure rents. A smaller group of people who solve high-risk problems, own customer relationships, or accept final liability can retain premium pricing. Workers in the middle who sell standard code and hours face more direct price competition. There is no basis for declaring that the winners will be exactly “one percent,” but the direction of concentration deserves attention.
+      </p>
+
+      <h2>The new sources of scarcity</h2>
+      <p>
+        Programmers can still build a moat, but they cannot package the old abilities unchanged. Scarcer work includes choosing a problem worth solving, turning business goals into testable constraints, designing safe failure modes, connecting unwritten organizational knowledge, and accepting responsibility for production outcomes.
+      </p>
+
+      <p>
+        Code remains important, but it now serves more often as an intermediate representation of intent. The expensive asset is a traceable chain of responsibility: why the requirement has this shape, what the model and the human each changed, which risks the tests cover, and who can stop the system when it behaves unexpectedly. AI can help build that chain or flood it with more code to review. The difference depends on whether the team treats verification as part of the product.
+      </p>
+
+      <p>
+        The three pillars are not collapsing at the same time. Each is splitting internally. Retrievable knowledge, scannable failures, and code beauty detached from risk are losing value. Tacit constraints, evidential judgment, and accountability remain scarce. The pressure on programmers is real. Craftsmanship still commands a price when it produces reliable outcomes; formal elegance on its own does not.
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">Contact</a> | <a href="../../cv/">CV</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
