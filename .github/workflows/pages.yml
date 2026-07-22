@@ -31,11 +31,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Check site
-        run: npm run check
+      - name: Test bilingual routes
+        run: npm run test:coverage
 
-      - name: Build static site
-        run: npm run build
+      - name: Audit and build static site
+        run: npm run audit
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

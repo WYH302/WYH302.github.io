@@ -2,23 +2,21 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import {
+  bilingualAllRoutes,
+  bilingualRoutePairs,
+  bilingualPublicRoutes,
+  postSlugs,
+  publicUrl,
+  relativeRouteHref,
+} from "./bilingual-routes.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const site = path.join(root, "_site");
 
 const requiredRoutes = [
-  "index.html",
-  "projects/index.html",
-  "publications/index.html",
-  "blog/index.html",
-  "posts/language-gravity-ai-bias-compression/index.html",
-  "posts/multimodal-agents-computational-imaging/index.html",
-  "posts/language-as-lossy-compression/index.html",
-  "posts/leakage-controlled-evaluation/index.html",
-  "posts/two-high-one-low-social-expectations/index.html",
-  "posts/verifiable-multimodal-engineering/index.html",
-  "cv/index.html",
-  "contact/index.html",
+  ...bilingualAllRoutes,
+  "404.html",
   "robots.txt",
   "sitemap.xml",
   "site.webmanifest",
@@ -31,24 +29,18 @@ const requiredRoutes = [
   "assets/images/favicon.svg",
 ];
 
-const publicHtmlRoutes = [
-  "index.html",
-  "projects/index.html",
-  "publications/index.html",
-  "blog/index.html",
-  "posts/language-gravity-ai-bias-compression/index.html",
-  "posts/multimodal-agents-computational-imaging/index.html",
-  "posts/language-as-lossy-compression/index.html",
-  "posts/leakage-controlled-evaluation/index.html",
-  "posts/two-high-one-low-social-expectations/index.html",
-  "posts/verifiable-multimodal-engineering/index.html",
-  "cv/index.html",
-  "contact/index.html",
-];
+const publicHtmlRoutes = bilingualPublicRoutes;
 
 const forbiddenPublishedPaths = [
   "posts/reading-note-template/index.html",
   "assets/images/profile-placeholder.svg",
+];
+
+const sensitiveSourceDirectories = [
+  "Masters_recommendletter",
+  "Overseas_recommendletter",
+  "Undergraduate_recommendletter",
+  "backups",
 ];
 
 const sensitivePatterns = [
@@ -69,6 +61,10 @@ function read(file) {
 
 function exists(relativePath) {
   return fs.existsSync(path.join(site, relativePath));
+}
+
+function escapeRegularExpression(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function walk(directory) {
@@ -112,6 +108,14 @@ for (const route of forbiddenPublishedPaths) {
   }
 }
 
+const notFoundHtml = read(path.join(site, "404.html"));
+if (!/<section lang="zh-CN"/.test(notFoundHtml)) {
+  failures.push("404.html: missing Chinese error message");
+}
+if (!/href="\/"/.test(notFoundHtml) || !/href="\/zh\/"/.test(notFoundHtml)) {
+  failures.push("404.html: missing root-safe English or Chinese homepage link");
+}
+
 for (const route of publicHtmlRoutes) {
   const filePath = path.join(site, route);
   if (!fs.existsSync(filePath)) {
@@ -119,8 +123,8 @@ for (const route of publicHtmlRoutes) {
   }
 
   const html = read(filePath);
-  if (!/<link rel="canonical" href="https:\/\/wyh302\.github\.io\//.test(html)) {
-    failures.push(`${route}: missing canonical URL`);
+  if (!html.includes(`<link rel="canonical" href="${publicUrl(route)}">`)) {
+    failures.push(`${route}: missing or incorrect canonical URL`);
   }
   if (/<meta name="robots" content="noindex"/.test(html)) {
     failures.push(`${route}: public page is marked noindex`);
@@ -128,26 +132,79 @@ for (const route of publicHtmlRoutes) {
   if (!/<meta property="og:title"/.test(html)) {
     failures.push(`${route}: missing Open Graph title`);
   }
+  if (!html.includes(`<meta property="og:url" content="${publicUrl(route)}">`)) {
+    failures.push(`${route}: missing or incorrect Open Graph URL`);
+  }
 }
 
-const blogHtml = read(path.join(site, "blog/index.html"));
-if (!/posts\/language-gravity-ai-bias-compression\//.test(blogHtml)) {
-  failures.push("blog/index.html: missing link to the language gravity essay");
+for (const route of bilingualAllRoutes) {
+  const filePath = path.join(site, route);
+  if (!fs.existsSync(filePath)) {
+    continue;
+  }
+
+  const html = read(filePath);
+  const expectedLanguage = route.startsWith("zh/") ? "zh-CN" : "en";
+  const pair = bilingualRoutePairs.find((candidate) =>
+    candidate.en === route || candidate.zh === route,
+  );
+  if (!html.includes(`<html lang="${expectedLanguage}">`)) {
+    failures.push(`${route}: expected html language ${expectedLanguage}`);
+  }
+  if ((html.match(/class="language-switcher"/g) ?? []).length !== 1) {
+    failures.push(`${route}: expected one language switcher`);
+  }
+  if (!html.includes(`<span class="visually-hidden">${expectedLanguage === "en" ? "Language" : "语言"}: </span>`)) {
+    failures.push(`${route}: missing accessible language-switcher label`);
+  }
+  if (!pair) {
+    failures.push(`${route}: missing bilingual route pair`);
+    continue;
+  }
+  for (const [language, pairedRoute] of [["en", pair.en], ["zh-CN", pair.zh]]) {
+    if (!html.includes(`<link rel="alternate" hreflang="${language}" href="${publicUrl(pairedRoute)}">`)) {
+      failures.push(`${route}: missing ${language} alternate URL`);
+    }
+  }
+  if (!html.includes(`<link rel="alternate" hreflang="x-default" href="${publicUrl(pair.en)}">`)) {
+    failures.push(`${route}: missing x-default alternate URL`);
+  }
+  const currentRoute = expectedLanguage === "en" ? pair.en : pair.zh;
+  const currentText = expectedLanguage === "en" ? "EN" : "中文";
+  const currentHref = relativeRouteHref(route, currentRoute);
+  if (!html.includes(`aria-current="page" href="${currentHref}" lang="${expectedLanguage}" hreflang="${expectedLanguage}">${currentText}</a>`)) {
+    failures.push(`${route}: language switcher does not identify the current language`);
+  }
+  if (route.startsWith("zh/")) {
+    const chineseNavigationTargets = [
+      ["关于", "zh/index.html"],
+      ["项目", "zh/projects/index.html"],
+      ["论文", "zh/publications/index.html"],
+      ["博客", "zh/blog/index.html"],
+      ["简历", "zh/cv/index.html"],
+      ["联系", "zh/contact/index.html"],
+    ];
+    for (const [label, targetRoute] of chineseNavigationTargets) {
+      const chineseRootHref = relativeRouteHref(route, "zh/index.html");
+      const targetSuffix = targetRoute.replace(/^zh\//, "").replace(/index\.html$/, "");
+      const expectedHref = targetSuffix
+        ? `${chineseRootHref === "./" ? "" : chineseRootHref}${targetSuffix}`
+        : chineseRootHref;
+      const href = escapeRegularExpression(expectedHref);
+      if (!new RegExp(`<a\\b[^>]*href="${href}"[^>]*>${label}</a>`).test(html)) {
+        failures.push(`${route}: Chinese navigation link ${label} leaves the Chinese site`);
+      }
+    }
+  }
 }
-if (!/posts\/multimodal-agents-computational-imaging\//.test(blogHtml)) {
-  failures.push("blog/index.html: missing link to the published research note");
-}
-if (!/posts\/language-as-lossy-compression\//.test(blogHtml)) {
-  failures.push("blog/index.html: missing link to the language compression essay");
-}
-if (!/posts\/leakage-controlled-evaluation\//.test(blogHtml)) {
-  failures.push("blog/index.html: missing link to the leakage-controlled evaluation note");
-}
-if (!/posts\/two-high-one-low-social-expectations\//.test(blogHtml)) {
-  failures.push("blog/index.html: missing link to the two-high-one-low social essay");
-}
-if (!/posts\/verifiable-multimodal-engineering\//.test(blogHtml)) {
-  failures.push("blog/index.html: missing link to the verifiable multimodal engineering note");
+
+for (const blogRoute of ["blog/index.html", "zh/blog/index.html"]) {
+  const blogHtml = read(path.join(site, blogRoute));
+  for (const slug of postSlugs) {
+    if (!new RegExp(`posts/${slug}/`).test(blogHtml)) {
+      failures.push(`${blogRoute}: missing link to ${slug}`);
+    }
+  }
 }
 
 const sitemap = read(path.join(site, "sitemap.xml"));
@@ -195,6 +252,26 @@ const unignoredOfficeDocs = runGit(
   .filter(Boolean);
 if (unignoredOfficeDocs.length > 0) {
   failures.push(`raw Office resume/source documents are not ignored: ${unignoredOfficeDocs.join(", ")}`);
+}
+
+const trackedSensitiveSources = runGit(
+  ["ls-files", "--", ...sensitiveSourceDirectories],
+  "tracked sensitive source scan",
+)
+  .split(/\r?\n/)
+  .filter(Boolean);
+if (trackedSensitiveSources.length > 0) {
+  failures.push(`sensitive recommendation or backup sources are tracked: ${trackedSensitiveSources.join(", ")}`);
+}
+
+const unignoredSensitiveSources = runGit(
+  ["ls-files", "--others", "--exclude-standard", "--", ...sensitiveSourceDirectories],
+  "unignored sensitive source scan",
+)
+  .split(/\r?\n/)
+  .filter(Boolean);
+if (unignoredSensitiveSources.length > 0) {
+  failures.push(`sensitive recommendation or backup sources are not ignored: ${unignoredSensitiveSources.join(", ")}`);
 }
 
 if (failures.length > 0) {

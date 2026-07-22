@@ -110,6 +110,18 @@ p {
   transform: translateY(0);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -181,6 +193,38 @@ p {
 .nav-list a[aria-current="page"] {
   border-bottom-color: var(--accent);
   color: var(--accent);
+}
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 0.08rem;
+  padding-left: 0.45rem;
+  margin-left: 0.35rem;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.nav-list .language-switcher .language-option {
+  min-width: 40px;
+  min-height: 40px;
+  justify-content: center;
+  padding: 0.25rem 0.42rem;
+  border: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+
+.nav-list .language-switcher .language-option:hover {
+  border: 0;
+  color: var(--accent);
+}
+
+.nav-list .language-switcher .language-option[aria-current="page"] {
+  border: 0;
+  background: var(--accent);
+  color: #fff;
 }
 
 .profile-band {
@@ -904,6 +948,11 @@ p {
     min-height: 42px;
     padding: 0.25rem 0.58rem;
     font-size: 0.92rem;
+  }
+
+  .language-switcher {
+    padding-left: 0.35rem;
+    margin-left: 0.15rem;
   }
 
   .header-inner,

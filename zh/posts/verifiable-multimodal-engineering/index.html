@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>可验证的多模态工程系统 | Yonghao Wu (Leon)</title>
+    <meta name="description" content="Yonghao Wu（Leon）关于传感、工业排样和智能体工作流中可验证多模态系统的公开工程笔记。">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/zh/posts/verifiable-multimodal-engineering/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="可验证的多模态工程系统">
+    <meta property="og:description" content="一篇面向项目的笔记，讨论多模态工程系统中的约束、中间产物和可审计输出。">
+    <meta property="og:url" content="https://wyh302.github.io/zh/posts/verifiable-multimodal-engineering/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳至主要内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu (Leon)</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="../../">关于</a></li>
+            <li><a href="../../projects/">项目</a></li>
+            <li><a href="../../publications/">论文</a></li>
+            <li><a aria-current="page" href="../../blog/">博客</a></li>
+            <li><a href="../../cv/">简历</a></li>
+            <li><a href="../../contact/">联系</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">工程笔记 | 2026-07-03</p>
+      <h1>可验证的多模态工程系统</h1>
+      <p class="lead">
+        如果输出可以核查，多模态系统会更实用。核查不能停留在查看结果，
+        还要能沿着约束、中间产物和明确的决策规则追溯整个过程。
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../../assets/images/research-systems.png?v=20260618-visual"
+          alt="连接雷达、视觉、语言和验证输出的抽象系统图"
+          width="1280"
+          height="760"
+        >
+      </figure>
+
+      <h2>从信号到可核查的输出</h2>
+      <p>
+        几条项目线采用了相同的工程模式：原始输入来自不同模态，系统随后必须给出可供人检查的结果。
+        例如，基础设施监测使用雷达信号和实时视频；工业排样处理自然语言裁切指令和缺陷图像；
+        智能体工作流则需要记录事件轨迹。
+      </p>
+
+      <h2>设计原则</h2>
+      <p>
+        系统应暴露足够的结构，让读者能够追问：哪个输入产生了这项输出，当时启用了哪条约束，
+        哪个模型作出了预测，之后可以审计什么产物？因此，我更倾向于保留中间结果的管线，
+        而不是只呈现最终生成的答案。
+      </p>
+
+      <h2>可复用模式</h2>
+      <ul class="detail-list">
+        <li>按模态和时间戳表示输入，而不是只保留最终的特征张量。</li>
+        <li>将学习式推理与基于规则或几何条件的可行性检查分开。</li>
+        <li>在最终界面附近保留输出凭证、警报、轨迹或回放日志。</li>
+        <li>公开介绍系统时，直接说明贡献内容及证据类型。</li>
+      </ul>
+
+      <h2>学术价值</h2>
+      <p>
+        可验证性改变了人们理解项目的方式。项目不再只像一个演示，而会成为可研究的对象，
+        其中包含问题设定、假设、约束、实现决策和可检查的输出。这正是我希望本网站项目页面体现的标准。
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">返回博客</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">联系</a> | <a href="../../cv/">简历</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

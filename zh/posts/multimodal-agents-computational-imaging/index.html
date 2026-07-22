@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>计算成像中的多模态智能体 | Yonghao Wu (Leon)</title>
+    <meta name="description" content="Yonghao Wu（Leon）关于计算成像中多模态智能体的简明公开研究笔记。">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/zh/posts/multimodal-agents-computational-imaging/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="计算成像中的多模态智能体">
+    <meta property="og:description" content="一篇研究议程笔记，讨论如何连接多模态感知、工具调用智能体与计算成像系统。">
+    <meta property="og:url" content="https://wyh302.github.io/zh/posts/multimodal-agents-computational-imaging/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
+    <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳至主要内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu (Leon)</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="../../">关于</a></li>
+            <li><a href="../../projects/">项目</a></li>
+            <li><a href="../../publications/">论文</a></li>
+            <li><a aria-current="page" href="../../blog/">博客</a></li>
+            <li><a href="../../cv/">简历</a></li>
+            <li><a href="../../contact/">联系</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">研究笔记 · 2026-06-19</p>
+      <h1>计算成像中的多模态智能体</h1>
+      <p class="lead">
+        本文概述一个公开的研究方向：把多模态感知、工具调用智能体与计算成像系统连接起来。
+        这是一篇研究议程笔记，并不表示相关实验已经完成。
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../../assets/images/research-hero.png?v=20260618-visual"
+          alt="由光学波前和多模态人工智能图构成的抽象计算成像装置"
+          width="1600"
+          height="980"
+        >
+      </figure>
+
+      <h2>研究动机</h2>
+      <p>
+        计算成像系统通常结合物理测量、重建算法和下游感知模型。随着多模态基础模型和智能体工作流逐渐成熟，
+        一个自然的问题是：智能系统能否对传感过程本身进行推理，包括测量什么、如何重建、调用哪些工具，
+        以及结果可靠到何种程度才足以支持下游决策。
+      </p>
+
+      <h2>研究问题</h2>
+      <ul class="detail-list">
+        <li>多模态模型如何在同一推理循环中表示光学测量、稀疏观测和重建后的视觉内容？</li>
+        <li>智能体如何调用模拟器、重建模块、分割模型和评估脚本等工具，同时如实呈现不确定性？</li>
+        <li>系统如何决定何时需要追加测量、调整传感策略或暂缓给出预测？</li>
+      </ul>
+
+      <h2>可行方向</h2>
+      <p>
+        一种可行的方向是把成像管线视为可检查的工作流。多模态智能体可以协调测量选择、重建、视觉分析和报告，
+        同时让每一步都可追溯。在这一框架下，智能体并非取代物理模型或信号处理的黑箱，
+        而是一个控制与推理层，用来衔接物理先验、学习模型和面向用户的解释。
+      </p>
+
+      <h2>实践中的注意事项</h2>
+      <p>
+        主要风险是夸大系统的自主能力。实用的研究原型应报告不确定性、保留中间产物，
+        并区分模型生成的建议与经过验证的测量结果。公开交流学术工作时，方法说明还应明确区分研究设想、
+        正在进行的工作和已经验证的结果。
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">返回博客</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">联系</a> | <a href="../../cv/">简历</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

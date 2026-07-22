@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { bilingualAllRoutes } from "./bilingual-routes.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputDirectory = path.join(root, "_site");
@@ -19,19 +20,8 @@ const ignoredHtmlFilePatterns = [
 ];
 
 const requiredSourceFiles = [
-  "index.html",
-  "projects/index.html",
-  "publications/index.html",
-  "blog/index.html",
-  "posts/language-gravity-ai-bias-compression/index.html",
-  "posts/multimodal-agents-computational-imaging/index.html",
-  "posts/language-as-lossy-compression/index.html",
-  "posts/leakage-controlled-evaluation/index.html",
-  "posts/two-high-one-low-social-expectations/index.html",
-  "posts/verifiable-multimodal-engineering/index.html",
-  "checklist/index.html",
-  "cv/index.html",
-  "contact/index.html",
+  ...bilingualAllRoutes,
+  "404.html",
   "robots.txt",
   "sitemap.xml",
   "site.webmanifest",
@@ -80,8 +70,11 @@ function localTargetExists(sourceFile, href) {
     return true;
   }
 
+  const decodedHref = decodeURIComponent(cleanHref);
   const sourceDirectory = path.dirname(sourceFile);
-  const resolved = path.resolve(sourceDirectory, decodeURIComponent(cleanHref));
+  const resolved = decodedHref.startsWith("/")
+    ? path.resolve(root, decodedHref.slice(1))
+    : path.resolve(sourceDirectory, decodedHref);
 
   if (!resolved.startsWith(root)) {
     return false;

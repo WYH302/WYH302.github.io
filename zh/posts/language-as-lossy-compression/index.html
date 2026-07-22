@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>不可说：语言作为高维经验的有损压缩 | 吴永豪 Yonghao Wu (Leon)</title>
+    <meta name="description" content="从中国哲学的语言边界出发，讨论语言作为有损编码的能力与限制，以及信息论、高维表征与哲学直觉的关系。">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/zh/posts/language-as-lossy-compression/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="不可说：语言作为高维经验的有损压缩">
+    <meta property="og:description" content="从古代哲学对语言的警惕，到现代计算机科学的压缩与表征，重新理解“不可说”。">
+    <meta property="og:url" content="https://wyh302.github.io/zh/posts/language-as-lossy-compression/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">吴永豪 Yonghao Wu (Leon)</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="../../">关于</a></li>
+            <li><a href="../../projects/">项目</a></li>
+            <li><a href="../../publications/">论文</a></li>
+            <li><a aria-current="page" href="../../blog/">博客</a></li>
+            <li><a href="../../cv/">简历</a></li>
+            <li><a href="../../contact/">联系</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">思想随笔 | 2026-07-22</p>
+      <h1>不可说：语言作为高维经验的有损压缩</h1>
+      <p class="lead">
+        我们能说出来的，往往只是经验经过符号编码后留下的投影。古人从修行和思辨中触到这条边界，信息论与表示学习则让我们可以描述其中的部分机制。
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../../assets/images/research-systems.png?v=20260618-visual"
+          alt="抽象系统图像，象征高维经验向符号表征的映射"
+          width="1280"
+          height="760"
+        >
+      </figure>
+
+      <p>
+        老子说：“道可道，非常道；名可名，非常名。”盲人摸象的古老寓言讲了另一个版本：每个人都摸到了某个真实的部分，却把局部当成全体。禅宗常说“不立文字”，警惕的也是同一件事。文字可以指向经验，却不等于经验本身。
+      </p>
+
+      <p>
+        这些思想不需要用神秘主义包装。它们首先是对语言能力的冷静判断：世界经过命名之后变得可以讨论，命名也同时删掉了许多细节。
+      </p>
+
+      <h2>经验比句子宽</h2>
+      <p>
+        你看到一棵树时，视野里同时有光线、颜色、边缘、距离和身体姿态，也有记忆和情绪。你说“我看到一棵树”，听者得到了一个可用的概括，却无法从这句话里还原你当时的全部感受。
+      </p>
+
+      <p>
+        这里的“高维”不一定指可以逐项计数的数学维度。它指经验包含许多同时变化的自由度。语言通常按线性顺序展开，语法和上下文可以表达复杂关系，但一句话的长度、词汇和共享背景都有限。语言必须选择保留什么。
+      </p>
+
+      <h2>一次无法逆转的编码</h2>
+      <p>
+        把当下经验记作 <code>x</code>，把语言编码记作 <code>E</code>，说出的句子就是 <code>y = E(x)</code>。听者再根据自己的记忆和上下文，用另一个过程 <code>D</code> 重建经验 <code>x' = D(y)</code>。多数时候，<code>x'</code> 不会与 <code>x</code> 完全一致。
+      </p>
+
+      <p>
+        更关键的限制是，不同的经验可能被压缩成同一句话。两个人都说“我很难过”，背后的身体感受、记忆和原因可能完全不同。在数学上，<code>E(x1) = E(x2)</code> 并不能推出 <code>x1 = x2</code>。编码已经合并了差异，听者无法只凭原句把它们找回来。
+      </p>
+
+      <p>
+        信息论用“率失真”研究这类取舍：当码长受限时，编码者根据任务保留信息，并接受一定的重建误差。一张地铁图删掉了街道宽度、建筑外观和真实距离，却保留了换乘关系。对乘客来说，这种失真很有用。
+      </p>
+
+      <h2>高维向量仍是任务化的表征</h2>
+      <p>
+        现代机器学习把词、图像和声音映射到高维向量。这些表征可以保留相似性、类别和上下文关系，模型因而能够搜索、分类和生成。向量的维度再高，它仍然是训练目标、数据和模型结构共同塑造的表征。
+      </p>
+
+      <p>
+        模型会保留有助于降低损失函数的差异，也会忽略训练任务不关心的细节。高维向量仍会遗漏信息，可计算的表征也可能停留在相关性层面。每个向量空间都带着建模者选择的尺度。
+      </p>
+
+      <h2>数学解释了什么</h2>
+      <p>
+        计算机科学没有“证明”老子或禅宗早已掌握信息论。哲学命题和数学定理属于不同的论证体系。现代理论能为某些古老直觉提供可计算的模型：表达需要选择，压缩会产生失真，接收者无法从有限符号中唯一重建原始经验。
+      </p>
+
+      <p>
+        这种限制也解释了语言为什么有用。如果每句话都要复制一次完整世界，沟通就无法进行。概念删掉了差异，也让我们可以归类、推理和协作。衡量一次语言压缩，关键要看它丢失的信息是否影响当前任务。
+      </p>
+
+      <h2>承认边界，继续说理</h2>
+      <p>
+        承认语言的边界，会让说理更诚实。说话的人需要清楚自己删掉了什么，听者也不应把一句话当成全部事实。面对复杂经验，我们需要更多视角、更长的上下文，有时还需要亲身实践。
+      </p>
+
+      <p>
+        现代数学没有替古人盖章。它让我们能在另一套符号系统里，重新检查同一类限制。古人从经验、修行与辩论中碰到语言的边界，计算机科学从编码、压缩与表征中测量它。两条路在这里交叉，也提醒我们审慎对待手里的模型、概念和结论。
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">返回博客</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">联系</a> | <a href="../../cv/">简历</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

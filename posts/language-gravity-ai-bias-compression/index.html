@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>语言重力：AI 压缩中的偏见与表达损失 | Yonghao Wu (Leon)</title>
-    <meta name="description" content="从数据可见性、概率建模、人类反馈和部署接口出发，讨论 AI 如何将表达拉向主流格式，以及低资源经验为何更容易在压缩中丢失。">
+    <title>Language Gravity: Bias and Expressive Loss in AI Compression | Yonghao Wu (Leon)</title>
+    <meta name="description" content="How data visibility, probabilistic modeling, human feedback, and deployment interfaces pull language toward dominant forms and erase low-resource experiences during compression.">
     <meta name="author" content="Yonghao Wu (Leon)">
     <meta name="theme-color" content="#8c1515">
     <link rel="canonical" href="https://wyh302.github.io/posts/language-gravity-ai-bias-compression/">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="语言重力：AI 压缩中的偏见与表达损失">
-    <meta property="og:description" content="AI 会把语言拉向高概率、标准化的表达中心。一篇关于压缩标准、低资源语言与语义损失的随笔。">
+    <meta property="og:title" content="Language Gravity: Bias and Expressive Loss in AI Compression">
+    <meta property="og:description" content="AI pulls language toward high-probability, standardized forms. An essay on compression criteria, low-resource languages, and semantic loss.">
     <meta property="og:url" content="https://wyh302.github.io/posts/language-gravity-ai-bias-compression/">
     <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
     <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
@@ -35,83 +35,83 @@
     </header>
 
     <main id="main" class="article">
-      <p class="article-meta">AI 与社会 | 2026-07-22</p>
-      <h1>语言重力：AI 压缩中的偏见与表达损失</h1>
+      <p class="article-meta">AI and society | 2026-07-22</p>
+      <h1>Language gravity: bias and expressive loss in AI compression</h1>
       <p class="lead">
-        开发者用训练数据、损失函数和人类反馈，把一套保留与舍弃的标准写进模型。当主流表达成为高概率中心，稀少、口语化和缺少机构背书的经验更容易被当作噪声。
+        Developers encode criteria for what to preserve and discard through training data, loss functions, and human feedback. Once dominant forms occupy the high-probability center, systems are more likely to treat rare, colloquial, and institutionally undocumented experiences as noise.
       </p>
 
       <figure class="article-figure">
         <img
           src="../../assets/images/research-systems.png?v=20260618-visual"
-          alt="抽象系统图像，象征多样表达被概率模型拉向高频中心"
+          alt="Abstract system diagram showing diverse expressions pulled toward a high-frequency center by a probabilistic model"
           width="1280"
           height="760"
         >
       </figure>
 
       <p>
-        上一篇<a href="../language-as-lossy-compression/">《不可说：语言作为高维经验的有损压缩》</a>讨论了一个基本限制：经验进入符号系统时，一定会丢失部分信息。AI 又加了一层。大模型从海量文本中学习哪些词更常见，哪些句子更像“正常回答”，再把新的输入改写为更符合这些概率的形状。
+        The previous essay, <a href="../language-as-lossy-compression/">“The Unsayable: Language as Lossy Compression of High-Dimensional Experience,”</a> examined a basic constraint: experience loses some information when it enters a symbolic system. AI adds another layer of compression. Large language models learn which words appear more often and which sentences resemble a “normal answer,” then reshape new input to match those probabilities.
       </p>
 
       <p>
-        我把这种倾向称为“语言重力”。高频词汇、标准语法和主流价值判断形成概率中心，模型的改写、摘要和翻译会向它们靠拢。离中心越远的表达，模型越容易删掉它的差异，再用熟悉的话补上空缺。
+        I call this tendency “language gravity.” Frequent vocabulary, standard grammar, and dominant value judgments form a probabilistic center. A model's rewrites, summaries, and translations drift toward it. The farther an expression sits from that center, the more likely the model is to remove its distinctive features and fill the gaps with familiar language.
       </p>
 
-      <h2>语言重力从哪里来</h2>
+      <h2>Where language gravity comes from</h2>
       <p>
-        训练语料首先决定可见性。有能力持续出版、建立数据库和维护机构网站的群体，会在数字语料中留下更多记录。方言对话、口述经验、临时劳动者的陈述和没有被归档的家庭记忆，则很少进入高质量训练集。模型对这些经验的掌握，从起点就更薄。
-      </p>
-
-      <p>
-        分词和概率建模会继续放大差异。常见词通常对应更稳定的符号单元，罕见人名、方言写法和混合语言可能被拆成更多片段。模型通过预测下一个符号学习语言，因此高频续写对损失函数的影响更大。常用解码策略又会优先选择高概率路径，稀少表达因此更难保留。
+        Training corpora determine visibility first. Groups with the resources to publish, build databases, and maintain institutional websites leave more records in digital corpora. Dialect conversations, oral accounts, statements from temporary workers, and unarchived family memories rarely enter high-quality training sets. Models begin with a thinner record of these experiences.
       </p>
 
       <p>
-        人类反馈会继续改变这个分布。标注者如果更偏好流畅、标准和符合机构口径的答案，模型就会学到一种稳定的“好表达”。这种标准能改善可读性，也会把犹豫、断裂句和不熟悉的叙事方式归入低质量。
-      </p>
-
-      <h2>被压低的是带宽与可见性</h2>
-      <p>
-        “弱势人群的低维表达”这个说法，把数据条件误写成了人的能力。他们的经验同样复杂。这些经验进入数字系统时，常常只留下更短、更零散、更少标注的记录。训练数据压低了带宽、可见性和语境，经验本身没有变薄。
+        Tokenization and probabilistic modeling widen the gap. Common words tend to map to stable token units, while rare names, dialect spellings, and mixed-language phrases may split into many pieces. Models learn language by predicting the next token, so frequent continuations have more influence on the loss function. Common decoding strategies favor high-probability paths, which makes rare expressions harder to preserve.
       </p>
 
       <p>
-        假设一名劳动者用方言、省略和断裂的时间顺序讲述欠薪经过。AI 可以把它改成工整的书面申诉，但改写过程可能合并本来不确定的日期，删掉与地方劳动关系有关的称呼，还可能把推测写成事实。文字更像机构文书了，证据状态却发生了变化。
+        Human feedback changes the distribution again. If annotators prefer fluent, standard answers that match institutional language, the model learns a narrow definition of “good expression.” That standard can improve readability, but it can also classify hesitation, broken sentences, and unfamiliar narrative forms as low quality.
+      </p>
+
+      <h2>Compression reduces bandwidth and visibility</h2>
+      <p>
+        The phrase “low-dimensional expression by marginalized people” mistakes a property of the data for a property of the person. Their experiences are no less complex. When those experiences enter digital systems, they often leave shorter, fragmented, and sparsely annotated records. The training data reduces bandwidth, visibility, and context. It does not make the experience itself thinner.
       </p>
 
       <p>
-        类似的损失也会出现在翻译和摘要中。亲属称谓可能同时表示年龄、责任和社会距离，标准译文只保留了“家人”。一段充满停顿的叙述可能在摘要里变成明确结论。对阅读者来说，文本更顺了；对叙述者来说，原来用来表达关系和不确定性的线索消失了。
-      </p>
-
-      <h2>失真函数里藏着选择</h2>
-      <p>
-        率失真理论用 <code>d(x, x')</code> 衡量原始信息 <code>x</code> 与重建结果 <code>x'</code> 之间的差异。工程师在码率有限时尽量降低这个失真。AI 系统中的价值选择也进入了这个函数：平台、标注者和评测基准共同决定哪些误差代价高，哪些差异可以忽略。
+        Consider a worker describing unpaid wages through dialect, omission, and a broken chronology. AI can turn the account into a polished written complaint, but the rewrite may merge uncertain dates, remove terms tied to local labor relations, or turn speculation into fact. The text looks more like an institutional document, while the status of its evidence has changed.
       </p>
 
       <p>
-        一个只检查事实要点和语句流畅度的摘要基准，不会惩罚模型删掉话语中的犹豫、身份标记或方言节奏。模型在分数上进步，同时把一群人的表达习惯变成“可以丢弃的误差”。这种损失很难从平均准确率里看到。
+        Translation and summarization produce similar losses. A kinship term may encode age, responsibility, and social distance, while a standard translation retains only “family member.” A hesitant account may become a firm conclusion in a summary. Readers get smoother prose, but the speaker loses cues that expressed relationships and uncertainty.
+      </p>
+
+      <h2>Choices inside the distortion function</h2>
+      <p>
+        Rate-distortion theory uses <code>d(x, x')</code> to measure the difference between original information <code>x</code> and a reconstruction <code>x'</code>. Engineers try to minimize this distortion under a limited bit rate. Value judgments enter the same function in AI systems: platforms, annotators, and evaluation benchmarks determine which errors carry a high cost and which differences the system may ignore.
       </p>
 
       <p>
-        当机构用模型处理投诉、医疗叙述、社会救助材料或内容审核时，这类失真会进入真实决策。拥有标准书面语和机构话语能力的人，更容易被模型正确解码。其他人需要先让自己的经验适应系统的格式，才能进入同一条流程。
-      </p>
-
-      <h2>减弱语言重力</h2>
-      <p>
-        一个更可靠的系统需要同时保留原文和模型改写，并标注哪些内容来自原始陈述，哪些是模型的归纳。遇到含混合语言、方言或叙事缺口的输入时，模型应该允许保留不确定性、请求补充语境，或给出多个可能解释。
+        A summarization benchmark that checks only factual points and fluency will not penalize a model for deleting hesitation, identity markers, or the rhythm of a dialect. The model's score improves while it treats a group's speech patterns as “discardable error.” Average accuracy makes this loss hard to see.
       </p>
 
       <p>
-        评测也需要拆开看。开发者除了报告平均准确率，还应按语言、方言、表达风格和资源稀缺程度检查误差。社区成员需要参与定义什么算作语义损失，因为一个词在基准里可能只是同义替换，在具体社区里却可能标记辈分、身份或历史。
+        When institutions use models to process complaints, medical narratives, social assistance applications, or content moderation cases, this distortion enters real decisions. Models are more likely to decode people who command standard written and institutional language as intended. Others must first reshape their experience to fit the system's format before they can enter the same process.
+      </p>
+
+      <h2>Reducing language gravity</h2>
+      <p>
+        A more reliable system should preserve the original text beside the model's rewrite and mark which content came from the source account and which came from the model's interpretation. For input that contains mixed languages, dialect, or gaps in the narrative, the system should preserve uncertainty, request more context, or offer multiple interpretations.
       </p>
 
       <p>
-        AI 可以帮助跨语言沟通，也可以让更多人使用机构所要求的书面格式。这些价值需要以可追溯和可选择为前提。用户应该能看见模型改了什么，也应该能拒绝那种改写。
+        Evaluation should separate these cases. Alongside average accuracy, developers should report errors by language, dialect, expressive style, and resource scarcity. Community members should help define semantic loss. A benchmark may treat one word as a synonym, while a particular community uses it to mark generation, identity, or history.
       </p>
 
       <p>
-        平台选择训练数据、标注规则和质量基准时，也在选择哪些信息可以被系统舍弃。开发者需要公开这些选择，并让受影响的社区参与定义失真。否则，系统会继续把进入其中的表达改写成同一种中心格式，用户得到了沟通通道，却丢失了原来的语言位置。
+        AI can support communication across languages and help more people use the written formats institutions require. Those benefits depend on traceability and choice. Users should be able to see what the model changed and reject the rewrite.
+      </p>
+
+      <p>
+        When platforms select training data, annotation rules, and quality benchmarks, they also choose which information the system may discard. Developers need to disclose these choices and involve affected communities in defining distortion. Without that work, systems will keep rewriting diverse expressions into one central form. Users may gain access to a communication channel while losing the linguistic position from which they spoke.
       </p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>

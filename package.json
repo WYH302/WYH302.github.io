@@ -5,8 +5,10 @@
   "description": "A static GitHub Pages academic personal homepage.",
   "scripts": {
     "build": "node scripts/build-pages.mjs",
+    "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-lines=80 --test-coverage-functions=80 --test-coverage-branches=80",
     "check": "node scripts/build-pages.mjs && node scripts/check-site.mjs",
     "audit": "node scripts/build-pages.mjs && node scripts/check-site.mjs && node scripts/audit-site.mjs",
-    "serve": "node scripts/serve.mjs"
+    "serve": "node scripts/build-pages.mjs && node scripts/serve.mjs"
   }
 }

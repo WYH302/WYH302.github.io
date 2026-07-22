@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>语言重力：AI 压缩中的偏见与表达损失 | 吴永豪 Yonghao Wu (Leon)</title>
+    <meta name="description" content="从数据可见性、概率建模、人类反馈和部署接口出发，讨论 AI 如何将表达拉向主流格式，以及低资源经验为何更容易在压缩中丢失。">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/zh/posts/language-gravity-ai-bias-compression/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="语言重力：AI 压缩中的偏见与表达损失">
+    <meta property="og:description" content="AI 会把语言拉向高概率、标准化的表达中心。一篇关于压缩标准、低资源语言与语义损失的随笔。">
+    <meta property="og:url" content="https://wyh302.github.io/zh/posts/language-gravity-ai-bias-compression/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">吴永豪 Yonghao Wu (Leon)</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="../../">关于</a></li>
+            <li><a href="../../projects/">项目</a></li>
+            <li><a href="../../publications/">论文</a></li>
+            <li><a aria-current="page" href="../../blog/">博客</a></li>
+            <li><a href="../../cv/">简历</a></li>
+            <li><a href="../../contact/">联系</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">AI 与社会 | 2026-07-22</p>
+      <h1>语言重力：AI 压缩中的偏见与表达损失</h1>
+      <p class="lead">
+        开发者通过训练数据、损失函数和人类反馈，把一套保留与舍弃的标准写进模型。当主流表达占据高概率中心，稀少、口语化和缺少机构记录的经验更容易被视为噪声。
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../../assets/images/research-systems.png?v=20260618-visual"
+          alt="抽象系统图像，象征多样表达被概率模型拉向高频中心"
+          width="1280"
+          height="760"
+        >
+      </figure>
+
+      <p>
+        上一篇<a href="../language-as-lossy-compression/">《不可说：语言作为高维经验的有损压缩》</a>讨论了一个基本限制：经验进入符号系统时，必然会丢失部分信息。AI 又增加了一层压缩。大模型从海量文本中学习哪些词更常见，哪些句子更像“正常回答”，再把新的输入改写成更符合这些概率分布的形式。
+      </p>
+
+      <p>
+        我把这种倾向称为“语言重力”。高频词汇、标准语法和主流价值判断形成概率中心，模型的改写、摘要和翻译会向这个中心靠拢。表达离中心越远，模型越容易删掉其中的差异，再用熟悉的话补上空缺。
+      </p>
+
+      <h2>语言重力从哪里来</h2>
+      <p>
+        训练语料首先决定可见性。有能力持续出版、建立数据库和维护机构网站的群体，会在数字语料中留下更多记录。方言对话、口述经验、临时劳动者的陈述和未被归档的家庭记忆很少进入高质量训练集。模型从一开始就缺少对这些经验的了解。
+      </p>
+
+      <p>
+        分词和概率建模会继续放大差异。常见词通常对应更稳定的符号单元，罕见人名、方言写法和混合语言可能被拆成更多片段。模型通过预测下一个符号学习语言，因此高频续写对损失函数的影响更大。常用解码策略又优先选择高概率路径，稀少表达因而更难保留。
+      </p>
+
+      <p>
+        人类反馈会再次改变这个分布。如果标注者偏好流畅、标准和符合机构口径的答案，模型就会学到一套固定的“好表达”标准。这套标准能改善可读性，也会把犹豫、断裂句和陌生的叙事方式归入低质量。
+      </p>
+
+      <h2>被压低的是带宽与可见性</h2>
+      <p>
+        “弱势人群的低维表达”这个说法，把数据条件误写成了人的能力。他们的经验同样复杂。这些经验进入数字系统时，往往只留下更短、更零散、标注更少的记录。训练数据压低了带宽、可见性和语境，经验本身没有变薄。
+      </p>
+
+      <p>
+        假设一名劳动者用方言、省略和断裂的时间顺序讲述欠薪经过。AI 可以把它改成工整的书面申诉，但改写过程可能合并原本不确定的日期，删掉与当地劳动关系有关的称呼，或者把推测写成事实。文字更像机构文书了，证据状态却发生了变化。
+      </p>
+
+      <p>
+        翻译和摘要中也会出现类似的损失。亲属称谓可能同时表示年龄、责任和社会距离，标准译文却只保留“家人”。一段充满停顿的叙述可能在摘要里变成明确结论。阅读者得到了更顺的文本，叙述者原本用来表达关系和不确定性的线索却消失了。
+      </p>
+
+      <h2>失真函数里藏着选择</h2>
+      <p>
+        率失真理论用 <code>d(x, x')</code> 衡量原始信息 <code>x</code> 与重建结果 <code>x'</code> 之间的差异。工程师在码率有限时尽量降低这个失真。AI 系统中的价值选择也进入了这个函数：平台、标注者和评测基准共同决定哪些误差代价高，哪些差异可以忽略。
+      </p>
+
+      <p>
+        一个只检查事实要点和语句流畅度的摘要基准，不会惩罚模型删掉话语中的犹豫、身份标记或方言节奏。模型的分数提高了，却把一群人的表达习惯变成“可以丢弃的误差”。平均准确率很难显示这种损失。
+      </p>
+
+      <p>
+        当机构用模型处理投诉、医疗叙述、社会救助材料或内容审核时，这类失真会进入真实决策。掌握标准书面语和机构话语的人，更容易被模型正确解码。其他人需要先让自己的经验适应系统格式，才能进入同一套流程。
+      </p>
+
+      <h2>减弱语言重力</h2>
+      <p>
+        更可靠的系统需要同时保留原文和模型改写，并标注哪些内容来自原始陈述，哪些是模型的归纳。输入包含混合语言、方言或叙事缺口时，模型应该保留不确定性、请求补充语境，或者给出多个可能的解释。
+      </p>
+
+      <p>
+        评测也需要拆开来看。开发者除了报告平均准确率，还应按语言、方言、表达风格和资源稀缺程度检查误差。社区成员需要参与定义什么算作语义损失。一个词在基准里可能只是同义替换，在具体社区里却可能标记辈分、身份或历史。
+      </p>
+
+      <p>
+        AI 可以帮助跨语言沟通，也可以让更多人使用机构要求的书面格式。这些价值需要以可追溯和可选择为前提。用户应该能看见模型改了什么，也应该能拒绝这种改写。
+      </p>
+
+      <p>
+        平台选择训练数据、标注规则和质量基准时，也在选择哪些信息可以被系统舍弃。开发者需要公开这些选择，并让受影响的社区参与定义失真。否则，系统会继续把不同的表达改写成同一种中心格式。用户得到了沟通渠道，却丢失了原来的语言位置。
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">返回博客</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">联系</a> | <a href="../../cv/">简历</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

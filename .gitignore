@@ -9,9 +9,14 @@ coverage/
 playwright-report/
 test-results/
 .playwright-mcp/
+.playwright-cli/
 *.log
 *.doc
 *.docx
+Masters_recommendletter/
+Overseas_recommendletter/
+Undergraduate_recommendletter/
+backups/
 简历有中英文俩份/
 lifephoto1.png
 lifephoto2.png

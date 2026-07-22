@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>控制评估中的数据泄漏为何重要 | Yonghao Wu (Leon)</title>
+    <meta name="description" content="Yonghao Wu（Leon）关于机器学习研究中泄漏控制评估方案的公开方法笔记。">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/zh/posts/leakage-controlled-evaluation/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="控制评估中的数据泄漏为何重要">
+    <meta property="og:description" content="一篇方法笔记，讨论仅用训练集计算统计量、按时间顺序划分数据、检索记忆边界和审慎报告结果。">
+    <meta property="og:url" content="https://wyh302.github.io/zh/posts/leakage-controlled-evaluation/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
+    <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../../assets/css/styles.css?v=20260703-site">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳至主要内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">Yonghao Wu (Leon)</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="../../">关于</a></li>
+            <li><a href="../../projects/">项目</a></li>
+            <li><a href="../../publications/">论文</a></li>
+            <li><a aria-current="page" href="../../blog/">博客</a></li>
+            <li><a href="../../cv/">简历</a></li>
+            <li><a href="../../contact/">联系</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="article">
+      <p class="article-meta">方法笔记 | 2026-07-03</p>
+      <h1>控制评估中的数据泄漏为何重要</h1>
+      <p class="lead">
+        本文说明我目前几篇手稿共同采用的一项做法：把评估方案的设计视为方法的一部分，
+        而不是论文定稿时才处理的格式细节。
+      </p>
+
+      <figure class="article-figure">
+        <img
+          src="../../../assets/images/research-hero.png?v=20260618-visual"
+          alt="包含传感、重建、模型评估和审计路径的抽象研究图"
+          width="1600"
+          height="980"
+        >
+      </figure>
+
+      <h2>问题所在</h2>
+      <p>
+        模型表现得更好，原因可能与所提方法关系不大。归一化统计量可能来自整个数据集，检索记忆中可能混入未来样本；
+        时间序列的划分方式也可能让同一场风暴、同一市场时段或同一场景中的事件同时进入训练集和评估集。
+        这些细节在代码里或许很小，却会明显影响结果的解释。
+      </p>
+
+      <h2>方案优先的做法</h2>
+      <ul class="detail-list">
+        <li>归一化、校准和记忆构建所需的统计量只取自训练集。</li>
+        <li>当样本在时间或结构上相互关联时，优先按时间顺序或实体划分数据。</li>
+        <li>记录预测时可用的信息，尤其要说明检索与适应方法的信息边界。</li>
+        <li>如实报告受条件影响的效果，不把所有结果都归入单一的性能提升叙述。</li>
+      </ul>
+
+      <h2>为何与当前工作相关</h2>
+      <p>
+        在飓风预测、轨迹预测、金融预测、测试时适应和检索增强模型中，控制泄漏尤为重要。
+        这些任务往往有不易察觉的结构：飓风样本包含多个预测时距，轨迹共享场景几何信息，金融序列有严格的时间顺序，
+        适应方法则可能意外读取了不该使用的分布信号。
+      </p>
+
+      <h2>实践标准</h2>
+      <p>
+        我倾向于采用一套简单的公开报告标准：说明数据如何划分，哪些信息仅来自训练集，模型在推理时能看到什么，
+        并直接描述负面结果或受条件限制的发现。严谨的评估方案不是结果之外的装饰，它本身就是结果的一部分。
+      </p>
+
+      <p><a class="button secondary" href="../../blog/">返回博客</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Yonghao Wu (Leon).</p>
+        <p><a href="../../contact/">联系</a> | <a href="../../cv/">简历</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
