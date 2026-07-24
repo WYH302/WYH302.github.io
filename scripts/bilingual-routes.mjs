@@ -8,6 +8,7 @@ export const postSlugs = [
   "leakage-controlled-evaluation",
   "two-high-one-low-social-expectations",
   "verifiable-multimodal-engineering",
+  "civil-service-security-and-ambition",
 ];
 
 export const primaryBaseRoutes = [
