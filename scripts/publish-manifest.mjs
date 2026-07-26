@@ -16,6 +16,7 @@ export const publishEntries = Object.freeze([
   "posts/verifiable-multimodal-engineering",
   "posts/civil-service-security-and-ambition",
   "posts/population-property-policy-feedback",
+  "posts/grammar-expression-information-structure",
   "projects",
   "publications",
   "robots.txt",

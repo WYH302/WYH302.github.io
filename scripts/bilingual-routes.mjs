@@ -10,6 +10,7 @@ export const postSlugs = [
   "verifiable-multimodal-engineering",
   "civil-service-security-and-ambition",
   "population-property-policy-feedback",
+  "grammar-expression-information-structure",
 ];
 
 export const primaryBaseRoutes = [

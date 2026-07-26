@@ -75,3 +75,28 @@ test("the policy-feedback essay is published as a sourced bilingual post", () =>
   assert.equal(occurrences(englishBlog, `../posts/${slug}/`), 1);
   assert.equal(occurrences(chineseBlog, `../posts/${slug}/`), 1);
 });
+
+test("the grammar-and-expression essay is published as a sourced bilingual post", () => {
+  const slug = "grammar-expression-information-structure";
+  const citedSources = [
+    "https://wals.info/chapter/81",
+    "https://benjamins.com/catalog/sl.33.1.04son",
+  ];
+  const englishPost = fs.readFileSync(path.join(root, `posts/${slug}/index.html`), "utf8");
+  const chinesePost = fs.readFileSync(path.join(root, `zh/posts/${slug}/index.html`), "utf8");
+  const englishBlog = fs.readFileSync(path.join(root, "blog/index.html"), "utf8");
+  const chineseBlog = fs.readFileSync(path.join(root, "zh/blog/index.html"), "utf8");
+
+  assert.ok(postSlugs.includes(slug), "new essay should be in the bilingual route table");
+  assert.match(englishPost, /Are grammar and expression truly isomorphic/i);
+  assert.match(chinesePost, /语法与表达真的“完全同构”吗/);
+  assert.match(englishPost, /local alignment without total isomorphism/i);
+  assert.match(chinesePost, /局部同向，整体并不同构/);
+  assert.ok(publishEntries.includes(`posts/${slug}`));
+  for (const source of citedSources) {
+    assert.equal(occurrences(englishPost, source), 1);
+    assert.equal(occurrences(chinesePost, source), 1);
+  }
+  assert.equal(occurrences(englishBlog, `../posts/${slug}/`), 1);
+  assert.equal(occurrences(chineseBlog, `../posts/${slug}/`), 1);
+});
