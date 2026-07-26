@@ -17,8 +17,13 @@
   </url>
   <url>
     <loc>https://wyh302.github.io/blog/</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wyh302.github.io/posts/population-property-policy-feedback/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wyh302.github.io/posts/three-pillars-programming-ai-economics/</loc>
@@ -87,8 +92,13 @@
   </url>
   <url>
     <loc>https://wyh302.github.io/zh/blog/</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wyh302.github.io/zh/posts/population-property-policy-feedback/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wyh302.github.io/zh/posts/three-pillars-programming-ai-economics/</loc>
