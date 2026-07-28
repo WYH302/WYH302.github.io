@@ -17,8 +17,13 @@
   </url>
   <url>
     <loc>https://wyh302.github.io/blog/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wyh302.github.io/posts/tailwinds-headwinds-path-dependence-2026/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wyh302.github.io/posts/population-property-policy-feedback/</loc>
@@ -97,8 +102,13 @@
   </url>
   <url>
     <loc>https://wyh302.github.io/zh/blog/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wyh302.github.io/zh/posts/tailwinds-headwinds-path-dependence-2026/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wyh302.github.io/zh/posts/population-property-policy-feedback/</loc>

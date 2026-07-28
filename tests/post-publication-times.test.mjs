@@ -19,6 +19,7 @@ const expectedPublicationTimes = {
   "civil-service-security-and-ambition": "2026-07-24T15:19:29+08:00",
   "population-property-policy-feedback": "2026-07-26T22:40:33+08:00",
   "grammar-expression-information-structure": "2026-07-26T23:16:41+08:00",
+  "tailwinds-headwinds-path-dependence-2026": "2026-07-28T12:06:13+08:00",
 };
 
 function occurrences(text, value) {
