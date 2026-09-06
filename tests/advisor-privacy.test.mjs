@@ -22,12 +22,20 @@ function collectPublishedHtml(relativePath) {
 const publicHtmlRoutes = publishEntries.flatMap(collectPublishedHtml);
 const forbiddenAdvisorIdentities =
   /李军|刘强|刘畅|Prof(?:essor)?\.?\s+(?:Jun Li|Chang Liu|Qiang Liu)|\b(?:Jun Li|Li Jun|Chang Liu|Liu Chang|Qiang Liu|Liu Qiang)\b/i;
+const bibliographicRoutes = new Set([
+  "publications/index.html",
+  "zh/publications/index.html",
+]);
+const forbiddenAdvisorLabels = /<dt>Advisor<\/dt>|<dt>导师<\/dt>|Advisor:|导师：/i;
 
-test("published pages do not expose advisor identities", () => {
+test("published pages do not expose advisor identities outside bibliographic author lists", () => {
   assert.equal(publicHtmlRoutes.length, 43);
   for (const route of publicHtmlRoutes) {
     const html = fs.readFileSync(path.join(root, route), "utf8");
-    assert.doesNotMatch(html, forbiddenAdvisorIdentities, route);
+    assert.doesNotMatch(html, forbiddenAdvisorLabels, route);
+    if (!bibliographicRoutes.has(route.replaceAll("\\", "/"))) {
+      assert.doesNotMatch(html, forbiddenAdvisorIdentities, route);
+    }
   }
 });
 
@@ -41,7 +49,7 @@ test("homepages and CV pages do not expose advisor fields", () => {
 
   for (const route of pages) {
     const html = fs.readFileSync(path.join(root, route), "utf8");
-    assert.doesNotMatch(html, /<dt>Advisor<\/dt>|<dt>导师<\/dt>|Advisor:|导师：/, route);
+    assert.doesNotMatch(html, forbiddenAdvisorLabels, route);
   }
 });
 

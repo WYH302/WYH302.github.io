@@ -76,16 +76,12 @@
         <li>Represent inputs by modality and timestamp, not just by final feature tensors.</li>
         <li>Separate learned inference from rule-based or geometric feasibility checks.</li>
         <li>Keep output certificates, alarms, traces, or replay logs close to the final interface.</li>
-        <li>Describe contribution and evidence type plainly when presenting the system publicly.</li>
+        <li>Keep the input, model version, and active constraints with each result so a failure can be reproduced.</li>
       </ul>
 
-      <h2>Academic value</h2>
+      <h2>Learning from failures</h2>
       <p>
-        Verifiability changes how a project reads. It makes the work less like
-        a demo and more like a research object: something with a problem
-        setting, assumptions, constraints, implementation decisions, and
-        inspectable outputs. That is the standard I want this website's project
-        page to reflect.
+        What matters to me is being able to locate a failure. Which geometry constraint did a nesting layout violate? Which radar segment triggered an alarm? At what step did an agent use the wrong state? Keeping these traces gives the next revision something concrete to work from.
       </p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>

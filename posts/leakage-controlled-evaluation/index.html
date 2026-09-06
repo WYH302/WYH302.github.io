@@ -11,7 +11,7 @@
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2026-07-04T09:42:11+08:00">
     <meta property="og:title" content="Why Leakage-Controlled Evaluation Matters">
-    <meta property="og:description" content="A method note on train-only statistics, chronological protocols, retrieval-memory boundaries, and conservative reporting.">
+    <meta property="og:description" content="How data splits, training statistics, and retrieval memory affect the meaning of an evaluation score.">
     <meta property="og:url" content="https://wyh302.github.io/posts/leakage-controlled-evaluation/">
     <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
     <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
@@ -83,10 +83,11 @@
 
       <h2>Practical standard</h2>
       <p>
-        My preferred public-facing standard is simple: state the split, state
-        what is train-only, state what information the model sees at inference,
-        and describe negative or conditional findings plainly. A careful
-        protocol is not a decoration around a result. It is part of the result.
+        When I read an experiment, I first ask how the data was split, where the
+        normalization statistics came from, and what information the model could
+        see at prediction time. If an improvement disappears under another split,
+        that is worth recording too. Scores are only comparable once these
+        conditions are clear.
       </p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>

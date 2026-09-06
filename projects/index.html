@@ -12,7 +12,7 @@
     <meta property="og:title" content="Projects | Yonghao Wu (Leon)">
     <meta property="og:description" content="Selected sensing, imaging, and visual intelligence projects by Yonghao Wu (Leon).">
     <meta property="og:url" content="https://wyh302.github.io/projects/">
-    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/bridge-and-vessel.webp">
     <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../assets/css/styles.css?v=20260703-site">
   </head>
@@ -38,33 +38,18 @@
       <section class="page-hero">
         <div class="content-wrap">
           <p class="eyebrow">Selected projects</p>
-          <h1>Research systems for sensing, imaging, and visual intelligence</h1>
-          <p class="lead">
-            Selected engineering work across urban infrastructure perception,
-            industrial vision-language compilation, agentic AI workflows, and
-            ocean-sensing systems.
-          </p>
-          <dl class="hero-stats compact" aria-label="Project page summary">
-            <div>
-              <dt>5</dt>
-              <dd>Selected systems</dd>
-            </div>
-            <div>
-              <dt>3</dt>
-              <dd>Commissioned or funded project contexts</dd>
-            </div>
-            <div>
-              <dt>7</dt>
-              <dd>Related patent outputs named on this page</dd>
-            </div>
-          </dl>
-          <figure class="page-visual">
+          <h1>Projects I have worked on</h1>
+          <p class="lead">These projects put models to work on road and bridge monitoring, ship trajectories, stone-cutting layouts, and multi-agent simulation. Here is what I contributed to each.</p>
+          <figure class="page-visual project-photograph">
             <img
-              src="../assets/images/research-systems.png?v=20260618-visual"
-              alt="Abstract research system visual linking sensing signals, reconstruction, and learning-based analysis"
-              width="1280"
-              height="760"
+              src="../assets/images/bridge-and-vessel.webp"
+              srcset="../assets/images/bridge-and-vessel-small.webp 640w, ../assets/images/bridge-and-vessel.webp 1600w"
+              sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1036px) calc(100vw - 96px), 940px"
+              alt="Aerial view of a container ship approaching a cable-stayed bridge along a waterway"
+              width="1600"
+              height="1557"
               loading="eager"
+              fetchpriority="high"
             >
           </figure>
         </div>
@@ -73,32 +58,10 @@
       <section class="page-body" id="project-evidence">
         <div class="content-wrap project-list">
           <article class="feature-item">
-            <p class="item-meta">Guangzhou Transportation Bureau commissioned project | Core technical contributor | 2024-2025</p>
-            <h2>Urban Infrastructure Hazard Perception, GPR Defect Analysis, and Bridge Anti-Collision Multi-Modal Visualization Platform</h2>
-            <p>
-              Contributed as a core technical contributor to an end-to-end
-              infrastructure perception pipeline covering road-hazard
-              detection, GPR-based crack and pothole recognition, sample
-              curation, detection-model training, and object-imaging
-              preprocessing. Delivered a unified multi-modal visualization
-              interface integrating live video, radar signals, automated
-              alarms, and model inference views; the work led to three related
-              invention-patent outputs.
-            </p>
-            <dl class="project-evidence-list">
-              <div>
-                <dt>Contribution</dt>
-                <dd>Dataset/sample curation, detection-model training, object-imaging preprocessing, and multi-modal interface integration.</dd>
-              </div>
-              <div>
-                <dt>Visible output</dt>
-                <dd>Road-hazard perception workflow, GPR defect analysis pipeline, alarm views, and patent-linked technical modules.</dd>
-              </div>
-              <div>
-                <dt>Evidence type</dt>
-                <dd>Commissioned project context with three related invention-patent outputs: CN120045978A, CN118918519B, and CN118604817B.</dd>
-              </div>
-            </dl>
+            <p class="item-meta">Guangzhou Municipal Transportation Bureau commissioned project | Core technical contributor | 2024-2025</p>
+            <h2 title="Urban Infrastructure Hazard Perception, GPR Defect Analysis, and Bridge Anti-Collision Multi-Modal Visualization Platform">Road and bridge safety monitoring</h2>
+          <p>I worked on road-hazard detection and ground-penetrating radar (GPR) defect analysis, including sample curation, detector training, crack and pothole recognition, and object-imaging preprocessing.</p>
+          <p>I also integrated a visualization interface combining live video, radar signals, automated alarms, and model inference results. The project produced three related invention-patent outputs.</p>
             <div class="tag-row" aria-label="Project tags">
               <span class="tag">infrastructure sensing</span>
               <span class="tag">GPR analysis</span>
@@ -109,29 +72,9 @@
 
           <article class="feature-item">
             <p class="item-meta">Self-Initiated Research and Engineering Project</p>
-            <h2>StoneVL-Nest / CF-SlabNest: Vision-Language-Driven Verifiable Industrial Nesting Compilation System</h2>
-            <p>
-              Architected a multimodal compilation pipeline translating
-              Chinese natural-language cutting orders and visual defect
-              constraints into geometrically verified stone-cutting nesting
-              layouts. Formalized the core task as a maximum-count irregular
-              nesting problem and designed independent geometric feasibility
-              verification with auditable certificate output.
-            </p>
-            <dl class="project-evidence-list">
-              <div>
-                <dt>Contribution</dt>
-                <dd>Problem formalization, multimodal parsing design, irregular nesting constraints, and independent geometry verification.</dd>
-              </div>
-              <div>
-                <dt>Visible output</dt>
-                <dd>Prototype compilation path from Chinese cutting orders and defect constraints to auditable nesting-layout certificates.</dd>
-              </div>
-              <div>
-                <dt>Research value</dt>
-                <dd>Connects vision-language grounding with verifiable industrial optimization rather than relying only on generated layouts.</dd>
-              </div>
-            </dl>
+            <h2 title="StoneVL-Nest / CF-SlabNest: Vision-Language-Driven Verifiable Industrial Nesting Compilation System">StoneVL-Nest / CF-SlabNest: stone-cutting layouts</h2>
+          <p>This self-initiated prototype translates Chinese cutting orders and images of stone defects into cutting layouts. I designed the multimodal parsing and nesting pipeline, framing the task as maximum-count irregular nesting.</p>
+          <p>An independent geometry checker tests the generated layout against its constraints and produces a verification certificate. I want to know whether the pieces can actually be cut as specified, not just whether the layout looks plausible.</p>
             <div class="tag-row" aria-label="Project tags">
               <span class="tag">vision-language systems</span>
               <span class="tag">industrial nesting</span>
@@ -142,31 +85,9 @@
 
           <article class="feature-item">
             <p class="item-meta">Self-Initiated Research and Engineering Project</p>
-            <h2>Multi-Agent Social Simulation and LLM-Orchestrated Agentic Workflow Prototype System</h2>
-            <p>
-              Constructed a full-stack multi-agent social simulation with
-              React, Phaser, and Node.js, supporting persistent character
-              memory, structured dialogue scheduling, and longitudinal
-              relationship evolution. Co-designed a deterministic Agentic Web
-              prototype with event-driven state persistence and closed-loop
-              decision, feedback, and resource tracing to validate
-              LLM-orchestrated workflow automation under operational
-              constraints.
-            </p>
-            <dl class="project-evidence-list">
-              <div>
-                <dt>Contribution</dt>
-                <dd>Full-stack prototype construction, memory/state modeling, dialogue scheduling, and deterministic workflow tracing.</dd>
-              </div>
-              <div>
-                <dt>Visible output</dt>
-                <dd>React/Phaser/Node.js simulation interface and Agentic Web prototype with event-driven state persistence.</dd>
-              </div>
-              <div>
-                <dt>Research value</dt>
-                <dd>Used as a controlled environment for studying lightweight agent social dynamics and workflow automation failure points.</dd>
-              </div>
-            </dl>
+            <h2 title="Multi-Agent Social Simulation and LLM-Orchestrated Agentic Workflow Prototype System">Multi-agent simulation and workflow prototypes</h2>
+          <p>I built a multi-agent social simulation prototype with React, Phaser, and Node.js. Characters retain memories, schedule dialogue, and develop relationships through repeated interaction.</p>
+          <p>I also co-designed a deterministic Agentic Web prototype that persists state through event records and traces decisions, feedback, and resource use. These prototypes provide a controlled setting for studying agent interactions and failure points in LLM-orchestrated workflows.</p>
             <div class="tag-row" aria-label="Project tags">
               <span class="tag">multi-agent systems</span>
               <span class="tag">React</span>
@@ -177,29 +98,9 @@
 
           <article class="feature-item">
             <p class="item-meta">Guangdong Provincial Department of Science and Technology | Main R&D contributor | 2020-2022</p>
-            <h2>Distributed Marine Radar Networking Key Technology Research</h2>
-            <p>
-              Contributed to the deep learning-based ship trajectory data
-              mining submodule, covering trajectory cleaning, behavioral
-              feature engineering, pattern recognition, and anomaly detection
-              as the core of the undergraduate thesis. Also developed a marine
-              data acquisition prototype and trajectory-analysis algorithms
-              with related patent outputs.
-            </p>
-            <dl class="project-evidence-list">
-              <div>
-                <dt>Contribution</dt>
-                <dd>Trajectory cleaning, feature engineering, pattern recognition, anomaly detection, and thesis-linked algorithm design.</dd>
-              </div>
-              <div>
-                <dt>Visible output</dt>
-                <dd>Marine data acquisition prototype and trajectory clustering / clustering-then-discrimination prediction algorithms.</dd>
-              </div>
-              <div>
-                <dt>Evidence type</dt>
-                <dd>Related patents include CN115629557A, CN116881750B, and CN117093889A.</dd>
-              </div>
-            </dl>
+            <h2 title="Distributed Marine Radar Networking Key Technology Research">Ship trajectories and marine radar</h2>
+          <p>I contributed to ship-trajectory data mining, working on trajectory cleaning, behavioral features, pattern recognition, and anomaly detection. This work formed the core of my undergraduate thesis.</p>
+          <p>I also developed a marine data acquisition prototype, trajectory clustering, and clustering-then-discrimination prediction algorithms, with related invention-patent outputs in marine trajectory analysis.</p>
             <div class="tag-row" aria-label="Project tags">
               <span class="tag">marine radar</span>
               <span class="tag">trajectory mining</span>
@@ -210,29 +111,9 @@
 
           <article class="feature-item">
             <p class="item-meta">Zhanjiang Municipal Science and Technology Bureau | Main R&D contributor | 2021-2023</p>
-            <h2>Multi-Source Heterogeneous Ocean Sensing Data Fusion Key Technology Research</h2>
-            <p>
-              Designed a blockchain-based ship data management system for
-              tamper-proof provenance tracking and full-chain auditability of
-              multi-source maritime sensing data. Developed a biomimetic
-              robotic fish system as a mobile underwater sensing platform and
-              investigated structured integration mechanisms for heterogeneous
-              sensor streams.
-            </p>
-            <dl class="project-evidence-list">
-              <div>
-                <dt>Contribution</dt>
-                <dd>Blockchain data-management design, provenance/auditability modeling, and heterogeneous sensing integration exploration.</dd>
-              </div>
-              <div>
-                <dt>Visible output</dt>
-                <dd>Ship data management system design and biomimetic robotic fish mobile underwater sensing platform.</dd>
-              </div>
-              <div>
-                <dt>Evidence type</dt>
-                <dd>Related mobile underwater sensing platform patent output: CN115476990A.</dd>
-              </div>
-            </dl>
+            <h2 title="Multi-Source Heterogeneous Ocean Sensing Data Fusion Key Technology Research">Ocean sensing and robotic fish</h2>
+          <p>I designed a blockchain-based ship data management system to track the origin and handling of multi-source maritime sensing data, supporting tamper-resistant provenance and auditing.</p>
+          <p>I also developed a biomimetic robotic fish as a mobile underwater sensing platform and investigated ways to combine heterogeneous sensor streams. This work includes a related mobile underwater sensing platform patent output.</p>
             <div class="tag-row" aria-label="Project tags">
               <span class="tag">ocean sensing</span>
               <span class="tag">data fusion</span>

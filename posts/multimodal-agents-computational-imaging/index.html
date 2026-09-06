@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Multimodal Agents for Computational Imaging | Yonghao Wu (Leon)</title>
-    <meta name="description" content="A concise public research note by Yonghao Wu (Leon) on multimodal agents for computational imaging.">
+    <meta name="description" content="Research ideas on agents that choose measurements and reconstruction tools for computational imaging.">
     <meta name="author" content="Yonghao Wu (Leon)">
     <meta name="theme-color" content="#8c1515">
     <link rel="canonical" href="https://wyh302.github.io/posts/multimodal-agents-computational-imaging/">
@@ -39,9 +39,9 @@
       <p class="article-meta">Research note · Published <time datetime="2026-06-19T00:56:27+08:00">June 19, 2026 at 00:56 (UTC+8)</time></p>
       <h1>Multimodal agents for computational imaging</h1>
       <p class="lead">
-        This note outlines a public research direction: connecting multimodal
-        perception, tool-using agents, and computational imaging systems. It is
-        a research agenda note, not a claim of completed experimental results.
+        I want to explore whether an agent can use measurement results to choose
+        the next sensing and reconstruction step. This is still a research
+        proposal; these are the questions I want to test and some possible approaches.
       </p>
 
       <figure class="article-figure">
@@ -83,11 +83,12 @@
 
       <h2>Practical caution</h2>
       <p>
-        The main risk is overclaiming autonomy. A useful research prototype
-        should report uncertainty, preserve intermediate artifacts, and separate
-        model-generated suggestions from verified measurements. For public
-        academic communication, method notes should distinguish proposals,
-        ongoing work, and validated results.
+        An agent suggesting a measurement does not establish that the measurement
+        will help. I want the prototype to preserve inputs, reconstructions, and
+        uncertainty estimates at each step, so we can tell which judgments came
+        from measurements and which came from the model's own guesses. Testing
+        the idea will require comparisons with fixed imaging pipelines on both
+        measurement cost and reconstruction quality.
       </p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>

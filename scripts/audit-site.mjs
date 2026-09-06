@@ -32,6 +32,7 @@ const requiredRoutes = [
 const publicHtmlRoutes = bilingualPublicRoutes;
 
 const forbiddenPublishedPaths = [
+  "assets/files/cv.pdf",
   "posts/reading-note-template/index.html",
   "assets/images/profile-placeholder.svg",
 ];
@@ -45,9 +46,14 @@ const sensitiveSourceDirectories = [
 
 const sensitivePatterns = [
   /Academic Homepage Draft/i,
+  /(?<!\d)1[3-9]\d{9}(?!\d)/,
+  /\b(?:Date of birth|DOB)\s*[:：]|出生(?:日期|年月)\s*[:：]/i,
   /\bRMB\b/i,
   /\bmAP\s*[:=]|\bmAP@[0-9]/i,
   /Under Review/i,
+  /\bCN\d{6,}[A-Z]\b/,
+  /\bAdvisor\s*:/i,
+  /导师\s*[：:]/,
   /Guangzhou Road Major/i,
   /your_email@university\.edu/i,
   /yourusername/i,
@@ -220,6 +226,9 @@ if (manifest.name !== "Yonghao Wu Academic Homepage") {
   failures.push("site.webmanifest: unexpected app name");
 }
 
+const publishedPdfs = walk(site).filter(file => path.extname(file).toLowerCase() === ".pdf");
+if (publishedPdfs.length) failures.push("PDF files must not be included in the public site");
+
 const publishedTextFiles = walk(site).filter((file) =>
   [".html", ".css", ".xml", ".txt", ".json", ".webmanifest"].includes(path.extname(file)),
 );
@@ -236,6 +245,9 @@ for (const filePath of publishedTextFiles) {
 
 runGit(["diff", "--check"], "git diff --check");
 runGit(["diff", "--cached", "--check"], "git diff --cached --check");
+if (runGit(["ls-files", "--", "*.pdf"], "tracked PDF scan")) {
+  failures.push("PDF files must remain local and untracked");
+}
 
 const trackedOfficeDocs = runGit(["ls-files", "--", "*.doc", "*.docx"], "tracked Office document scan")
   .split(/\r?\n/)

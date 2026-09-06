@@ -11,7 +11,7 @@
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2026-06-19T00:56:27+08:00">
     <meta property="og:title" content="计算成像中的多模态智能体">
-    <meta property="og:description" content="一篇研究议程笔记，讨论如何连接多模态感知、工具调用智能体与计算成像系统。">
+    <meta property="og:description" content="关于智能体如何选择测量与重建工具的一些研究设想。">
     <meta property="og:url" content="https://wyh302.github.io/zh/posts/multimodal-agents-computational-imaging/">
     <meta property="og:image" content="https://wyh302.github.io/assets/images/research-hero.png?v=20260618-visual">
     <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
@@ -39,8 +39,8 @@
       <p class="article-meta">研究笔记 · 发布于 <time datetime="2026-06-19T00:56:27+08:00">2026年6月19日 00:56（北京时间，UTC+8）</time></p>
       <h1>计算成像中的多模态智能体</h1>
       <p class="lead">
-        本文概述一个公开的研究方向：把多模态感知、工具调用智能体与计算成像系统连接起来。
-        这是一篇研究议程笔记，并不表示相关实验已经完成。
+        我想探索一个问题：智能体能否根据测量结果，自己选择下一步的成像与重建操作？
+        这个方向还在研究设想阶段，下面是我想解决的问题和可能的做法。
       </p>
 
       <figure class="article-figure">
@@ -75,9 +75,9 @@
 
       <h2>实践中的注意事项</h2>
       <p>
-        主要风险是夸大系统的自主能力。实用的研究原型应报告不确定性、保留中间产物，
-        并区分模型生成的建议与经过验证的测量结果。公开交流学术工作时，方法说明还应明确区分研究设想、
-        正在进行的工作和已经验证的结果。
+        智能体提出一次测量建议，并不意味着这次测量一定有用。我希望原型能保留每一步的输入、
+        重建结果和不确定性估计，让人可以回查：某个判断来自实际测量，还是模型自己的推测？
+        要检验这个方向是否可行，还需要比较它与固定成像流程在测量成本和重建质量上的差别。
       </p>
 
       <p><a class="button secondary" href="../../blog/">返回博客</a></p>

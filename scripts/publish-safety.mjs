@@ -7,6 +7,7 @@ export const assetExtensions = new Set([
   ".gif",
   ".jpeg",
   ".jpg",
+  ".js",
   ".png",
   ".svg",
   ".webp",
@@ -27,6 +28,8 @@ const forbiddenPublishExtensions = new Set([
   ".tex",
   ".zip",
 ]);
+
+export const localOnlySourcePaths = new Set(["assets/files/cv.pdf"]);
 
 export function assertSafePublishSource(sourcePath, repositoryRoot, allowedExtensions = null) {
   const stats = fs.lstatSync(sourcePath);

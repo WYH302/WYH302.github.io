@@ -56,6 +56,20 @@ test("rejects sensitive extensions and environment files", () => {
   );
 });
 
+test("rejects the local CV PDF as a publishable asset", () => {
+  const publicCv = path.join(temporaryRoot, "assets", "files", "cv.pdf");
+  fs.mkdirSync(path.dirname(publicCv), { recursive: true });
+  fs.writeFileSync(publicCv, "audited public CV fixture");
+
+  assert.throws(() =>
+    assertSafePublishSource(publicCv, temporaryRoot, assetExtensions), /sensitive file type/,
+  );
+  assert.throws(
+    () => assertSafePublishSource(path.join(temporaryRoot, "resume.pdf"), temporaryRoot),
+    /sensitive file type/,
+  );
+});
+
 test("rejects OCR bounding-box HTML exports", () => {
   assert.throws(
     () => assertSafePublishSource(

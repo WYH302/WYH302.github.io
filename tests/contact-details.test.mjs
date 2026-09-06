@@ -47,16 +47,16 @@ test("both contact pages identify the QQ number without malformed addresses", ()
   }
 });
 
-test("contact labels identify the preferred and confirmed routes in each language", () => {
+test("contact labels identify the preferred email and alternative providers", () => {
   const english = pages[0][1];
   const chinese = pages[1][1];
 
-  assert.match(english, /Preferred academic email \(confirmed\)/);
-  assert.match(english, /Additional email \(confirmed\)/);
-  assert.match(english, /QQ email \(confirmed\)/);
-  assert.match(chinese, /首选学术邮箱（已确认）/);
-  assert.match(chinese, /备用邮箱（已确认）/);
-  assert.match(chinese, /QQ 邮箱（已确认）/);
+  assert.match(english, /Academic email \(preferred\)/);
+  assert.match(english, /Gmail/);
+  assert.match(english, /QQ email/);
+  assert.match(chinese, /学术邮箱（首选）/);
+  assert.match(chinese, /Gmail/);
+  assert.match(chinese, /QQ 邮箱/);
 });
 
 test("every public contact entry uses the complete preferred academic address", () => {

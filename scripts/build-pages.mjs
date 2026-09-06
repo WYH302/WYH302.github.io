@@ -2,12 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { injectLanguageMarkup } from "./bilingual-markup.mjs";
+import { applyEditorialLayout } from "./editorial-layout.mjs";
 import { bilingualRoutePairs } from "./bilingual-routes.mjs";
 import { publishEntries } from "./publish-manifest.mjs";
 import {
   assertSafePublishSource,
   assetExtensions,
   htmlExtensions,
+  localOnlySourcePaths,
   validateCname,
 } from "./publish-safety.mjs";
 
@@ -19,7 +21,7 @@ function injectLanguageNavigation(route, pair, language) {
   const html = injectLanguageMarkup(fs.readFileSync(filePath, "utf8"), route, pair, language)
     .replaceAll("styles.css?v=20260703-site", "styles.css?v=20260722-bilingual")
     .replaceAll("styles.css?v=20260618-visual", "styles.css?v=20260722-bilingual");
-  fs.writeFileSync(filePath, html, "utf8");
+  fs.writeFileSync(filePath, applyEditorialLayout(html, route), "utf8");
 }
 
 function copyEntry(entry) {
@@ -42,6 +44,8 @@ function copyEntry(entry) {
     recursive: true,
     force: true,
     filter: (sourcePath) => {
+      const relativeSource = path.relative(root, sourcePath).replaceAll(path.sep, "/");
+      if (localOnlySourcePaths.has(relativeSource)) return false;
       if (sourcePath.includes(`${path.sep}.git${path.sep}`)) {
         return false;
       }
