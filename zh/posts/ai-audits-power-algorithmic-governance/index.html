@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>把权力交给 AI，还是让 AI 盯住权力？ | Yonghao Wu (Leon)</title>
+    <meta name="description" content="AI 可以降低监督成本，但公平仍取决于谁制定规则、谁能质疑结果，以及谁承担责任。">
+    <meta name="author" content="Yonghao Wu (Leon)">
+    <meta name="theme-color" content="#8c1515">
+    <link rel="canonical" href="https://wyh302.github.io/zh/posts/ai-audits-power-algorithmic-governance/">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-09-06T16:15:00+08:00">
+    <meta property="og:title" content="把权力交给 AI，还是让 AI 盯住权力？">
+    <meta property="og:description" content="AI 可以降低监督成本，但公平仍取决于谁制定规则、谁能质疑结果，以及谁承担责任。">
+    <meta property="og:url" content="https://wyh302.github.io/zh/posts/ai-audits-power-algorithmic-governance/">
+    <meta property="og:image" content="https://wyh302.github.io/assets/images/research-systems.png?v=20260618-visual">
+    <link rel="icon" href="../../../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../../assets/css/styles.css?v=20260722-bilingual">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../">吴永浩 Yonghao Wu (Leon)</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="../../">关于</a></li>
+            <li><a href="../../projects/">项目</a></li>
+            <li><a href="../../publications/">论文</a></li>
+            <li><a aria-current="page" href="../../blog/">博客</a></li>
+            <li><a href="../../cv/">简历</a></li>
+            <li><a href="../../contact/">联系</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="article">
+      <p class="article-meta">社会观察 · 发布于 <time datetime="2026-09-06T16:15:00+08:00">2026年9月6日 16:15（北京时间，UTC+8）</time></p>
+      <h1>把权力交给 AI，还是让 AI 盯住权力？</h1>
+      <p class="lead">让 AI 当领导的吸引力并不难理解。见过任人唯亲、规则临时改写的人，会希望有一个不收礼、不认亲戚的裁判。我支持用技术压缩这种任意性，但一套能够监督决策的制度，比一个号称无私的决策者更值得争取。</p>
+      <h2>不收礼，不等于没有偏见</h2>
+      <p>模型没有人类意义上的亲属关系，却会使用人类提供的数据、标签和目标。如果过去的晋升记录偏向某些院校或圈子，把它们作为“优秀人才”的样本，就可能把旧偏好写进新的评分。开发者选择哪些表现值得奖励，也是在行使判断权。</p>
+      <p><a href="https://arxiv.org/abs/1609.05807">Kleinberg、Mullainathan 与 Raghavan 的风险评分研究</a>证明，在其形式化条件下，几项公平要求除特殊情形外无法同时满足。这不是“任何公平都不可能”的证明，更不是反对改革的理由。它提醒我们：不能把不同公平目标之间的选择藏在一个总分里。</p>
+      <p>提拔员工时，组织究竟重视短期产出、长期贡献，还是起点不平等下的潜力？算法可以帮助检查选择的后果，无法免除组织解释选择的责任。</p>
+      <h2>谁能改规则，谁就仍然握有权力</h2>
+      <p>把签字人换成模型，权力不会随之消失。数据由谁录入，哪些事项不进入系统，谁能修改权重，谁有权覆盖结论，这些权限都会影响结果。公众若只能看见最终分数，甚至可能更难发现偏袒。</p>
+      <p>员工也会适应规则。考核只看材料数量，就有人把工作切成更多材料；只看可见工时，就有人优化可见性。这是需要预防的激励问题，不能预先断言所有人都会造假。指标必须与实际任务核对，并允许当事人补充模型看不到的贡献。</p>
+      <h2>把 AI 用在可复核的监督环节</h2>
+      <p>我更愿意先让 AI 协助检查预算、采购和任免程序：发现重复付款，核对评分变化，标出需要人工复查的关联。系统必须保留每条提示所依据的记录。一个关联图说明“这里值得调查”，不能直接证明利益输送，更不能代替处分或裁判。</p>
+      <p>这种部署仍然需要成本。数据缺失、身份匹配错误、系统维护和独立复核都需要人力。公开的信息也可能涉及个人隐私；不能因为技术能够汇总，就把无关人员的生活全部暴露出来。监督应围绕公共职权与合法用途，按必要范围访问和公布数据。</p>
+      <p><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST 的 AI 风险管理框架</a>提供了贯穿设计、使用与评估的风险管理参考。下面是我的制度建议，而非该框架承诺的一套现成解法。</p>
+      <h2>监督系统本身也要接受监督</h2>
+      <p>每次改变指标，应记录理由、审批者和版本，并评估受影响群体。开发供应商、使用部门和申诉复核者应有角色分离，不能让被质疑的部门独自宣布自己的模型没有问题。</p>
+      <p>受影响者应能知道不利决定的主要依据，纠正错误数据，并请求有权限改变结果的人复核。人工复核不能只是点一下“同意”。复核者应写明理由，组织应统计纠错率、漏报和误报，并在系统表现不可靠时暂停相关用途。</p>
+      <p>开源可以帮助外部检查，但公开代码不等于公开实际运行过程。数据质量、部署版本和例外审批同样重要。涉及个人资料或安全限制的部分，可以采用受约束的独立审计；保密范围也应有依据和复审机制。规则讨论需要员工、公民代表与专业人员参与，不能把复杂的权利问题全部简化为一次多数投票。</p>
+      <h2>技术会增加改革压力，不会自动形成“死棋”</h2>
+      <p>监督工具变得便宜之后，公众有理由追问原来难以检查的事项。但“不部署就说明腐败”仍然是无效推断。数据条件、法律边界、预算和错误成本都可能构成正当障碍。管理者应说明障碍、公布试点安排，而不是靠一句“技术有风险”无限拖延。</p>
+      <p>另一方面，部署一个名为廉政的系统，也不证明权力已经受到约束。应看它审查哪些层级、异常之后有没有独立调查，以及公众能否质疑审查范围。技术既可能降低监督门槛，也可能让少数人更方便地控制信息。</p>
+      <h2>历史提供的是条件，不是保证</h2>
+      <p>英国1832年的议会改革能帮助理解权力调整的限度。<a href="https://www.parliament.uk/about/living-heritage/transformingsociety/electionsvoting/chartists/case-study/the-right-to-vote/thomas-attwood-and-the-birmingham-political-union/1832-reform-act/1832-reform-act-2/">英国议会的史料说明</a>指出，改革扩大了中产阶级的代表权，但没有把选举权扩展到工人阶级。新的经济力量、政治动员与既有制度中的妥协共同参与了改变，收益也并未平均分配。</p>
+      <p>因此，不能从“出现了新生产力”直接跳到“普通人必然获得权力”。AI 能帮助更多人理解公开记录，但记录能否获得、质疑能否回应、错误能否纠正，仍需要制度保障。</p>
+      <p>我赞成推进改革，也赞成把试点做得足够具体：选一个边界清楚的监督任务，公开评估办法，比较改进前后的错误与纠错成本。让技术改善公平，最终要落实为普通人可以使用的程序，而不是要求他们相信另一个不能反驳的权威。</p>
+      <p><a class="text-link" href="../../blog/">返回博客目录</a></p>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><p>&copy; 2026 Yonghao Wu (Leon).</p><p><a href="../../contact/">联系</a> | <a href="../../cv/">简历</a></p></div></footer>
+  </body>
+</html>

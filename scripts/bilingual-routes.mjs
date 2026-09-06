@@ -12,6 +12,9 @@ export const postSlugs = [
   "population-property-policy-feedback",
   "grammar-expression-information-structure",
   "tailwinds-headwinds-path-dependence-2026",
+  "youth-defensive-withdrawal-and-social-trust",
+  "ai-audits-power-algorithmic-governance",
+  "tenure-review-youth-and-university-renewal",
 ];
 
 export const primaryBaseRoutes = [

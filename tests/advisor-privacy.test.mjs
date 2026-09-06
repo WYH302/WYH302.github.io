@@ -24,7 +24,7 @@ const forbiddenAdvisorIdentities =
   /李军|刘强|刘畅|Prof(?:essor)?\.?\s+(?:Jun Li|Chang Liu|Qiang Liu)|\b(?:Jun Li|Li Jun|Chang Liu|Liu Chang|Qiang Liu|Liu Qiang)\b/i;
 
 test("published pages do not expose advisor identities", () => {
-  assert.equal(publicHtmlRoutes.length, 37);
+  assert.equal(publicHtmlRoutes.length, 43);
   for (const route of publicHtmlRoutes) {
     const html = fs.readFileSync(path.join(root, route), "utf8");
     assert.doesNotMatch(html, forbiddenAdvisorIdentities, route);

@@ -20,6 +20,9 @@ const expectedPublicationTimes = {
   "population-property-policy-feedback": "2026-07-26T22:40:33+08:00",
   "grammar-expression-information-structure": "2026-07-26T23:16:41+08:00",
   "tailwinds-headwinds-path-dependence-2026": "2026-07-28T12:06:13+08:00",
+  "youth-defensive-withdrawal-and-social-trust": "2026-09-06T16:15:00+08:00",
+  "ai-audits-power-algorithmic-governance": "2026-09-06T16:15:00+08:00",
+  "tenure-review-youth-and-university-renewal": "2026-09-06T16:15:00+08:00",
 };
 
 function occurrences(text, value) {
