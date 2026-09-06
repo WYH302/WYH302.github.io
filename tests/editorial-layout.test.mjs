@@ -55,7 +55,7 @@ test("journal enhancements do not hide articles when JavaScript is disabled", ()
     assert.match(html, /aria-pressed="true"/);
   }
 });
-test("both homepages use four daily photos in the hero carousel without a duplicate gallery", () => {
+test("both homepages retain the two original portraits plus four daily photos in the hero carousel", () => {
   for (const route of bilingualAllRoutes) {
     const source = fs.readFileSync(new URL("../" + route, import.meta.url), "utf8");
     const html = applyEditorialLayout(source, route);
@@ -67,11 +67,17 @@ test("both homepages use four daily photos in the hero carousel without a duplic
     assert.ok(gallery, route);
     assert.match(gallery, /aria-roledescription=/);
     assert.match(gallery, route.startsWith("zh/") ? /aria-label="生活照片"/ : /aria-label="Everyday photographs"/);
-    assert.equal((gallery.match(/class="carousel-slide"/g) || []).length, 4);
+    assert.equal((gallery.match(/class="carousel-slide"/g) || []).length, 6);
+    const files = [...gallery.matchAll(/<img src="[^"]*\/([^/\"]+)"/g)].map(match => match[1]);
+    assert.deepEqual(files, ["portrait-study.webp", "portrait-notes.webp", "daily-coffee-walk.webp", "daily-cafe.webp", "daily-city-walk.webp", "daily-window-seat.webp"]);
+    assert.equal((gallery.match(/data-go-to=/g) || []).length, 6);
+    assert.equal((gallery.match(/data-position="hidden"/g) || []).length, 3);
+    assert.equal((gallery.match(/data-position="previous"/g) || []).length, 1);
+    assert.equal((gallery.match(/data-position="next"/g) || []).length, 1);
     assert.doesNotMatch(html, /daily-band|photo-pair|primary-photo|secondary-photo/);
     assert.ok(html.indexOf('class="hero-carousel"') < html.indexOf('class="fact-list"'));
     assert.equal((gallery.match(/data-position="active"/g) || []).length, 1);
-    assert.equal((gallery.match(/tabindex="-1" aria-hidden="true"/g) || []).length, 3);
+    assert.equal((gallery.match(/tabindex="-1" aria-hidden="true"/g) || []).length, 5);
     assert.match(gallery, /data-previous/);
     assert.match(gallery, /data-next/);
     assert.match(gallery, /data-rotation/);
@@ -79,13 +85,18 @@ test("both homepages use four daily photos in the hero carousel without a duplic
     assert.doesNotMatch(gallery, /figcaption|\.png|backups|D:/);
     for (const image of gallery.matchAll(/<img\b[^>]*>/g)) {
       assert.match(image[0], /alt="[^"]+"/);
-      assert.match(image[0], /width="1122" height="1402"/);
-      assert.match(image[0], /480w, [^"]+ 1122w/);
+      if (image[0].includes("/portrait-")) {
+        assert.match(image[0], /width="900" height="1125"/);
+        assert.match(image[0], /srcset="[^"]+ 900w"/);
+      } else {
+        assert.match(image[0], /width="1122" height="1402"/);
+        assert.match(image[0], /480w, [^"]+ 1122w/);
+      }
     }
     for (const link of gallery.matchAll(/href="([^"]+)"/g)) {
       assert.ok(fs.existsSync(new URL("../" + route.replace(/index\.html$/, "") + link[1], import.meta.url)), link[1]);
     }
-    assert.equal((gallery.match(/target="_blank" rel="noopener"/g) || []).length, 4);
+    assert.equal((gallery.match(/target="_blank" rel="noopener"/g) || []).length, 6);
   }
 });
 test("short articles and unmapped notes remain usable", () => {
