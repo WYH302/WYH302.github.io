@@ -55,30 +55,37 @@ test("journal enhancements do not hide articles when JavaScript is disabled", ()
     assert.match(html, /aria-pressed="true"/);
   }
 });
-test("both homepages include four accessible local daily photos without exposing source files", () => {
+test("both homepages use four daily photos in the hero carousel without a duplicate gallery", () => {
   for (const route of bilingualAllRoutes) {
     const source = fs.readFileSync(new URL("../" + route, import.meta.url), "utf8");
     const html = applyEditorialLayout(source, route);
     if (!["index.html", "zh/index.html"].includes(route)) {
-      assert.doesNotMatch(html, /class="daily-band"/, route);
+      assert.doesNotMatch(html, /data-carousel\b/, route);
       continue;
     }
-    const gallery = html.match(/<section class="daily-band"[\s\S]*?<\/section>/)?.[0];
+    const gallery = html.match(/<section class="hero-carousel"[\s\S]*?<\/section>/)?.[0];
     assert.ok(gallery, route);
-    assert.match(gallery, /aria-labelledby="daily-heading"/);
-    assert.match(gallery, route.startsWith("zh/") ? />日常<\/h2>/ : />Everyday life<\/h2>/);
-    assert.equal((gallery.match(/class="daily-photo"/g) || []).length, 4);
+    assert.match(gallery, /aria-roledescription=/);
+    assert.match(gallery, route.startsWith("zh/") ? /aria-label="生活照片"/ : /aria-label="Everyday photographs"/);
+    assert.equal((gallery.match(/class="carousel-slide"/g) || []).length, 4);
+    assert.doesNotMatch(html, /daily-band|photo-pair|primary-photo|secondary-photo/);
+    assert.ok(html.indexOf('class="hero-carousel"') < html.indexOf('class="fact-list"'));
+    assert.equal((gallery.match(/data-position="active"/g) || []).length, 1);
+    assert.equal((gallery.match(/tabindex="-1" aria-hidden="true"/g) || []).length, 3);
+    assert.match(gallery, /data-previous/);
+    assert.match(gallery, /data-next/);
+    assert.match(gallery, /data-rotation/);
+    assert.match(gallery, /data-carousel-controls hidden/);
     assert.doesNotMatch(gallery, /figcaption|\.png|backups|D:/);
     for (const image of gallery.matchAll(/<img\b[^>]*>/g)) {
       assert.match(image[0], /alt="[^"]+"/);
-      assert.match(image[0], /loading="lazy"/);
       assert.match(image[0], /width="1122" height="1402"/);
       assert.match(image[0], /480w, [^"]+ 1122w/);
     }
     for (const link of gallery.matchAll(/href="([^"]+)"/g)) {
       assert.ok(fs.existsSync(new URL("../" + route.replace(/index\.html$/, "") + link[1], import.meta.url)), link[1]);
     }
-    assert.equal((gallery.match(/target="_blank" rel="noopener" aria-label=/g) || []).length, 4);
+    assert.equal((gallery.match(/target="_blank" rel="noopener"/g) || []).length, 4);
   }
 });
 test("short articles and unmapped notes remain usable", () => {
