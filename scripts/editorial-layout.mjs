@@ -39,6 +39,19 @@ function imageMarkup(route, key, z, large = false) {
 function photo(route, key, z) {
   return `<figure class="editorial-cover">${imageMarkup(route, key, z, true)}</figure>`;
 }
+function dailyGallery(route, z) {
+  const base = `${rootHref(route)}/assets/images/daily-`;
+  const photos = [
+    ["coffee-walk", "穿灰色卫衣，背着背包，在街边拿着一杯咖啡", "In a grey hoodie with a backpack and a coffee on the sidewalk"],
+    ["cafe", "坐在咖啡馆窗边，桌上放着电脑和冰咖啡", "Sitting by a cafe window with a laptop and iced coffee on the table"],
+    ["city-walk", "穿黑色外套，拿着手机站在树木成荫的街边", "In a black jacket, holding a phone on a tree-lined sidewalk"],
+    ["window-seat", "坐在窗边，望向窗外", "Sitting by a window, looking outside"],
+  ];
+  return `<section class="daily-band" aria-labelledby="daily-heading"><div class="content-wrap"><h2 id="daily-heading">${z ? "日常" : "Everyday life"}</h2><div class="daily-gallery">${photos.map(([file, zh, en]) => {
+    const alt = z ? zh : en;
+    return `<a class="daily-photo" href="${base}${file}.webp" target="_blank" rel="noopener" aria-label="${alt}${z ? "（在新标签页查看大图）" : " (open full-size photo in a new tab)"}"><img src="${base}${file}.webp" srcset="${base}${file}-small.webp 480w, ${base}${file}.webp 1122w" sizes="(max-width: 600px) calc((100vw - 50px) / 2), (max-width: 900px) calc((100vw - 68px) / 2), (max-width: 1336px) calc((100vw - 162px) / 4), 294px" width="1122" height="1402" alt="${alt}" loading="lazy" decoding="async"></a>`;
+  }).join("")}</div></div></section>`;
+}
 function enhanceCards(html, route, z) {
   return html.replace(/<article class="note-card">([\s\S]*?)<\/article>/g, (whole, body) => {
     const slug = body.match(/\.\.\/posts\/([^/]+)\//)?.[1];
@@ -56,7 +69,7 @@ export function applyEditorialLayout(html, route) {
   const local = route.replace(/^zh\//, "");
   const root = rootHref(route);
   html = html.replace('<main id="main"', '<main id="main" tabindex="-1"');
-  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260906-editorial">\n<script src="${root}/assets/js/editorial.js?v=20260906-editorial" defer></script>\n</head>`);
+  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260906-daily">\n<script src="${root}/assets/js/editorial.js?v=20260906-editorial" defer></script>\n</head>`);
   html = html.replace("<body>", `<body class="editorial ${local === "index.html" ? "home-page" : local === "blog/index.html" ? "journal-page" : local.startsWith("posts/") ? "essay-page" : "document-page"}">`);
   html = html.replaceAll("lifephoto-2.png?v=20260630-photo", "portrait-study.webp").replaceAll("lifephoto-1.png?v=20260630-photo", "portrait-notes.webp");
   if (local === "index.html") {
@@ -65,7 +78,7 @@ export function applyEditorialLayout(html, route) {
       ? [["youth-defensive-withdrawal-and-social-trust","年轻人的冷漠，是一种防御吗？","city"],["ai-audits-power-algorithmic-governance","把权力交给 AI，还是让 AI 盯住权力？","circuits"],["tenure-review-youth-and-university-renewal","“铁饭碗”碎了，青年教师就能上桌吗？","library"]]
       : [["youth-defensive-withdrawal-and-social-trust","Is detachment a form of self-protection?","city"],["ai-audits-power-algorithmic-governance","Should AI rule, or audit power?","circuits"],["tenure-review-youth-and-university-renewal","Do young scholars get a seat?","library"]];
     const latest = `<section class="latest-band"><div class="content-wrap"><div class="journal-section-title"><div><p class="eyebrow">THE JOURNAL / ${z ? "随笔" : "RECENT WRITING"}</p><h2>${z ? "实验室之外的思考" : "Beyond the laboratory"}</h2></div><a class="text-link" href="blog/">${z ? "全部文章" : "All essays"} <span aria-hidden="true">↗</span></a></div><div class="home-essays">${homeNotes.map(([slug,title,key],i)=>`<article><div class="home-note-image">${imageMarkup(route,key,z)}</div><p class="item-meta">0${i+1} / ${z ? "思想随笔" : "ESSAY"}</p><h3><a href="posts/${slug}/">${title}</a></h3></article>`).join("")}</div></div></section>`;
-    html = html.replace(/(<section class="section-band">)/, latest + "$1");
+    html = html.replace(/(<section class="section-band">)/, dailyGallery(route, z) + latest + "$1");
   }
   if (local === "blog/index.html") {
     html = html.replace(/<h1>[\s\S]*?<\/h1>/, `<h1 class="journal-title">${z ? "观察与追问<span>Field notes.</span>" : "Field notes<span>on a changing world.</span>"}</h1>`);

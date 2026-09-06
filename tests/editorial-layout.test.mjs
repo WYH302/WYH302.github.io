@@ -55,6 +55,32 @@ test("journal enhancements do not hide articles when JavaScript is disabled", ()
     assert.match(html, /aria-pressed="true"/);
   }
 });
+test("both homepages include four accessible local daily photos without exposing source files", () => {
+  for (const route of bilingualAllRoutes) {
+    const source = fs.readFileSync(new URL("../" + route, import.meta.url), "utf8");
+    const html = applyEditorialLayout(source, route);
+    if (!["index.html", "zh/index.html"].includes(route)) {
+      assert.doesNotMatch(html, /class="daily-band"/, route);
+      continue;
+    }
+    const gallery = html.match(/<section class="daily-band"[\s\S]*?<\/section>/)?.[0];
+    assert.ok(gallery, route);
+    assert.match(gallery, /aria-labelledby="daily-heading"/);
+    assert.match(gallery, route.startsWith("zh/") ? />日常<\/h2>/ : />Everyday life<\/h2>/);
+    assert.equal((gallery.match(/class="daily-photo"/g) || []).length, 4);
+    assert.doesNotMatch(gallery, /figcaption|\.png|backups|D:/);
+    for (const image of gallery.matchAll(/<img\b[^>]*>/g)) {
+      assert.match(image[0], /alt="[^"]+"/);
+      assert.match(image[0], /loading="lazy"/);
+      assert.match(image[0], /width="1122" height="1402"/);
+      assert.match(image[0], /480w, [^"]+ 1122w/);
+    }
+    for (const link of gallery.matchAll(/href="([^"]+)"/g)) {
+      assert.ok(fs.existsSync(new URL("../" + route.replace(/index\.html$/, "") + link[1], import.meta.url)), link[1]);
+    }
+    assert.equal((gallery.match(/target="_blank" rel="noopener" aria-label=/g) || []).length, 4);
+  }
+});
 test("short articles and unmapped notes remain usable", () => {
   const html = '<html><head></head><body><main><h1>A note</h1><p class="lead">Hello</p><h2 id="existing">Section</h2><p>Body</p></main></body></html>';
   const output = applyEditorialLayout(html, "posts/unmapped/index.html");
