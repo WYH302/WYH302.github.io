@@ -42,19 +42,19 @@ function photo(route, key, z) {
 function heroCarousel(route, z) {
   const base = `${rootHref(route)}/assets/images/`;
   const photos = [
+    ["daily-coffee-walk", "穿灰色卫衣，背着背包，在街边拿着一杯咖啡", "In a grey hoodie with a backpack and a coffee on the sidewalk"],
+    ["daily-window-seat", "坐在窗边，望向窗外", "Sitting by a window, looking outside"],
+    ["daily-city-walk", "穿黑色外套，拿着手机站在树木成荫的街边", "In a black jacket, holding a phone on a tree-lined sidewalk"],
+    ["daily-cafe", "坐在咖啡馆窗边，桌上放着电脑和冰咖啡", "Sitting by a cafe window with a laptop and iced coffee on the table"],
     ["portrait-study", "吴永浩穿深色西装，坐在书架旁的桌前", "Yonghao Wu in a dark blazer, seated at a desk beside bookshelves", 900, 1125],
     ["portrait-notes", "吴永浩在笔记本电脑旁写笔记", "Yonghao Wu writing notes beside a laptop", 900, 1125],
-    ["daily-coffee-walk", "穿灰色卫衣，背着背包，在街边拿着一杯咖啡", "In a grey hoodie with a backpack and a coffee on the sidewalk"],
-    ["daily-cafe", "坐在咖啡馆窗边，桌上放着电脑和冰咖啡", "Sitting by a cafe window with a laptop and iced coffee on the table"],
-    ["daily-city-walk", "穿黑色外套，拿着手机站在树木成荫的街边", "In a black jacket, holding a phone on a tree-lined sidewalk"],
-    ["daily-window-seat", "坐在窗边，望向窗外", "Sitting by a window, looking outside"],
   ];
   return `<section class="hero-carousel" data-carousel role="region" aria-roledescription="${z ? "轮播" : "carousel"}" aria-label="${z ? "生活照片" : "Everyday photographs"}"><div class="carousel-stage">${photos.map(([file, zh, en, width = 1122, height = 1402], i) => {
     const alt = z ? zh : en;
     const position = i === 0 ? "active" : i === 1 ? "next" : i === photos.length - 1 ? "previous" : "hidden";
     const srcset = `${file.startsWith("daily-") ? `${base}${file}-small.webp 480w, ` : ""}${base}${file}.webp ${width}w`;
     return `<a class="carousel-slide" data-slide data-position="${position}" href="${base}${file}.webp" target="_blank" rel="noopener" tabindex="${i ? "-1" : "0"}"${i ? ' aria-hidden="true"' : ""} aria-label="${alt}${z ? "（在新标签页查看大图）" : " (open full-size photo in a new tab)"}"><img src="${base}${file}.webp" srcset="${srcset}" sizes="(max-width: 600px) 78vw, 440px" width="${width}" height="${height}" alt="${alt}"${i ? "" : ' fetchpriority="high"'} decoding="async"></a>`;
-  }).join("")}<div class="carousel-arrows" data-carousel-controls hidden><button type="button" data-previous aria-label="${z ? "上一张照片" : "Previous photo"}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${z ? "下一张照片" : "Next photo"}"><span aria-hidden="true">›</span></button></div></div><div class="carousel-toolbar" data-carousel-controls hidden><button type="button" class="carousel-rotation" data-rotation aria-label="${z ? "暂停自动轮播" : "Pause slideshow"}"><span aria-hidden="true">Ⅱ</span></button><div class="carousel-dots" role="group" aria-label="${z ? "选择照片" : "Choose a photo"}">${photos.map((_,i)=>`<button type="button" data-go-to="${i}" aria-label="${z ? `查看第 ${i+1} 张照片` : `Show photo ${i+1}`}"${i ? "" : ' aria-current="true"'}><span aria-hidden="true"></span></button>`).join("")}</div><p class="visually-hidden" data-carousel-status aria-live="off" aria-atomic="true"></p></div></section>`;
+  }).join("")}<div class="carousel-arrows" data-carousel-controls hidden><button type="button" data-previous aria-label="${z ? "上一张照片" : "Previous photo"}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${z ? "下一张照片" : "Next photo"}"><span aria-hidden="true">›</span></button></div></div><div class="carousel-toolbar" data-carousel-controls hidden><div class="carousel-dots" role="group" aria-label="${z ? "选择照片" : "Choose a photo"}">${photos.map((_,i)=>`<button type="button" data-go-to="${i}" aria-label="${z ? `查看第 ${i+1} 张照片` : `Show photo ${i+1}`}"${i ? "" : ' aria-current="true"'}><span aria-hidden="true"></span></button>`).join("")}</div><p class="visually-hidden" data-carousel-status aria-live="off" aria-atomic="true"></p></div></section>`;
 }
 function enhanceCards(html, route, z) {
   return html.replace(/<article class="note-card">([\s\S]*?)<\/article>/g, (whole, body) => {
@@ -73,7 +73,7 @@ export function applyEditorialLayout(html, route) {
   const local = route.replace(/^zh\//, "");
   const root = rootHref(route);
   html = html.replace('<main id="main"', '<main id="main" tabindex="-1"');
-  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260906-carousel">\n<script src="${root}/assets/js/editorial.js?v=20260906-carousel" defer></script>\n</head>`);
+  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260906-autoplay">\n<script src="${root}/assets/js/editorial.js?v=20260906-autoplay" defer></script>\n</head>`);
   html = html.replace("<body>", `<body class="editorial ${local === "index.html" ? "home-page" : local === "blog/index.html" ? "journal-page" : local.startsWith("posts/") ? "essay-page" : "document-page"}">`);
   html = html.replaceAll("lifephoto-2.png?v=20260630-photo", "portrait-study.webp").replaceAll("lifephoto-1.png?v=20260630-photo", "portrait-notes.webp");
   if (local === "index.html") {

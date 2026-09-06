@@ -37,13 +37,9 @@
   if (!carousel) return;
   const slides = [...carousel.querySelectorAll("[data-slide]")];
   const dots = [...carousel.querySelectorAll("[data-go-to]")];
-  const rotation = carousel.querySelector("[data-rotation]");
   const status = carousel.querySelector("[data-carousel-status]");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const zh = document.documentElement.lang.startsWith("zh");
   let index = 0;
-  let paused = reducedMotion.matches;
-  let hovering = false;
   let inView = true;
   let ready = false;
   let timer;
@@ -64,11 +60,9 @@
 
   function syncPlayback() {
     clearInterval(timer);
-    const playing = ready && !paused && !hovering && inView && !document.hidden;
+    // Keep a focused photo stable for keyboard users; controls never latch playback off.
+    const playing = ready && inView && !document.hidden && !slides.includes(document.activeElement);
     carousel.dataset.playing = String(playing);
-    rotation.setAttribute("aria-label", zh ? (paused ? "开始自动轮播" : "暂停自动轮播") : (paused ? "Start slideshow" : "Pause slideshow"));
-    rotation.firstElementChild.textContent = paused ? "▶" : "Ⅱ";
-    status.setAttribute("aria-live", paused ? "polite" : "off");
     if (playing) timer = setInterval(() => {
       index = (index + 1) % slides.length;
       render();
@@ -76,18 +70,13 @@
   }
 
   function goTo(next) {
-    paused = true;
-    syncPlayback();
     index = (next + slides.length) % slides.length;
     render();
+    syncPlayback();
   }
   carousel.querySelector("[data-previous]").addEventListener("click", () => goTo(index - 1));
   carousel.querySelector("[data-next]").addEventListener("click", () => goTo(index + 1));
   dots.forEach(dot => dot.addEventListener("click", () => goTo(Number(dot.dataset.goTo))));
-  rotation.addEventListener("click", () => {
-    paused = !paused;
-    syncPlayback();
-  });
   carousel.addEventListener("keydown", event => {
     if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
     event.preventDefault();
@@ -95,25 +84,9 @@
     goTo(index + (event.key === "ArrowRight" ? 1 : -1));
     if (slideFocused) slides[index].focus();
   });
-  carousel.addEventListener("focusin", event => {
-    if (event.target === rotation) return;
-    paused = true;
-    syncPlayback();
-  });
-  carousel.addEventListener("pointerenter", event => {
-    if (event.pointerType !== "mouse") return;
-    hovering = true;
-    syncPlayback();
-  });
-  carousel.addEventListener("pointerleave", () => {
-    hovering = false;
-    syncPlayback();
-  });
+  carousel.addEventListener("focusin", syncPlayback);
+  carousel.addEventListener("focusout", () => queueMicrotask(syncPlayback));
   document.addEventListener("visibilitychange", syncPlayback);
-  reducedMotion.addEventListener("change", () => {
-    paused = reducedMotion.matches;
-    syncPlayback();
-  });
   new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
     syncPlayback();
@@ -121,7 +94,7 @@
   carousel.querySelectorAll("[data-carousel-controls]").forEach(control => { control.hidden = false; });
   render();
   syncPlayback();
-  Promise.all(slides.map(slide => slide.querySelector("img").decode().catch(() => {}))).then(() => {
+  slides[0].querySelector("img").decode().catch(() => {}).then(() => {
     ready = true;
     syncPlayback();
   });

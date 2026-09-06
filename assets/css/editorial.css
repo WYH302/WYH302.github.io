@@ -49,7 +49,6 @@ img { background: var(--paper-soft); }
 .carousel-toolbar { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 12px; }
 .carousel-toolbar[hidden],.carousel-arrows[hidden] { display: none; }
 .carousel-toolbar button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
-.carousel-toolbar .carousel-rotation { border: 1px solid var(--line); border-radius: 50%; font-size: 13px; }
 .carousel-dots { display: flex; }
 .carousel-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); transition: background .2s ease, transform .2s ease; }
 .carousel-dots [aria-current="true"] span { background: var(--accent); transform: scale(1.5); }

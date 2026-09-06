@@ -69,7 +69,7 @@ test("both homepages retain the two original portraits plus four daily photos in
     assert.match(gallery, route.startsWith("zh/") ? /aria-label="生活照片"/ : /aria-label="Everyday photographs"/);
     assert.equal((gallery.match(/class="carousel-slide"/g) || []).length, 6);
     const files = [...gallery.matchAll(/<img src="[^"]*\/([^/\"]+)"/g)].map(match => match[1]);
-    assert.deepEqual(files, ["portrait-study.webp", "portrait-notes.webp", "daily-coffee-walk.webp", "daily-cafe.webp", "daily-city-walk.webp", "daily-window-seat.webp"]);
+    assert.deepEqual(files, ["daily-coffee-walk.webp", "daily-window-seat.webp", "daily-city-walk.webp", "daily-cafe.webp", "portrait-study.webp", "portrait-notes.webp"]);
     assert.equal((gallery.match(/data-go-to=/g) || []).length, 6);
     assert.equal((gallery.match(/data-position="hidden"/g) || []).length, 3);
     assert.equal((gallery.match(/data-position="previous"/g) || []).length, 1);
@@ -80,7 +80,7 @@ test("both homepages retain the two original portraits plus four daily photos in
     assert.equal((gallery.match(/tabindex="-1" aria-hidden="true"/g) || []).length, 5);
     assert.match(gallery, /data-previous/);
     assert.match(gallery, /data-next/);
-    assert.match(gallery, /data-rotation/);
+    assert.doesNotMatch(gallery, /data-rotation|carousel-rotation|Start slideshow|Pause slideshow|▶|Ⅱ/);
     assert.match(gallery, /data-carousel-controls hidden/);
     assert.doesNotMatch(gallery, /figcaption|\.png|backups|D:/);
     for (const image of gallery.matchAll(/<img\b[^>]*>/g)) {
