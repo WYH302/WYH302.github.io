@@ -23,6 +23,7 @@ const expectedPublicationTimes = {
   "youth-defensive-withdrawal-and-social-trust": "2026-09-06T16:15:00+08:00",
   "ai-audits-power-algorithmic-governance": "2026-09-06T16:15:00+08:00",
   "tenure-review-youth-and-university-renewal": "2026-09-06T16:15:00+08:00",
+  "education-credential-scarcity-demographic-transition": "2026-09-07T17:56:55+08:00",
 };
 
 function occurrences(text, value) {

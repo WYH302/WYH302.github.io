@@ -29,7 +29,7 @@ const bibliographicRoutes = new Set([
 const forbiddenAdvisorLabels = /<dt>Advisor<\/dt>|<dt>导师<\/dt>|Advisor:|导师：/i;
 
 test("published pages do not expose advisor identities outside bibliographic author lists", () => {
-  assert.equal(publicHtmlRoutes.length, 43);
+  assert.equal(publicHtmlRoutes.length, 45);
   for (const route of publicHtmlRoutes) {
     const html = fs.readFileSync(path.join(root, route), "utf8");
     assert.doesNotMatch(html, forbiddenAdvisorLabels, route);

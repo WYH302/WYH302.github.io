@@ -292,3 +292,10 @@ a, p, h1, h2, h3, dd { overflow-wrap: anywhere; }
   .article > h1 { font-size: 24pt; }
   .article h2 { font-size: 16pt; }
 }
+
+/* Data tables in long-form essays: wrap within small screens. */
+.essay-data-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 26px 0; font-size: 14px; line-height: 1.6; }
+.essay-data-table caption { text-align: left; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+.essay-data-table th,.essay-data-table td { text-align: left; vertical-align: top; padding: 12px 8px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.essay-data-table thead th { border-top: 1px solid var(--line-strong); font-weight: 600; }
+.essay-data-table tbody th { font-weight: 500; }

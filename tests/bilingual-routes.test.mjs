@@ -15,7 +15,7 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 test("every route has one unique English and Chinese partner", () => {
-  assert.equal(bilingualRoutePairs.length, 21);
+  assert.equal(bilingualRoutePairs.length, 22);
   assert.equal(new Set(bilingualAllRoutes).size, bilingualAllRoutes.length);
 
   for (const pair of bilingualRoutePairs) {
@@ -23,8 +23,8 @@ test("every route has one unique English and Chinese partner", () => {
   }
 });
 
-test("all fourteen posts are public in both languages", () => {
-  assert.equal(postSlugs.length, 14);
+test("all fifteen posts are public in both languages", () => {
+  assert.equal(postSlugs.length, 15);
   assert.equal(postSlugs[0], "three-pillars-programming-ai-economics");
 
   for (const slug of postSlugs) {

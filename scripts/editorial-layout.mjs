@@ -9,6 +9,7 @@ export const imageCredits = {
   circuits: { file: "circuits", author: "Unsplash", url: "https://unsplash.com/s/photos/circuit-board", en: "Electronic components on a circuit board", zh: "电路板上的电子元件" },
 };
 export const essayThemes = {
+  "education-credential-scarcity-demographic-transition": ["society", "library"],
   "youth-defensive-withdrawal-and-social-trust": ["society", "city"],
   "ai-audits-power-algorithmic-governance": ["ai", "circuits"],
   "tenure-review-youth-and-university-renewal": ["society", "library"],
@@ -73,15 +74,15 @@ export function applyEditorialLayout(html, route) {
   const local = route.replace(/^zh\//, "");
   const root = rootHref(route);
   html = html.replace('<main id="main"', '<main id="main" tabindex="-1"');
-  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260906-autoplay">\n<script src="${root}/assets/js/editorial.js?v=20260906-autoplay" defer></script>\n</head>`);
+  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260907-education">\n<script src="${root}/assets/js/editorial.js?v=20260907-education" defer></script>\n</head>`);
   html = html.replace("<body>", `<body class="editorial ${local === "index.html" ? "home-page" : local === "blog/index.html" ? "journal-page" : local.startsWith("posts/") ? "essay-page" : "document-page"}">`);
   html = html.replaceAll("lifephoto-2.png?v=20260630-photo", "portrait-study.webp").replaceAll("lifephoto-1.png?v=20260630-photo", "portrait-notes.webp");
   if (local === "index.html") {
     html = html.replace(/<figure class="hero-figure photo-pair">[\s\S]*?<\/figure>/, heroCarousel(route, z));
     html = html.replace(/<h1>[\s\S]*?<\/h1>/, `<p class="author-kicker">${z ? "吴永浩 · Yonghao Wu (Leon)" : "Yonghao Wu (Leon) · Research & ideas"}</p><h1 class="home-title">${z ? "感知世界。<br>构建智能。<br><em>保持追问。</em>" : "Perception.<br>Intelligence.<br><em>Human questions.</em>"}</h1>`);
     const homeNotes = z
-      ? [["youth-defensive-withdrawal-and-social-trust","年轻人的冷漠，是一种防御吗？","city"],["ai-audits-power-algorithmic-governance","把权力交给 AI，还是让 AI 盯住权力？","circuits"],["tenure-review-youth-and-university-renewal","“铁饭碗”碎了，青年教师就能上桌吗？","library"]]
-      : [["youth-defensive-withdrawal-and-social-trust","Is detachment a form of self-protection?","city"],["ai-audits-power-algorithmic-governance","Should AI rule, or audit power?","circuits"],["tenure-review-youth-and-university-renewal","Do young scholars get a seat?","library"]];
+      ? [["education-credential-scarcity-demographic-transition","普通学历不再天然稀缺","library"],["youth-defensive-withdrawal-and-social-trust","年轻人的冷漠，是一种防御吗？","city"],["ai-audits-power-algorithmic-governance","把权力交给 AI，还是让 AI 盯住权力？","circuits"]]
+      : [["education-credential-scarcity-demographic-transition","The changing value of an ordinary degree","library"],["youth-defensive-withdrawal-and-social-trust","Is detachment a form of self-protection?","city"],["ai-audits-power-algorithmic-governance","Should AI rule, or audit power?","circuits"]];
     const latest = `<section class="latest-band"><div class="content-wrap"><div class="journal-section-title"><div><p class="eyebrow">THE JOURNAL / ${z ? "随笔" : "RECENT WRITING"}</p><h2>${z ? "实验室之外的思考" : "Beyond the laboratory"}</h2></div><a class="text-link" href="blog/">${z ? "全部文章" : "All essays"} <span aria-hidden="true">↗</span></a></div><div class="home-essays">${homeNotes.map(([slug,title,key],i)=>`<article><div class="home-note-image">${imageMarkup(route,key,z)}</div><p class="item-meta">0${i+1} / ${z ? "思想随笔" : "ESSAY"}</p><h3><a href="posts/${slug}/">${title}</a></h3></article>`).join("")}</div></div></section>`;
     html = html.replace(/(<section class="section-band">)/, latest + "$1");
   }
