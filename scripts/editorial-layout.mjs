@@ -10,21 +10,22 @@ export const imageCredits = {
   circuits: { file: "circuits", author: "Unsplash", url: "https://unsplash.com/s/photos/circuit-board", en: "Electronic components on a circuit board", zh: "电路板上的电子元件" },
 };
 export const essayThemes = {
-  "education-credential-scarcity-demographic-transition": ["society", "library"],
-  "youth-defensive-withdrawal-and-social-trust": ["society", "city"],
-  "ai-audits-power-algorithmic-governance": ["ai", "circuits"],
-  "tenure-review-youth-and-university-renewal": ["society", "library"],
-  "tailwinds-headwinds-path-dependence-2026": ["society", "ocean"],
-  "grammar-expression-information-structure": ["language", "books"],
-  "population-property-policy-feedback": ["society", "architecture"],
-  "civil-service-security-and-ambition": ["society", "architecture"],
-  "three-pillars-programming-ai-economics": ["ai", "circuits"],
-  "language-gravity-ai-bias-compression": ["language", "books"],
-  "language-as-lossy-compression": ["language", "library"],
-  "two-high-one-low-social-expectations": ["society", "architecture"],
-  "leakage-controlled-evaluation": ["research", "circuits"],
-  "verifiable-multimodal-engineering": ["research", "circuits"],
-  "multimodal-agents-computational-imaging": ["research", "ocean"],
+  // Category, opening photograph, closing photograph. Keep each pair distinct.
+  "education-credential-scarcity-demographic-transition": ["society", "library", "books"],
+  "youth-defensive-withdrawal-and-social-trust": ["society", "city", "architecture"],
+  "ai-audits-power-algorithmic-governance": ["ai", "circuits", "city"],
+  "tenure-review-youth-and-university-renewal": ["society", "library", "books"],
+  "tailwinds-headwinds-path-dependence-2026": ["society", "ocean", "city"],
+  "grammar-expression-information-structure": ["language", "books", "library"],
+  "population-property-policy-feedback": ["society", "architecture", "city"],
+  "civil-service-security-and-ambition": ["society", "architecture", "city"],
+  "three-pillars-programming-ai-economics": ["ai", "circuits", "books"],
+  "language-gravity-ai-bias-compression": ["language", "books", "circuits"],
+  "language-as-lossy-compression": ["language", "library", "books"],
+  "two-high-one-low-social-expectations": ["society", "architecture", "city"],
+  "leakage-controlled-evaluation": ["research", "circuits", "library"],
+  "verifiable-multimodal-engineering": ["research", "circuits", "books"],
+  "multimodal-agents-computational-imaging": ["research", "ocean", "circuits"],
 };
 const labels = {
   en: { society: "Society", ai: "AI & work", language: "Language", research: "Research" },
@@ -33,13 +34,13 @@ const labels = {
 function rootHref(route) {
   return path.posix.relative(path.posix.dirname(route), ".") || ".";
 }
-function imageMarkup(route, key, z, large = false) {
+function imageMarkup(route, key, z, large = false, lazy = !large) {
   const credit = imageCredits[key];
   const base = rootHref(route);
-  return `<img src="${base}/assets/images/${credit.file}.webp" srcset="${base}/assets/images/${credit.file}-small.webp 600w, ${base}/assets/images/${credit.file}.webp 1400w" sizes="${large ? "(max-width: 700px) 100vw, 1100px" : "(max-width: 700px) 100vw, 600px"}" width="1400" height="933" alt="${z ? credit.zh : credit.en}" loading="${large ? "eager" : "lazy"}" decoding="async">`;
+  return `<img src="${base}/assets/images/${credit.file}.webp" srcset="${base}/assets/images/${credit.file}-small.webp 600w, ${base}/assets/images/${credit.file}.webp 1400w" sizes="${large ? "(max-width: 700px) 100vw, 1100px" : "(max-width: 700px) 100vw, 600px"}" width="1400" height="933" alt="${z ? credit.zh : credit.en}" loading="${lazy ? "lazy" : "eager"}" decoding="async">`;
 }
-function photo(route, key, z) {
-  return `<figure class="editorial-cover">${imageMarkup(route, key, z, true)}</figure>`;
+function photo(route, key, z, closing = false) {
+  return `<figure class="editorial-cover${closing ? " editorial-closing" : ""}">${imageMarkup(route, key, z, true, closing)}</figure>`;
 }
 function heroCarousel(route, z) {
   const base = `${rootHref(route)}/assets/images/`;
@@ -75,7 +76,7 @@ export function applyEditorialLayout(html, route) {
   const local = route.replace(/^zh\//, "");
   const root = rootHref(route);
   html = html.replace('<main id="main"', '<main id="main" tabindex="-1"');
-  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260908-research-photos">\n<script src="${root}/assets/js/editorial.js?v=20260908-research-photos" defer></script>\n</head>`);
+  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260908-essay-bookends">\n<script src="${root}/assets/js/editorial.js?v=20260908-research-photos" defer></script>\n</head>`);
   html = html.replace("<body>", `<body class="editorial ${local === "index.html" ? "home-page" : local === "blog/index.html" ? "journal-page" : local.startsWith("posts/") ? "essay-page" : "document-page"}">`);
   html = html.replaceAll("lifephoto-2.png?v=20260630-photo", "portrait-study.webp").replaceAll("lifephoto-1.png?v=20260630-photo", "portrait-notes.webp");
   if (local === "index.html") {
@@ -96,6 +97,12 @@ export function applyEditorialLayout(html, route) {
     const slug = local.split("/")[1];
     if (essayThemes[slug]) {
       html = html.replace(/(<h1>[\s\S]*?<\/h1>)/, "$1" + photo(route, essayThemes[slug][1], z));
+      // Place the closing image after the essay (including sources), before navigation.
+      const closing = photo(route, essayThemes[slug][2], z, true);
+      const backLink = /(<p>\s*<a\b[^>]*href="(?:\.\.\/)+blog\/"[^>]*>[\s\S]*?<\/a>\s*<\/p>\s*)(<\/main>)/;
+      html = backLink.test(html)
+        ? html.replace(backLink, closing + "$1$2")
+        : html.replace("</main>", closing + "</main>");
     }
     const headings = [];
     let count = 0;

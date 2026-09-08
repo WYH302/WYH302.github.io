@@ -38,11 +38,7 @@
     <main id="main" class="article">
       <p class="article-meta">Method note · Published <time datetime="2026-07-04T09:42:11+08:00">July 4, 2026 at 09:42 (UTC+8)</time></p>
       <h1>Why leakage-controlled evaluation matters</h1>
-      <p class="lead">
-        This note explains one habit that appears across several of my current
-        manuscripts: treat evaluation protocol design as part of the method,
-        not as a final formatting detail.
-      </p>
+<p class="lead">An apparent improvement can come from information the model should never have seen. In my current manuscripts, I treat the data split and the information available at prediction time as part of the method itself.</p>
 
       <figure class="article-figure">
         <img
@@ -54,41 +50,16 @@
       </figure>
 
       <h2>The problem</h2>
-      <p>
-        A model can look better for reasons that have little to do with the
-        proposed method. Normalization statistics may be computed on the full
-        dataset. Retrieval memory may contain future samples. A time-series
-        split may let events from the same storm, market period, or scene leak
-        into both training and evaluation. These details can be small in code
-        and large in interpretation.
-      </p>
+<p>Computing normalization statistics on the full dataset gives a model access to the evaluation data. Retrieval memory can contain future samples. Even a time-series split may place observations from the same storm, market period, or scene in both training and evaluation. A few lines of preprocessing code can therefore change what a reported score means.</p>
 
       <h2>Protocol-first habits</h2>
-      <ul class="detail-list">
-        <li>Use train-only statistics for normalization, calibration, and memory construction.</li>
-        <li>Prefer chronological or entity-level splits when samples are temporally or structurally coupled.</li>
-        <li>Document what information is available at prediction time, especially for retrieval and adaptation methods.</li>
-        <li>Report condition-dependent effects instead of forcing every result into a single improvement narrative.</li>
-      </ul>
+<p>I use training data to construct normalization statistics, calibration settings, and retrieval memory. If samples share a timeline or an entity, the split needs to respect that connection. For retrieval and adaptation methods, the protocol should state exactly what the model can access when it makes a prediction.</p><p>I also want to see results broken down by condition. An improvement that holds for one prediction horizon but disappears at another is worth reporting as such.</p>
 
       <h2>Why it matters for current work</h2>
-      <p>
-        Leakage control is especially important in hurricane forecasting,
-        trajectory prediction, financial forecasting, test-time adaptation, and
-        retrieval-augmented models. These settings often have hidden structure:
-        storms contain multiple horizons, trajectories share scene geometry,
-        financial sequences are chronological, and adaptation methods can
-        accidentally observe the wrong distributional signal.
-      </p>
+<p>These checks affect several tasks I study. Observations from one hurricane can appear at multiple forecast horizons, and trajectories can share the same scene geometry. Financial forecasting requires strict time ordering. Test-time adaptation and retrieval add further ways to expose a model to information that the stated task would not permit.</p>
 
       <h2>Practical standard</h2>
-      <p>
-        When I read an experiment, I first ask how the data was split, where the
-        normalization statistics came from, and what information the model could
-        see at prediction time. If an improvement disappears under another split,
-        that is worth recording too. Scores are only comparable once these
-        conditions are clear.
-      </p>
+<p>Before comparing scores, I check the split, the source of the normalization statistics, and the information available at prediction time. If the improvement disappears under another valid split, I would keep that result in the report. It helps explain where the method works and where the evidence is weaker.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

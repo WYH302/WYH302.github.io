@@ -23,6 +23,10 @@ test("editorial layer preserves bilingual source content, dates and navigation",
 });
 test("every essay has a local, licensed thematic image at two sizes", () => {
   assert.deepEqual(Object.keys(essayThemes).sort(), [...postSlugs].sort());
+  for (const [slug, [, opening, closing]] of Object.entries(essayThemes)) {
+    assert.ok(imageCredits[opening] && imageCredits[closing], slug);
+    assert.notEqual(opening, closing, slug);
+  }
   for (const credit of Object.values(imageCredits)) {
     for (const suffix of ["", "-small"]) {
       assert.ok(fs.existsSync(new URL("../assets/images/" + credit.file + suffix + ".webp", import.meta.url)));
@@ -30,6 +34,44 @@ test("every essay has a local, licensed thematic image at two sizes", () => {
     assert.ok(credit.url.startsWith("https://unsplash.com/"));
     assert.ok(credit.en && credit.zh);
   }
+});
+test("all bilingual essays frame the complete text with two different photographs", () => {
+  for (const slug of postSlugs) {
+    const pairs = [];
+    for (const prefix of ["", "zh/"]) {
+      const route = `${prefix}posts/${slug}/index.html`;
+      const source = fs.readFileSync(new URL("../" + route, import.meta.url), "utf8");
+      const html = applyEditorialLayout(source, route);
+      const photos = [...html.matchAll(/<figure class="editorial-cover[^\"]*">([\s\S]*?)<\/figure>/g)];
+      assert.equal(photos.length, 2, route);
+      const [opening, closing] = photos;
+      assert.match(opening[0], /loading="eager"/);
+      assert.match(closing[0], /editorial-closing/);
+      assert.match(closing[0], /loading="lazy"/);
+      assert.ok(opening.index > html.indexOf("</h1>"), route);
+      assert.ok(opening.index < html.indexOf('<p class="lead">'), route);
+      const paragraphs = [...source.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/g)]
+        .map(match => match[0])
+        .filter(p => !p.includes('class="article-meta"') && !p.includes('href="../../blog/"'));
+      // Only paragraphs inside main are article text (the footer is outside it).
+      for (const p of paragraphs) {
+        const index = html.indexOf(p);
+        if (index > html.indexOf("</main>")) continue;
+        assert.ok(index > opening.index && index < closing.index, route);
+      }
+      assert.ok(closing.index < html.indexOf('class="back-to-top"'), route);
+      assert.ok(closing.index < html.indexOf('href="../../blog/"', closing.index), route);
+      pairs.push(photos.map(p => p[1].match(/src="[^\"]*\/([^/\"]+)"/)[1]));
+    }
+    assert.deepEqual(pairs[0], pairs[1], slug);
+    assert.notEqual(pairs[0][0], pairs[0][1], slug);
+  }
+});
+test("a mapped essay without a return link still gets its closing photograph", () => {
+  const source = '<html><head></head><body><main><h1>Title</h1><p class="lead">Intro</p><p>Last paragraph</p></main></body></html>';
+  const html = applyEditorialLayout(source, `posts/${postSlugs[0]}/index.html`);
+  assert.ok(html.indexOf('editorial-closing') > html.indexOf('Last paragraph'));
+  assert.equal((html.match(/<figure/g) || []).length, 2);
 });
 test("public pages omit optional stock-photo credits without losing source links or image descriptions", () => {
   for (const route of bilingualAllRoutes) {

@@ -38,11 +38,7 @@
     <main id="main" class="article">
       <p class="article-meta">Research note · Published <time datetime="2026-06-19T00:56:27+08:00">June 19, 2026 at 00:56 (UTC+8)</time></p>
       <h1>Multimodal agents for computational imaging</h1>
-      <p class="lead">
-        I want to explore whether an agent can use measurement results to choose
-        the next sensing and reconstruction step. This is still a research
-        proposal; these are the questions I want to test and some possible approaches.
-      </p>
+<p class="lead">Can an agent use a measurement to decide what to measure next, or whether to reconstruct the image again? I want to test this in computational imaging. The work is still a proposal, not a validated system.</p>
 
       <figure class="article-figure">
         <img
@@ -54,42 +50,16 @@
       </figure>
 
       <h2>Motivation</h2>
-      <p>
-        Computational imaging systems often combine physical measurements,
-        reconstruction algorithms, and downstream perception models. As
-        multimodal foundation models and agentic workflows mature, a natural
-        question is whether an intelligent system can reason about the sensing
-        process itself: what to measure, how to reconstruct, which tools to
-        call, and when the result is reliable enough for a downstream decision.
-      </p>
+<p>In computational imaging, a reconstruction depends on how the data was measured. A downstream model then uses that reconstruction to recognize objects or make another prediction. An error early in the process can affect every later step. An agent could help choose the next operation, but it would need access to the measurements and their limits, not just the final image.</p>
 
       <h2>Research questions</h2>
-      <ul class="detail-list">
-        <li>How can multimodal models represent optical measurements, sparse observations, and reconstructed visual content in one reasoning loop?</li>
-        <li>How can agents use tools such as simulators, reconstruction modules, segmentation models, and evaluation scripts without hiding uncertainty?</li>
-        <li>How can a system decide when to request more measurements, change a sensing strategy, or defer a prediction?</li>
-      </ul>
+<p>The first difficulty is representing optical measurements, sparse observations, and reconstructed images in a form the agent can compare. It would also need to use simulators, reconstruction modules, segmentation models, and evaluation scripts without treating uncertain outputs as established facts.</p><p>I would test the decision to collect more data separately from the decision to change the reconstruction method. Sometimes neither will justify a confident prediction; the system needs to be able to defer an answer.</p>
 
       <h2>Possible direction</h2>
-      <p>
-        One promising direction is to treat the imaging pipeline as an
-        inspectable workflow. A multimodal agent can coordinate measurement
-        selection, reconstruction, visual analysis, and reporting, while each
-        step remains traceable. In this framing, the agent is not a black-box
-        replacement for physics or signal processing. It is a controller and
-        reasoning layer that helps connect physical priors, learned models, and
-        human-facing explanations.
-      </p>
+<p>The agent could select a measurement, pass it to a reconstruction module, and compare the result with the task requirements before choosing another tool. Each call would retain its inputs and outputs. Physics and signal-processing models would still perform their own calculations; the agent would coordinate them and explain why it chose a particular step.</p>
 
       <h2>Practical caution</h2>
-      <p>
-        An agent suggesting a measurement does not establish that the measurement
-        will help. I want the prototype to preserve inputs, reconstructions, and
-        uncertainty estimates at each step, so we can tell which judgments came
-        from measurements and which came from the model's own guesses. Testing
-        the idea will require comparisons with fixed imaging pipelines on both
-        measurement cost and reconstruction quality.
-      </p>
+<p>A plausible measurement suggestion may still waste time or collect no useful information. The prototype should keep the inputs, reconstructions, and uncertainty estimates so that a reviewer can separate evidence from the agent's guesses. I would compare it with a fixed imaging pipeline: does it improve reconstruction quality for the same measurement cost, or reach the same quality with fewer measurements?</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

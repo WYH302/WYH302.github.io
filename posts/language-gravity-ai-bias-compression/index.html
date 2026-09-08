@@ -38,9 +38,7 @@
     <main id="main" class="article">
       <p class="article-meta">AI and society · Published <time datetime="2026-07-22T01:11:25+08:00">July 22, 2026 at 01:11 (UTC+8)</time></p>
       <h1>Language gravity: bias and expressive loss in AI compression</h1>
-      <p class="lead">
-        Developers encode criteria for what to preserve and discard through training data, loss functions, and human feedback. Once dominant forms occupy the high-probability center, systems are more likely to treat rare, colloquial, and institutionally undocumented experiences as noise.
-      </p>
+<p class="lead">An AI rewrite can be easier to read while losing something the speaker meant. A hesitant date becomes definite; a local term becomes a generic one. I am interested in how a model decides which differences to preserve, especially when the original account does not resemble the formal writing common in its training data.</p>
 
       <figure class="article-figure">
         <img
@@ -55,27 +53,19 @@
         The previous essay, <a href="../language-as-lossy-compression/">“The Unsayable: Language as Lossy Compression of High-Dimensional Experience,”</a> examined a basic constraint: experience loses some information when it enters a symbolic system. AI adds another layer of compression. Large language models learn which words appear more often and which sentences resemble a “normal answer,” then reshape new input to match those probabilities.
       </p>
 
-      <p>
-        I call this tendency “language gravity.” Frequent vocabulary, standard grammar, and dominant value judgments form a probabilistic center. A model's rewrites, summaries, and translations drift toward it. The farther an expression sits from that center, the more likely the model is to remove its distinctive features and fill the gaps with familiar language.
-      </p>
+<p>I use “language gravity” for the tendency of rewrites, summaries, and translations to converge on familiar wording. It is a metaphor for a risk, not a measured force or a rule that every model follows. A fluent rewrite deserves a comparison with the original before we assume it preserved the meaning.</p>
 
       <h2>Where language gravity comes from</h2>
-      <p>
-        Training corpora determine visibility first. Groups with the resources to publish, build databases, and maintain institutional websites leave more records in digital corpora. Dialect conversations, oral accounts, statements from temporary workers, and unarchived family memories rarely enter high-quality training sets. Models begin with a thinner record of these experiences.
-      </p>
+<p>Groups able to publish, build databases, and maintain websites leave records that are easier to collect. A dialect conversation or an unarchived family account may leave no searchable text at all. If those accounts are missing from a training set, the model has less material from which to learn their wording and context.</p>
 
       <p>
         Tokenization and probabilistic modeling widen the gap. Common words tend to map to stable token units, while rare names, dialect spellings, and mixed-language phrases may split into many pieces. Models learn language by predicting the next token, so frequent continuations have more influence on the loss function. Common decoding strategies favor high-probability paths, which makes rare expressions harder to preserve.
       </p>
 
-      <p>
-        Human feedback changes the distribution again. If annotators prefer fluent, standard answers that match institutional language, the model learns a narrow definition of “good expression.” That standard can improve readability, but it can also classify hesitation, broken sentences, and unfamiliar narrative forms as low quality.
-      </p>
+<p>Human feedback can reinforce a preference for standard answers. If annotators consistently favour polished institutional prose, a model may remove hesitation or unfamiliar narrative forms to match that preference. Readability can improve even while a meaningful distinction disappears.</p>
 
       <h2>Compression reduces bandwidth and visibility</h2>
-      <p>
-        The phrase “low-dimensional expression by marginalized people” mistakes a property of the data for a property of the person. Their experiences are no less complex. When those experiences enter digital systems, they often leave shorter, fragmented, and sparsely annotated records. The training data reduces bandwidth, visibility, and context. It does not make the experience itself thinner.
-      </p>
+<p>Calling someone's expression “low-dimensional” confuses the record with the person. A brief or fragmented account may reflect limited time, access, or annotation. It does not show that the experience behind it was simple.</p>
 
       <p>
         Consider a worker describing unpaid wages through dialect, omission, and a broken chronology. AI can turn the account into a polished written complaint, but the rewrite may merge uncertain dates, remove terms tied to local labor relations, or turn speculation into fact. The text looks more like an institutional document, while the status of its evidence has changed.
@@ -86,17 +76,11 @@
       </p>
 
       <h2>Choices inside the distortion function</h2>
-      <p>
-        Rate-distortion theory uses <code>d(x, x')</code> to measure the difference between original information <code>x</code> and a reconstruction <code>x'</code>. Engineers try to minimize this distortion under a limited bit rate. Value judgments enter the same function in AI systems: platforms, annotators, and evaluation benchmarks determine which errors carry a high cost and which differences the system may ignore.
-      </p>
+<p>Rate-distortion theory uses <code>d(x, x')</code> to measure the difference between information <code>x</code> and its reconstruction <code>x'</code> under a limited bit rate. I use this as an analogy for evaluation choices in AI. A platform or benchmark designer decides which errors count heavily; differences left out of that evaluation may receive little protection.</p>
 
-      <p>
-        A summarization benchmark that checks only factual points and fluency will not penalize a model for deleting hesitation, identity markers, or the rhythm of a dialect. The model's score improves while it treats a group's speech patterns as “discardable error.” Average accuracy makes this loss hard to see.
-      </p>
+<p>If a benchmark measures only factual points and fluency, it may miss the loss of hesitation, identity markers, or dialect. A summary could therefore score well while changing how a speaker presents their knowledge or relationships. An average score would not tell us which distinctions were lost.</p>
 
-      <p>
-        When institutions use models to process complaints, medical narratives, social assistance applications, or content moderation cases, this distortion enters real decisions. Models are more likely to decode people who command standard written and institutional language as intended. Others must first reshape their experience to fit the system's format before they can enter the same process.
-      </p>
+<p>Those changes matter if the rewritten text enters a complaint review, a medical record, or a social assistance decision. A person whose account already fits the expected format may need fewer corrections. Others may have to revise the model's version before an institution has even considered what they wanted to say.</p>
 
       <h2>Reducing language gravity</h2>
       <p>
@@ -107,13 +91,9 @@
         Evaluation should separate these cases. Alongside average accuracy, developers should report errors by language, dialect, expressive style, and resource scarcity. Community members should help define semantic loss. A benchmark may treat one word as a synonym, while a particular community uses it to mark generation, identity, or history.
       </p>
 
-      <p>
-        AI can support communication across languages and help more people use the written formats institutions require. Those benefits depend on traceability and choice. Users should be able to see what the model changed and reject the rewrite.
-      </p>
+<p>I still see value in helping someone translate an account or prepare it in a required written format. The user should be able to compare versions and reject a change without losing access to the service.</p>
 
-      <p>
-        When platforms select training data, annotation rules, and quality benchmarks, they also choose which information the system may discard. Developers need to disclose these choices and involve affected communities in defining distortion. Without that work, systems will keep rewriting diverse expressions into one central form. Users may gain access to a communication channel while losing the linguistic position from which they spoke.
-      </p>
+<p>Developers should explain what their quality tests measure and invite affected speakers to identify omissions those tests miss. I would want to know whether a rewritten complaint kept an uncertain date uncertain, or whether a translated term still conveyed the relationship the speaker intended. Those checks are more informative than calling the final prose fluent.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

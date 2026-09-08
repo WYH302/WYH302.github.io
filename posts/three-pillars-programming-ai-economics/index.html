@@ -38,9 +38,7 @@
     <main id="main" class="article">
       <p class="article-meta">AI and work · Published <time datetime="2026-07-23T00:42:01+08:00">July 23, 2026 at 00:42 (UTC+8)</time></p>
       <h1>Are the three pillars of programming collapsing? AI, oversupply, and the economics of “good-enough” code</h1>
-      <p class="lead">
-        Domain knowledge, debugging intuition, and code taste once supported much of a programmer's professional premium. AI has not erased them. It is lowering the price of the parts that can be retrieved, scanned, and standardized. The more useful question now is: which parts of a programmer's work will companies still pay for?
-      </p>
+<p class="lead">I am less worried about AI making programming skills useless than about it making familiar work cheaper. A company may still need domain knowledge, debugging, and readable code while paying less for the time spent on them. That distinction matters to anyone whose income depends on those skills.</p>
 
       <figure class="article-figure">
         <img
@@ -51,39 +49,27 @@
         >
       </figure>
 
-      <p>
-        Programmers tend to place their professional value in three abilities: understanding the domain rules that documentation leaves incomplete, finding the cause when a system fails, and organizing code so that it remains clear and durable. All three still matter. Useful does not mean scarce, however, and scarcity does not guarantee that buyers will keep paying the old price.
-      </p>
+<p>Experience helps a programmer notice an unwritten business rule, find the cause of a failure, or keep a codebase manageable. Employers have paid for those abilities partly because they are costly to acquire. As models take on portions of the work, we need to examine which costs they remove and which they leave with the engineer.</p>
 
-      <p>
-        A moat is only as wide as the cost of replacing it. Language models and coding agents are separating these abilities into smaller pieces, then turning the reproducible pieces into cheap services. They are changing the boundary between ordinary execution and work that commands a premium.
-      </p>
+<p>A model might retrieve a rule that once took a newcomer days to find. That does not mean it can decide whether the rule applies to a disputed transaction. Treating both tasks as “domain expertise” hides the part of the job that is becoming easier to replace.</p>
 
       <h2>The first pillar: domain knowledge becomes context engineering</h2>
       <p>
         Experience in payment idempotency, ledger reconciliation, healthcare compliance, or supply-chain exceptions once created a substantial information gap. A newcomer did not know what to search for or when a general rule in the documentation would fail.
       </p>
 
-      <p>
-        Language models reduce the value of remembering more facts. A model can retrieve standards, read code history, and assemble constraints from project instructions such as <code>AGENTS.md</code>. Teams can place incident reviews, business terminology, and checklists in an agent's context. Knowledge that once lived in individual memory starts to function as shared infrastructure.
-      </p>
+<p>With access to the relevant tools and documents, a model can retrieve standards, read code history, and use project instructions such as <code>AGENTS.md</code>. Teams can also supply incident reviews and business checklists. Writing this knowledge down makes it available to colleagues and agents instead of leaving each newcomer to discover it again.</p>
 
-      <p>
-        Experience has not become worthless. Models can access what people recorded, while the hardest constraints often remain unwritten: why one partner follows a special rule, which metric is temporarily reliable, how a regulator's language applies to a particular product, and who bears the cost of failure. The premium moves from “I know the answer” to “I can complete the constraints, recognize exceptions, and take responsibility for the judgment.”
-      </p>
+<p>Some constraints remain unwritten: why a partner follows a special rule, whether a metric is trustworthy this week, or who must approve a risky change. Models cannot reliably recover missing context from a generic specification. An experienced engineer still has to identify those gaps, consult the people involved, and judge whether the proposed solution fits.</p>
 
       <h2>The second pillar: debugging becomes instrumented search</h2>
-      <p>
-        Traditional debugging rewards a diagnostic instinct that resembles a physician reading symptoms. An experienced engineer can glance at logs, latency curves, and recent releases, then choose the right starting point. That instinct was valuable partly because humans lacked a fast way to read all the available evidence.
-      </p>
+<p>An experienced engineer can use logs, latency curves, and recent releases to choose where to investigate first. That saves time because reading every available record is rarely practical for a person. Agents make a wider search feasible, which changes the advantage that comes from knowing where to look.</p>
 
       <p>
         Sentry, Datadog, distributed tracing, and MCP tools have changed the cost of search. An agent can read stacks, compare changes, run tests, query metrics, and check hypotheses along the call graph. Work that once demanded patience and memory can now run in batches. The personal advantage of “searching logs and trying a few fixes” will narrow.
       </p>
 
-      <p>
-        Machine scanning stops at the boundary of observability. A stack trace cannot reveal missing instrumentation, misleading metrics, cross-team business agreements, or the user impact of a rollback. Valuable debugging work moves earlier in the system: designing observability, deciding when evidence is sufficient, separating cause from correlation, and containing damage under uncertainty.
-      </p>
+<p>An agent cannot inspect a state the system never logged. It may also misread a metric or miss a cross-team agreement that explains unusual behaviour. Engineers still need to design useful instrumentation, check causal explanations, and decide whether a rollback will help users or cause further harm.</p>
 
       <h2>The third pillar: code taste faces commercial pricing</h2>
       <p>
@@ -94,9 +80,7 @@
         Buyers' willingness to pay is changing. A disposable script, short-lived prototype, or low-risk internal tool often needs to run and remain easy to replace. A team will not buy textbook architecture for every page. Long-lived infrastructure, financial ledgers, and clinical systems have different economics. Design costs avoided today can return during the next migration, audit, or outage.
       </p>
 
-      <p>
-        The market will separate code into two broad classes. One optimizes for low cost and fast replacement. The other holds persistent state and real liability, so it needs stricter design and verification. Code taste will survive, but elegance detached from lifetime, risk, and maintenance cost is difficult to sell on its own.
-      </p>
+<p>I would judge design effort against the expected life and risk of the software. A tool that can be discarded tomorrow deserves a different review from a service holding years of customer state. Clear code remains useful in both cases, but the justification for extra architecture should be the maintenance or failure cost it avoids.</p>
 
       <h2>The evidence does not give one universal answer</h2>
       <p>
@@ -116,9 +100,7 @@
         One optimistic argument invokes Jevons paradox: cheaper software production will lead society to consume more software, so demand for programmers will rise. The first part is plausible. School departments, small shops, and individuals will commission tools that were once too expensive to build.
       </p>
 
-      <p>
-        More demand for software does not produce the same percentage increase in developer jobs. Employment depends on customers' price sensitivity, the division of work between AI and people, and whether a company spends its saved capacity on expansion or cost reduction. In some standardized tasks, one employee can complete work that once required several people. “One person replaces ten” remains a cost model, not a general statistic.
-      </p>
+<p>The employment effect depends on how much new demand lower prices create and how companies divide the work. A company might use the saved time to build another product, or use it to reduce staffing. In some standardized tasks, one employee may do work that once needed several people. “One person replaces ten” is a scenario to test, not a general employment statistic.</p>
 
       <p>
         Copywriting and basic UI work offer a useful comparison. Generative tools lower the price of standardized deliverables and give more people access to competent output. Demand may grow while supply grows faster, reducing the bargaining power of ordinary work. Programming tasks that are easy to specify, check, and copy may follow the same path.
@@ -129,22 +111,14 @@
         AI helps more people cross the entry threshold. Product managers can build prototypes, researchers can write data pipelines, and independent developers can maintain products that once needed a small team. Society may receive more software without each worker earning more. When competent output becomes abundant, customers treat it as the default rather than paying a scarcity premium.
       </p>
 
-      <p>
-        Gains may also concentrate at both ends. Companies controlling models, cloud platforms, and distribution collect infrastructure rents. A smaller group of people who solve high-risk problems, own customer relationships, or accept final liability can retain premium pricing. Workers in the middle who sell standard code and hours face more direct price competition. There is no basis for declaring that the winners will be exactly “one percent,” but the direction of concentration deserves attention.
-      </p>
+<p>Companies that control models, cloud platforms, or distribution can charge for access. Engineers with customer relationships or responsibility for difficult, high-risk systems may retain more bargaining power than those selling standard code by the hour. This is a reason to watch who captures the savings; it does not support a precise claim that only “one percent” will benefit.</p>
 
       <h2>The new sources of scarcity</h2>
-      <p>
-        Programmers can still build a moat, but they cannot package the old abilities unchanged. Scarcer work includes choosing a problem worth solving, turning business goals into testable constraints, designing safe failure modes, connecting unwritten organizational knowledge, and accepting responsibility for production outcomes.
-      </p>
+<p>For a programmer deciding what to learn, I would pay attention to work the tools do not resolve on their own. That includes checking whether a requested feature solves the customer's problem, finding missing business constraints, and planning how to recover if a change fails. These tasks require contact with the people who use and operate the software.</p>
 
-      <p>
-        Code remains important, but it now serves more often as an intermediate representation of intent. The expensive asset is a traceable chain of responsibility: why the requirement has this shape, what the model and the human each changed, which risks the tests cover, and who can stop the system when it behaves unexpectedly. AI can help build that chain or flood it with more code to review. The difference depends on whether the team treats verification as part of the product.
-      </p>
+<p>A team also needs a record of why it defined a requirement that way, what people and models changed, and which risks the tests address. Someone must be able to stop an unsafe release. AI can help maintain those records, but generating more code without reviewing it only adds to the backlog of unverified work.</p>
 
-      <p>
-        The three pillars are not collapsing at the same time. Each is splitting internally. Retrievable knowledge, scannable failures, and code beauty detached from risk are losing value. Tacit constraints, evidential judgment, and accountability remain scarce. The pressure on programmers is real. Craftsmanship still commands a price when it produces reliable outcomes; formal elegance on its own does not.
-      </p>
+<p>I do not expect these three skills to lose value at the same rate. Retrieving documented rules is easier to automate than resolving an undocumented exception. Searching logs is easier than deciding which explanation warrants a production change. The practical response is to use the tools for the cheaper work while learning to make and check the judgments that remain.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

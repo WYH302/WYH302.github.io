@@ -1,5 +1,16 @@
 # Website editorial photography
 
+## Essay opening and closing photographs — 2026-09-08
+
+All 15 essays, in both languages, now use a pair of different photographs:
+one after the title and one after the text and sources, before return navigation.
+These reuse the six licensed editorial assets listed below; no new photographs
+or third-party requests are added. They illustrate themes rather than document
+the events described. The category/opening/closing mapping is maintained in
+`scripts/editorial-layout.mjs`. Closing images load lazily; both sizes and
+language-specific descriptions are retained. New essays must define both images
+and pass the paired-image test before release.
+
 ## Research-index photography — 2026-09-08
 
 The owner requested online topic photographs, explicitly excluding paper figures.

@@ -38,10 +38,7 @@
     <main id="main" class="article">
       <p class="article-meta">Engineering note · Published <time datetime="2026-07-04T09:42:11+08:00">July 4, 2026 at 09:42 (UTC+8)</time></p>
       <h1>Verifiable multimodal engineering systems</h1>
-      <p class="lead">
-        Multimodal systems become more useful when users can trace each output
-        through constraints, intermediate artifacts, and explicit decision rules.
-      </p>
+<p class="lead">When a multimodal system gives the wrong answer, I want to be able to trace it back to the input, the model, and the rules applied at that step. Showing the final result is not enough to locate an error.</p>
 
       <figure class="article-figure">
         <img
@@ -53,36 +50,16 @@
       </figure>
 
       <h2>From signals to accountable outputs</h2>
-      <p>
-        Several project lines share the same engineering pattern: raw inputs
-        arrive from different modalities, then the system must produce a result
-        that a human can inspect. Examples include radar signals and live video
-        in infrastructure monitoring, natural-language cutting orders and
-        defect images in industrial nesting, or event traces in agentic
-        workflows.
-      </p>
+<p>The projects I work on take different inputs. Infrastructure monitoring combines radar signals with live video; industrial nesting uses cutting instructions and defect images. Agent workflows leave event traces. In each case, someone needs to inspect the result and understand how the system produced it.</p>
 
       <h2>Design principle</h2>
-      <p>
-        The system should expose enough structure that a reader can ask:
-        which input produced this output, which constraint was active, which
-        model made the prediction, and what artifact can be audited afterward?
-        This is why I prefer pipelines that preserve intermediate results
-        rather than only showing a final generated answer.
-      </p>
+<p>I prefer to keep intermediate results alongside the final answer. A reviewer should be able to recover the input, identify the model version, and see which constraints were active. That makes it possible to check a disputed result without reconstructing the whole run from memory.</p>
 
       <h2>Reusable pattern</h2>
-      <ul class="detail-list">
-        <li>Represent inputs by modality and timestamp, not just by final feature tensors.</li>
-        <li>Separate learned inference from rule-based or geometric feasibility checks.</li>
-        <li>Keep output certificates, alarms, traces, or replay logs close to the final interface.</li>
-        <li>Keep the input, model version, and active constraints with each result so a failure can be reproduced.</li>
-      </ul>
+<p>I would store each input with its modality and timestamp, rather than keep only the final feature tensor. Learned predictions also need a separate check against the rules or geometry of the task. A plausible-looking nesting layout, for example, still has to satisfy its geometric constraints.</p><p>The interface should make relevant alarms, output certificates, and replay logs easy to reach. Saving the model version and active constraints with each result helps another person reproduce a failure.</p>
 
       <h2>Learning from failures</h2>
-      <p>
-        What matters to me is being able to locate a failure. Which geometry constraint did a nesting layout violate? Which radar segment triggered an alarm? At what step did an agent use the wrong state? Keeping these traces gives the next revision something concrete to work from.
-      </p>
+<p>A failed nesting layout should point to the geometry constraint it violated. A radar alarm should lead back to the signal segment that triggered it. For an agent, the record should show the step where it used the wrong state. Those details give me a place to begin the next revision.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>
