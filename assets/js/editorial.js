@@ -1,5 +1,59 @@
 /* Progressive enhancement: the journal and first portrait work without JavaScript. */
 (() => {
+  const links = [...document.querySelectorAll('[data-research-lightbox]')];
+  if (!links.length || typeof HTMLDialogElement === 'undefined' ||
+      !HTMLDialogElement.prototype.showModal) return;
+  const zh = document.documentElement.lang.startsWith('zh');
+  const dialog = document.createElement('dialog');
+  dialog.className = 'research-lightbox';
+  dialog.setAttribute('aria-labelledby', 'research-image-title');
+  dialog.setAttribute('aria-describedby', 'research-image-note');
+  const panel = document.createElement('div');
+  panel.className = 'research-lightbox-panel';
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'research-lightbox-close';
+  close.setAttribute('aria-label', zh ? '关闭大图' : 'Close enlarged image');
+  close.textContent = '×';
+  const img = document.createElement('img');
+  const title = document.createElement('p');
+  title.id = 'research-image-title';
+  title.className = 'research-lightbox-title';
+  const note = document.createElement('p');
+  note.id = 'research-image-note';
+  note.className = 'research-lightbox-note';
+  const disclaimer = zh ? '配图用于说明研究主题，不是实验结果。' : 'An illustration of the research topic, not an experimental result.';
+  panel.append(close, img, title, note);
+  dialog.append(panel);
+  document.body.append(dialog);
+  let trigger;
+  img.addEventListener('error', () => {
+    note.textContent = zh ? '大图暂时无法加载，请关闭后重试。' : 'The image could not be loaded. Close and try again.';
+  });
+  close.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('keydown', event => {
+    // The viewer has one control; keep both Tab directions on that control.
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      close.focus();
+    }
+  });
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => trigger?.focus({preventScroll: true}));
+  links.forEach(link => link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    trigger = link;
+    img.alt = link.querySelector('img').alt;
+    img.src = link.href;
+    title.textContent = link.closest('article').querySelector('h2').textContent;
+    note.textContent = disclaimer;
+    dialog.showModal();
+    close.focus();
+  }));
+})();
+
+(() => {
   const tools = document.querySelector("[data-journal-tools]");
   const list = document.querySelector(".post-list");
   if (!tools || !list) return;

@@ -1,4 +1,5 @@
 import path from "node:path";
+import { addPublicationImages } from "./publication-images.mjs";
 
 export const imageCredits = {
   architecture: { file: "architecture", author: "CHUTTERSNAP", url: "https://unsplash.com/fr/photos/facade-dimmeuble-de-grande-hauteur-en-beton-beige-YtSROA4sBCg", en: "Repeating windows on a building facade", zh: "建筑立面上重复排列的窗户" },
@@ -74,7 +75,7 @@ export function applyEditorialLayout(html, route) {
   const local = route.replace(/^zh\//, "");
   const root = rootHref(route);
   html = html.replace('<main id="main"', '<main id="main" tabindex="-1"');
-  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260907-education">\n<script src="${root}/assets/js/editorial.js?v=20260907-education" defer></script>\n</head>`);
+  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260908-research-photos">\n<script src="${root}/assets/js/editorial.js?v=20260908-research-photos" defer></script>\n</head>`);
   html = html.replace("<body>", `<body class="editorial ${local === "index.html" ? "home-page" : local === "blog/index.html" ? "journal-page" : local.startsWith("posts/") ? "essay-page" : "document-page"}">`);
   html = html.replaceAll("lifephoto-2.png?v=20260630-photo", "portrait-study.webp").replaceAll("lifephoto-1.png?v=20260630-photo", "portrait-notes.webp");
   if (local === "index.html") {
@@ -107,5 +108,5 @@ export function applyEditorialLayout(html, route) {
     html = html.replace(/(<p class="lead">[\s\S]*?<\/p>)/, "$1"+toc);
     html = html.replace("</main>", `<p class="back-to-top"><a href="#main">${z ? "回到文章开头" : "Back to the beginning"} ↑</a></p></main>`);
   }
-  return html;
+  return addPublicationImages(html, route);
 }

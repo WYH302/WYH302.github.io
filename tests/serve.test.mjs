@@ -90,3 +90,13 @@ test("uses the bilingual 404 page for missing files", () => {
   assert.equal(response.status, 404);
   assert.equal(response.body, "missing");
 });
+
+test("serves research photographs as browser-viewable images", () => {
+  for (const [ext, mime] of [["webp", "image/webp"], ["jpg", "image/jpeg"], ["jpeg", "image/jpeg"], ["png", "image/png"]]) {
+    fs.writeFileSync(path.join(siteRoot, `photo.${ext}`), "image-fixture");
+    const response = captureResponse();
+    createRequestHandler(siteRoot)({url: `/photo.${ext}`}, response);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers["content-type"], mime);
+  }
+});
