@@ -63,8 +63,8 @@ test("the policy-feedback essay is published as a sourced bilingual post", () =>
   assert.ok(postSlugs.includes(slug), "new essay should be in the bilingual route table");
   assert.match(englishPost, /From expansion to adjustment/);
   assert.match(chinesePost, /从增量扩张到存量调整/);
-  assert.match(englishPost, /not a single-cause explanation/i);
-  assert.match(chinesePost, /不是单一原因的解释/);
+  assert.match(englishPost, /have different histories and vary across regions/i);
+  assert.match(chinesePost, /有不同的历史，地区之间也不一样/);
   assert.match(englishPost, /National Bureau of Statistics of China/);
   assert.match(chinesePost, /国家统计局/);
   assert.ok(publishEntries.includes(`posts/${slug}`));
@@ -90,8 +90,8 @@ test("the grammar-and-expression essay is published as a sourced bilingual post"
   assert.ok(postSlugs.includes(slug), "new essay should be in the bilingual route table");
   assert.match(englishPost, /Are grammar and expression truly isomorphic/i);
   assert.match(chinesePost, /语法与表达真的“完全同构”吗/);
-  assert.match(englishPost, /local alignment without total isomorphism/i);
-  assert.match(chinesePost, /局部同向，整体并不同构/);
+  assert.match(englishPost, /examples rule out complete isomorphism/i);
+  assert.match(chinesePost, /这些例子不支持“完全同构”/);
   assert.ok(publishEntries.includes(`posts/${slug}`));
   for (const source of citedSources) {
     assert.equal(occurrences(englishPost, source), 1);
@@ -123,8 +123,8 @@ test("the tailwinds and headwinds essay is published as a sourced bilingual post
   assert.ok(postSlugs.includes(slug), "new essay should be in the bilingual route table");
   assert.match(englishPost, /Tailwinds, headwinds, and institutional room to move/i);
   assert.match(chinesePost, /顺风局、逆风局与制度的回旋余地/);
-  assert.match(englishPost, /analytical shorthand, not a formal law/i);
-  assert.match(chinesePost, /分析性简称，不是一条形式化定律/);
+  assert.match(englishPost, /not a formal game-theoretic model of a whole economy/i);
+  assert.match(chinesePost, /而不是把整个经济当成一个已经建模的博弈/);
   assert.match(englishPost, /thermodynamic entropy/i);
   assert.match(chinesePost, /热力学熵/);
   assert.match(englishPost, /4\.1% growth for the ASEAN-5 in 2026/);
