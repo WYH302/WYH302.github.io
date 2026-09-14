@@ -20,21 +20,16 @@ function collectPublishedHtml(relativePath) {
 }
 
 const publicHtmlRoutes = publishEntries.flatMap(collectPublishedHtml);
-const forbiddenAdvisorIdentities =
-  /李军|刘强|刘畅|Prof(?:essor)?\.?\s+(?:Jun Li|Chang Liu|Qiang Liu)|\b(?:Jun Li|Li Jun|Chang Liu|Liu Chang|Qiang Liu|Liu Qiang)\b/i;
-const bibliographicRoutes = new Set([
-  "publications/index.html",
-  "zh/publications/index.html",
-]);
 const forbiddenAdvisorLabels = /<dt>Advisor<\/dt>|<dt>导师<\/dt>|Advisor:|导师：/i;
 
-test("published pages do not expose advisor identities outside bibliographic author lists", () => {
+test("published pages omit advisor fields and identify only the site owner in author metadata", () => {
   assert.equal(publicHtmlRoutes.length, 45);
   for (const route of publicHtmlRoutes) {
     const html = fs.readFileSync(path.join(root, route), "utf8");
     assert.doesNotMatch(html, forbiddenAdvisorLabels, route);
-    if (!bibliographicRoutes.has(route.replaceAll("\\", "/"))) {
-      assert.doesNotMatch(html, forbiddenAdvisorIdentities, route);
+    const metadata = [...html.matchAll(/<meta\s+name="author"\s+content="([^"]*)"/gi)];
+    for (const match of metadata) {
+      assert.match(match[1], /^Yonghao Wu(?: \(Leon\))?$|^吴永浩$/, route);
     }
   }
 });
@@ -61,4 +56,13 @@ test("removing advisor details preserves the requested GPA records", () => {
   assert.match(englishCv, /GPA: 3\.88\/5\.00, top 3%\./);
   assert.match(chineseCv, /GPA：3\.71\/5\.00，前 5%。/);
   assert.match(chineseCv, /GPA：3\.88\/5\.00，前 3%。/);
+});
+
+test("publication entries link to research records without reproducing collaborator bylines", () => {
+  for (const route of ["publications/index.html", "zh/publications/index.html"]) {
+    const html = fs.readFileSync(path.join(root, route), "utf8");
+    // Personal role statements replace comma-separated bylines; research links remain.
+    assert.doesNotMatch(html, /(?:Yonghao Wu|吴永浩)\s*[,，、]\s*[A-Z\u4e00-\u9fff]/, route);
+    assert.match(html, /https:\/\/(?:doi\.org|arxiv\.org)\//, route);
+  }
 });
