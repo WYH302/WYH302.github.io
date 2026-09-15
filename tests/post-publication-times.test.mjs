@@ -24,6 +24,7 @@ const expectedPublicationTimes = {
   "ai-audits-power-algorithmic-governance": "2026-09-06T16:15:00+08:00",
   "tenure-review-youth-and-university-renewal": "2026-09-06T16:15:00+08:00",
   "education-credential-scarcity-demographic-transition": "2026-09-07T17:56:55+08:00",
+  "robots-beyond-human-form-and-hype": "2026-09-15T16:00:00+08:00",
 };
 
 function occurrences(text, value) {
