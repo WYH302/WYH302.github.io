@@ -19,6 +19,7 @@ export const postSlugs = [
   "robots-beyond-human-form-and-hype",
   "machine-native-interfaces-human-centered-ai",
   "learning-without-context",
+  "academic-hiring-risk-and-research-work",
 ];
 
 export const primaryBaseRoutes = [

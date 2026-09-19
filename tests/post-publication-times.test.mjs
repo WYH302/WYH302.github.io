@@ -27,6 +27,7 @@ const expectedPublicationTimes = {
   "robots-beyond-human-form-and-hype": "2026-09-15T16:00:00+08:00",
   "machine-native-interfaces-human-centered-ai": "2026-09-19T16:18:00+08:00",
   "learning-without-context": "2026-09-19T16:32:00+08:00",
+  "academic-hiring-risk-and-research-work": "2026-09-19T16:44:00+08:00",
 };
 
 function occurrences(text, value) {
