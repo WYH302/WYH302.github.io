@@ -38,6 +38,7 @@ img { background: var(--paper-soft); }
 .carousel-stage { position: relative; overflow: hidden; aspect-ratio: 1 / 1; isolation: isolate; }
 .carousel-slide { position: absolute; top: 0; left: 11%; width: 78%; line-height: 0; border-radius: 140px 140px 0 0; overflow: hidden; transition: transform .35s ease, opacity .35s ease; }
 .carousel-slide img { display: block; width: 100%; height: auto; }
+.carousel-slide img:not([src]) { visibility: hidden; }
 .carousel-slide[data-position="active"] { transform: translateX(0); opacity: 1; z-index: 2; }
 .carousel-slide[data-position="previous"] { transform: translateX(-100%) scale(.88); opacity: .3; z-index: 1; pointer-events: none; }
 .carousel-slide[data-position="next"] { transform: translateX(100%) scale(.88); opacity: .3; z-index: 1; pointer-events: none; }

@@ -97,6 +97,30 @@
   let inView = true;
   let ready = false;
   let timer;
+  let navigation = 0;
+  let navigating = false;
+  const loaded = new Set();
+  const failed = new Set();
+  const pending = new Map();
+
+  function loadPhoto(i) {
+    if (pending.has(i)) return pending.get(i);
+    const img = slides[i].querySelector("img");
+    if (img.dataset.src) {
+      img.fetchPriority = "low";
+      img.srcset = img.dataset.srcset;
+      img.src = img.dataset.src;
+    }
+    const request = img.decode().then(() => {
+      loaded.add(i);
+      return true;
+    }, () => {
+      failed.add(i);
+      return false;
+    });
+    pending.set(i, request);
+    return request;
+  }
 
   function render() {
     slides.forEach((slide, i) => {
@@ -115,17 +139,28 @@
   function syncPlayback() {
     clearInterval(timer);
     // Keep a focused photo stable for keyboard users; controls never latch playback off.
-    const playing = ready && inView && !document.hidden && !slides.includes(document.activeElement);
+    const playing = ready && !navigating && inView && !document.hidden && !slides.includes(document.activeElement);
     carousel.dataset.playing = String(playing);
     if (playing) timer = setInterval(() => {
-      index = (index + 1) % slides.length;
+      let next = (index + 1) % slides.length;
+      while (next !== index && failed.has(next)) next = (next + 1) % slides.length;
+      if (!loaded.has(next)) return;
+      index = next;
       render();
     }, 1000);
   }
 
-  function goTo(next) {
-    index = (next + slides.length) % slides.length;
+  async function goTo(next, focusPhoto = false) {
+    const request = ++navigation;
+    navigating = true;
+    syncPlayback();
+    const target = (next + slides.length) % slides.length;
+    const success = await loadPhoto(target);
+    if (request !== navigation) return;
+    navigating = false;
+    if (success) index = target;
     render();
+    if (focusPhoto) slides[index].focus();
     syncPlayback();
   }
   carousel.querySelector("[data-previous]").addEventListener("click", () => goTo(index - 1));
@@ -135,8 +170,7 @@
     if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
     event.preventDefault();
     const slideFocused = slides.includes(document.activeElement);
-    goTo(index + (event.key === "ArrowRight" ? 1 : -1));
-    if (slideFocused) slides[index].focus();
+    goTo(index + (event.key === "ArrowRight" ? 1 : -1), slideFocused);
   });
   carousel.addEventListener("focusin", syncPlayback);
   carousel.addEventListener("focusout", () => queueMicrotask(syncPlayback));
@@ -148,8 +182,11 @@
   carousel.querySelectorAll("[data-carousel-controls]").forEach(control => { control.hidden = false; });
   render();
   syncPlayback();
-  slides[0].querySelector("img").decode().catch(() => {}).then(() => {
+  loadPhoto(0).then(async () => {
     ready = true;
     syncPlayback();
+    // First photo wins the network race; adjacent previews precede hidden slides.
+    const order = [...new Set([1, slides.length - 1, ...slides.map((_, i) => i)])];
+    for (const i of order) if (i !== 0) await loadPhoto(i);
   });
 })();

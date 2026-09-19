@@ -60,7 +60,7 @@ function heroCarousel(route, z) {
     const alt = z ? zh : en;
     const position = i === 0 ? "active" : i === 1 ? "next" : i === photos.length - 1 ? "previous" : "hidden";
     const srcset = `${file.startsWith("daily-") ? `${base}${file}-small.webp 480w, ` : ""}${base}${file}.webp ${width}w`;
-    return `<a class="carousel-slide" data-slide data-position="${position}" href="${base}${file}.webp" target="_blank" rel="noopener" tabindex="${i ? "-1" : "0"}"${i ? ' aria-hidden="true"' : ""} aria-label="${alt}${z ? "（在新标签页查看大图）" : " (open full-size photo in a new tab)"}"><img src="${base}${file}.webp" srcset="${srcset}" sizes="(max-width: 600px) 78vw, 440px" width="${width}" height="${height}" alt="${alt}"${i ? "" : ' fetchpriority="high"'} decoding="async"></a>`;
+    return `<a class="carousel-slide" data-slide data-position="${position}" href="${base}${file}.webp" target="_blank" rel="noopener" tabindex="${i ? "-1" : "0"}"${i ? ' aria-hidden="true"' : ""} aria-label="${alt}${z ? "（在新标签页查看大图）" : " (open full-size photo in a new tab)"}"><img ${i ? "data-src" : "src"}="${base}${file}.webp" ${i ? "data-srcset" : "srcset"}="${srcset}" sizes="(max-width: 600px) 78vw, 440px" width="${width}" height="${height}" alt="${alt}"${i ? "" : ' fetchpriority="high"'} decoding="async"></a>`;
   }).join("")}<div class="carousel-arrows" data-carousel-controls hidden><button type="button" data-previous aria-label="${z ? "上一张照片" : "Previous photo"}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${z ? "下一张照片" : "Next photo"}"><span aria-hidden="true">›</span></button></div></div><div class="carousel-toolbar" data-carousel-controls hidden><div class="carousel-dots" role="group" aria-label="${z ? "选择照片" : "Choose a photo"}">${photos.map((_,i)=>`<button type="button" data-go-to="${i}" aria-label="${z ? `查看第 ${i+1} 张照片` : `Show photo ${i+1}`}"${i ? "" : ' aria-current="true"'}><span aria-hidden="true"></span></button>`).join("")}</div><p class="visually-hidden" data-carousel-status aria-live="off" aria-atomic="true"></p></div></section>`;
 }
 function enhanceCards(html, route, z) {
@@ -80,7 +80,7 @@ export function applyEditorialLayout(html, route) {
   const local = route.replace(/^zh\//, "");
   const root = rootHref(route);
   html = html.replace('<main id="main"', '<main id="main" tabindex="-1"');
-  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260908-essay-bookends">\n<script src="${root}/assets/js/editorial.js?v=20260908-research-photos" defer></script>\n</head>`);
+  html = html.replace("</head>", `<link rel="stylesheet" href="${root}/assets/css/editorial.css?v=20260919-progressive-photos">\n<script src="${root}/assets/js/editorial.js?v=20260919-progressive-photos" defer></script>\n</head>`);
   html = html.replace("<body>", `<body class="editorial ${local === "index.html" ? "home-page" : local === "blog/index.html" ? "journal-page" : local.startsWith("posts/") ? "essay-page" : "document-page"}">`);
   html = html.replaceAll("lifephoto-2.png?v=20260630-photo", "portrait-study.webp").replaceAll("lifephoto-1.png?v=20260630-photo", "portrait-notes.webp");
   if (local === "index.html") {

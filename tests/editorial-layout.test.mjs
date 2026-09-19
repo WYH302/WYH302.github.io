@@ -110,7 +110,10 @@ test("both homepages retain the two original portraits plus four daily photos in
     assert.match(gallery, /aria-roledescription=/);
     assert.match(gallery, route.startsWith("zh/") ? /aria-label="生活照片"/ : /aria-label="Everyday photographs"/);
     assert.equal((gallery.match(/class="carousel-slide"/g) || []).length, 6);
-    const files = [...gallery.matchAll(/<img src="[^"]*\/([^/\"]+)"/g)].map(match => match[1]);
+    const files = [...gallery.matchAll(/<img (?:data-)?src="[^"]*\/([^/\"]+)"/g)].map(match => match[1]);
+    assert.equal((gallery.match(/<img src=/g) || []).length, 1);
+    assert.equal((gallery.match(/<img data-src=/g) || []).length, 5);
+    assert.equal((gallery.match(/fetchpriority="high"/g) || []).length, 1);
     assert.deepEqual(files, ["daily-coffee-walk.webp", "daily-window-seat.webp", "daily-city-walk.webp", "daily-cafe.webp", "portrait-study.webp", "portrait-notes.webp"]);
     assert.equal((gallery.match(/data-go-to=/g) || []).length, 6);
     assert.equal((gallery.match(/data-position="hidden"/g) || []).length, 3);
