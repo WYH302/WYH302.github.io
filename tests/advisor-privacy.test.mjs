@@ -23,7 +23,7 @@ const publicHtmlRoutes = publishEntries.flatMap(collectPublishedHtml);
 const forbiddenAdvisorLabels = /<dt>Advisor<\/dt>|<dt>导师<\/dt>|Advisor:|导师：/i;
 
 test("published pages omit advisor fields and identify only the site owner in author metadata", () => {
-  assert.equal(publicHtmlRoutes.length, 49);
+  assert.equal(publicHtmlRoutes.length, 51);
   for (const route of publicHtmlRoutes) {
     const html = fs.readFileSync(path.join(root, route), "utf8");
     assert.doesNotMatch(html, forbiddenAdvisorLabels, route);
