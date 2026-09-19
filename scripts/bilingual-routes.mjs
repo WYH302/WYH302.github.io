@@ -17,6 +17,7 @@ export const postSlugs = [
   "tenure-review-youth-and-university-renewal",
   "education-credential-scarcity-demographic-transition",
   "robots-beyond-human-form-and-hype",
+  "machine-native-interfaces-human-centered-ai",
 ];
 
 export const primaryBaseRoutes = [

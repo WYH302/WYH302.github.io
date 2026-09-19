@@ -23,6 +23,7 @@ export const publishEntries = Object.freeze([
   "posts/tenure-review-youth-and-university-renewal",
   "posts/education-credential-scarcity-demographic-transition",
   "posts/robots-beyond-human-form-and-hype",
+  "posts/machine-native-interfaces-human-centered-ai",
   "projects",
   "publications",
   "robots.txt",

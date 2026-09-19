@@ -11,6 +11,7 @@ export const imageCredits = {
 };
 export const essayThemes = {
   // Category, opening photograph, closing photograph. Keep each pair distinct.
+  "machine-native-interfaces-human-centered-ai": ["ai", "circuits", "city"],
   "robots-beyond-human-form-and-hype": ["ai", "circuits", "books"],
   "education-credential-scarcity-demographic-transition": ["society", "library", "books"],
   "youth-defensive-withdrawal-and-social-trust": ["society", "city", "architecture"],

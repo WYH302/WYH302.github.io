@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A silicon ghost in a human body: must human-centred AI imitate us? | Yonghao Wu (Leon)</title>
+<meta name="description" content="Language, tools, and the cost of backward compatibility: an argument for task-led machine interfaces without giving up human control.">
+<meta name="author" content="Yonghao Wu (Leon)">
+<meta name="theme-color" content="#8c1515">
+<link rel="canonical" href="https://wyh302.github.io/posts/machine-native-interfaces-human-centered-ai/">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-09-19T16:18:00+08:00">
+<meta property="og:title" content="A silicon ghost in a human body: must human-centred AI imitate us?">
+<meta property="og:description" content="Language, tools, and the cost of backward compatibility: an argument for task-led machine interfaces without giving up human control.">
+<meta property="og:url" content="https://wyh302.github.io/posts/machine-native-interfaces-human-centered-ai/">
+<meta property="og:image" content="https://wyh302.github.io/assets/images/circuits.webp">
+<link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/styles.css?v=20260722-bilingual">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="../../">Yonghao Wu (Leon)</a>
+<nav aria-label="Primary navigation"><ul class="nav-list">
+<li><a href="../../">About</a></li>
+<li><a href="../../projects/">Projects</a></li>
+<li><a href="../../publications/">Publications</a></li>
+<li><a aria-current="page" href="../../blog/">Blog</a></li>
+<li><a href="../../cv/">CV</a></li>
+<li><a href="../../contact/">Contact</a></li>
+</ul></nav></div></header>
+<main id="main" class="article">
+<p class="article-meta">Robotics and AI · Published <time datetime="2026-09-19T16:18:00+08:00">September 19, 2026 at 16:18 (UTC+8)</time></p>
+<h1>A silicon ghost in a human body: must human-centred AI imitate us?</h1>
+
+<p class="lead">After writing <a href="../robots-beyond-human-form-and-hype/">about humanoid robots</a>, I felt that one question remained: if we leave tools, environments, and communication unchanged and ask machines to accommodate us, how much avoidable work are we adding?</p>
+<p>I imagine this as a “silicon ghost trapped in a human body.” It is a metaphor, not a claim that present-day AI is conscious or becoming a higher-dimensional life form. My concern is a design habit: we ask machines to repeat the way people have always done things, then count the difficulty of imitation as a lack of intelligence.</p>
+<h2>Serving people does not require working like people</h2>
+<p>Human-centred design can mean respecting people's needs, dignity, and safety. It can also be misread as a requirement to speak, grasp, and climb stairs like a person. I support the former goal without assuming it requires the latter implementation.</p>
+<p>A hospital that needs dependable medicine delivery may not need a biped pushing a human trolley. Dedicated containers, automatic doors, and wheeled equipment might do the job. People remain the beneficiaries while engineers change how the machinery works. I want to know which compatibility requirements provide value and which persist because nobody has reconsidered them.</p>
+<h2>Natural language need not carry every internal message</h2>
+<p>“Tidy this up” often omits the objects involved, the completion criteria, and what must not be touched. People fill gaps through shared experience; a machine may guess wrong. If two programs already have object identifiers, positions, and target states, converting that information into prose for another model to interpret can add unnecessary translation and ambiguity.</p>
+<p>For such exchanges, I would prefer typed data, explicit units, and commands that programs can check. An object identifier specifies what to move, a coordinate frame and units specify the destination, and a returned status reports completion. The <a href="https://json-schema.org/learn/getting-started-step-by-step">official JSON Schema introduction</a> shows how to constrain data structure, types, and values. Such validation can check a format; it cannot decide whether a destination is safe or a task is sensible.</p>
+<p>Language also cannot be explained solely through vocal cords and lung capacity. Writing and signing carry language too, and much of our knowledge, requests, and negotiation lives in language. Letting people express intentions in familiar words can make a system easier to use. I question extending that entry point into every layer of computation, not the need for communication with users.</p>
+<h2>A vector is not a shared, lossless language by default</h2>
+<p>Reasoning without writing every intermediate step in words is worth investigating. The <a href="https://arxiv.org/abs/2412.06769">Coconut paper</a> explores feeding hidden states back as subsequent inputs so that some reasoning occurs in a continuous latent space. This is a specific method, not evidence that arbitrary models can already exchange mutually intelligible “thoughts.”</p>
+<p>Even vectors of the same size from two models need not mean the same thing. Exchanging internal representations still requires work on compatibility, training, task objectives, and error checking. Transmitting numbers bit for bit is different from preserving meaning, and neither guarantees a correct conclusion.</p>
+<p>I would not describe “microsecond, lossless tensor communication” as an established general capability that human conventions alone suppress. A useful experiment would compare natural language, structured messages, and latent representations on the same task, measuring accuracy, latency, data volume, and recovery costs. Those results could show what a different interface saves and what it gives up.</p>
+<h2>Change the objects as well as the robot</h2>
+<p>Cups, handles, keyboards, and stairs often suit human bodies. A robot operating among them may need complicated perception and control. But I would not treat every existing tool as an untouchable premise.</p>
+<p>Suppose a production line repeatedly moves containers. We could teach a robot to grasp varied rims, or standardize the containers' locating surfaces and clamping points. Tools could use quick-change couplings; doors could accept authorized opening commands. Designing the environment alongside the mechanism may be more useful than adding fingers and joints.</p>
+<p>Magnets, latches, and electrical connections have costs too. Magnetic coupling depends on materials and holding force; latches face tolerances, wear, and contamination. Electrical interfaces need power, communication, and fault isolation. Food, medical applications, and fragile or deformable objects may call for different contact methods. “Machine-native” should mean designed for the task, not another promise of a universal connector.</p>
+<p>Grasping would still matter. Household clutter, old parts at a repair site, and unexpected obstacles may have no standardized connection. General manipulation remains valuable there. My argument is to include environmental changes among the options, not to rebuild every setting.</p>
+<h2>Backward compatibility is a cost to assess</h2>
+<p>Standardizing the environment can look obvious if we consider only the robot. Replacing doors and containers, installing communications, and training maintenance staff also cost money and can interrupt operations. A more complicated robot that uses existing tools might still reduce the total deployment cost. The answer depends on the setting.</p>
+<p>A new factory and an occupied home cannot have the same answer. Designers can reserve machine interfaces in a new facility; in a home, they must also consider everyday use, accessibility, and emergency passage. Making a machine's job easier should not make people's lives harder.</p>
+<p>I want comparisons of complete arrangements for the same work: keep the environment and improve the robot, or modify the environment and simplify the robot. Alongside speed, measure deployment time, downtime, energy use, maintenance, and human intervention. A faster motion alone does not establish a more efficient system.</p>
+<h2>Removing imitation does not remove human control</h2>
+<p>Machines need not speak natural language to one another. People still need to know what permissions a system holds, what it did, where it failed, and how to stop it. Compact internal messages should not become a reason to refuse audit or explanation.</p>
+<p>Nor can we blame alignment problems on language alone. A precisely formatted command may contain the wrong objective, grant excessive authority, or lead to unsafe behaviour in an unfamiliar setting. A falling robot may have mechanical, perception, or control problems. A different protocol does not remove gravity, friction, or sensor noise.</p>
+<p>I therefore do not expect abandoning human interfaces to produce a frictionless future of unlimited acceleration. Reducing compatibility burdens can help, but the gains need measurement. Otherwise, “machine-native” becomes another untested story about the future.</p>
+<h2>I want more freedom in implementation</h2>
+<p>I would prefer a layered design. People express needs and approve consequential decisions in a form they understand. Internal components use structured data or validated representations where appropriate. Engineers design equipment and its surroundings together while preserving access for maintenance and human takeover. None of this requires a world that only machines can inhabit.</p>
+<p>For me, the “constraint of the body” is our habit of treating familiar methods as the only methods. A system can serve people without copying our anatomy or every operation we perform. I would judge it by the work it completes, its total cost, and whether the people using it retain meaningful choices and control.</p>
+<p><a class="button secondary" href="../../blog/">Back to blog</a></p>
+</main>
+<footer class="site-footer"><div class="footer-inner"><p>&copy; 2026 Yonghao Wu (Leon).</p><p><a href="../../contact/">Contact</a> | <a href="../../cv/">CV</a></p></div></footer>
+</body>
+</html>
