@@ -63,26 +63,20 @@
       </p>
 
       <h2>Design principle</h2>
-      <p>
-        The system should expose enough structure that a reader can ask:
-        which input produced this output, which constraint was active, which
-        model made the prediction, and what artifact can be audited afterward?
-        This is why I prefer pipelines that preserve intermediate results
-        rather than only showing a final generated answer.
-      </p>
+      <p>When a system fails, I want to follow the result back to its inputs and decisions. There should be a record of which model identified a defect, which rule accepted a layout, and what was changed later. A fluent explanation beside a final answer does not show whether that explanation matches the computation.</p>
+<p>Consider a hypothetical stone-nesting task. An order calls for pieces of specified dimensions while avoiding defects marked in a photograph. The first steps are to confirm units, the scale between image and material, and defect boundaries. “Use as little material as possible” also needs an objective that can be compared. Without those decisions, a tidy layout may solve the wrong problem.</p>
+<p>A candidate layout can then be checked for pieces outside the slab, overlaps, the agreed cutting clearance, and entry into excluded regions. If a check fails, the interface should identify the piece and constraint and retain the failed layout. Running the same checks after a revision shows whether the problem was resolved or merely hidden by a different drawing.</p>
 
       <h2>Reusable pattern</h2>
-      <ul class="detail-list">
-        <li>Represent inputs by modality and timestamp, not just by final feature tensors.</li>
-        <li>Separate learned inference from rule-based or geometric feasibility checks.</li>
-        <li>Keep output certificates, alarms, traces, or replay logs close to the final interface.</li>
-        <li>Keep the input, model version, and active constraints with each result so a failure can be reproduced.</li>
-      </ul>
+      <p>I would keep the necessary provenance by modality and timestamp, with the model version and active constraints attached to each result. Separating learned judgments from rule-based or geometry checks makes errors easier to locate. Output certificates, alarms, traces, or replay logs should be accessible beside the final interface, so users can follow a result back to its computation without finding a separate internal account.</p>
+
+      <h2>What a passed check still needs to say</h2>
+      <p>I want a check to state its scope. “This layout satisfies the current defect mask and cutting-clearance constraints” tells a user more than an isolated “verified” badge. It identifies assumptions still worth confirming: whether the mask is complete, whether the clearance suits the equipment, and whether the input describes the current slab.</p>
+      <p>If an operator changes a defect boundary, the old layout and check should be invalidated together or clearly retained as records for the old input. The system needs to recompute and show what the edit affects. I do not want auditability to matter only after an incident. Making these dependencies visible during ordinary use can help someone notice that they are relying on a stale result.</p>
 
       <h2>Learning from failures</h2>
-      <p>
-        What matters to me is being able to locate a failure. Which geometry constraint did a nesting layout violate? Which radar segment triggered an alarm? At what step did an agent use the wrong state? Keeping these traces gives the next revision something concrete to work from.
-      </p>
+      <p>One boundary remains in this design example: passing every geometry check does not establish that the defects were identified correctly. Inspection of the original image or material may still be needed. Separating recognition errors, unit errors, and layout errors tells us whether to change the model, the interface, or the constraints.</p>
+<p>The same questions apply elsewhere. A radar alarm needs its signal segment and corresponding video time. An agent acting on the wrong state needs a trace of when that state was read. Nor should logs be kept without limit: sensitive inputs need access restrictions and a retention period. I want the next person investigating a failure to have somewhere concrete to start, rather than more records for their own sake.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

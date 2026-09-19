@@ -54,42 +54,23 @@
       </figure>
 
       <h2>Motivation</h2>
-      <p>
-        Computational imaging systems often combine physical measurements,
-        reconstruction algorithms, and downstream perception models. As
-        multimodal foundation models and agentic workflows mature, a natural
-        question is whether an intelligent system can reason about the sensing
-        process itself: what to measure, how to reconstruct, which tools to
-        call, and when the result is reliable enough for a downstream decision.
-      </p>
+      <p>Computational imaging turns physical measurements into images, then uses those images to answer questions. I am interested in the choices a person makes along the way: what remains unclear, what another measurement should resolve, and whether a different reconstruction method is worth trying. Having an agent help make those choices is closer to my research interest than asking it to describe a finished image.</p>
 
       <h2>Research questions</h2>
-      <ul class="detail-list">
-        <li>How can multimodal models represent optical measurements, sparse observations, and reconstructed visual content in one reasoning loop?</li>
-        <li>How can agents use tools such as simulators, reconstruction modules, segmentation models, and evaluation scripts without hiding uncertainty?</li>
-        <li>How can a system decide when to request more measurements, change a sensing strategy, or defer a prediction?</li>
-      </ul>
+      <p>The representation question comes first: how can optical measurements, sparse observations, and reconstructed images enter one reasoning process without confusing the evidence each supplies? At the tool level, I would want simulators, reconstruction modules, segmentation models, and evaluation scripts to return inspectable results, including failures and uncertainty. That would give the next decision a basis: request more measurements, change the sensing strategy, or defer a prediction.</p>
 
       <h2>Possible direction</h2>
-      <p>
-        One promising direction is to treat the imaging pipeline as an
-        inspectable workflow. A multimodal agent can coordinate measurement
-        selection, reconstruction, visual analysis, and reporting, while each
-        step remains traceable. In this framing, the agent is not a black-box
-        replacement for physics or signal processing. It is a controller and
-        reasoning layer that helps connect physical priors, learned models, and
-        human-facing explanations.
-      </p>
+      <p>In the prototype I have in mind, the physical model and reconstruction tools remain in place. The agent chooses among them. Each choice keeps its inputs, call parameters, and outputs so I can inspect its basis. I would start with a small set of available actions and expand it only when there is a workable way to judge whether the preceding action helped.</p>
+<p>Consider a hypothetical imaging task with a limited measurement budget. After an initial reconstruction, an edge remains unclear. The agent could request another measurement or compare a different reconstruction method. I would want it to identify the uncertainty and explain which competing account the proposed action could rule out, rather than say that image quality needs improvement. This is a workflow to test, not a report of an experiment already completed.</p>
+<p>If two reconstruction methods disagree about an edge, their disagreement is not yet a reliable uncertainty estimate. The prototype should preserve it and check it using independent measurements or a predefined evaluation procedure. If the budget runs out, it should return the unresolved region and the reason for stopping. A convincing image must not stand in for missing measurements.</p>
+
+      <h2>Test one small decision first</h2>
+      <p>The first experiment need not give an agent control of an entire instrument. I would narrow the question to selecting the next measurement from a given set: does that choice help more than a fixed order? Candidate actions, costs, and available information would be specified in advance. Giving the agent just this decision makes it easier to distinguish an unhelpful choice from a failed tool call.</p>
+      <p>I would keep a simple selection rule in the comparison, such as a predefined measurement order, rather than test only against a deliberately weak pipeline. If the agent adds explanation and execution overhead without improving results under the same budget, that part of the workflow may not need it yet. Finding where more elaborate reasoning earns its cost would itself be useful.</p>
 
       <h2>Practical caution</h2>
-      <p>
-        An agent suggesting a measurement does not establish that the measurement
-        will help. I want the prototype to preserve inputs, reconstructions, and
-        uncertainty estimates at each step, so we can tell which judgments came
-        from measurements and which came from the model's own guesses. Testing
-        the idea will require comparisons with fixed imaging pipelines on both
-        measurement cost and reconstruction quality.
-      </p>
+      <p>I would give the fixed pipeline and the agent pipeline the same initial information and measurement budget, while recording extra computation, failed tool calls, and human intervention. Reconstruction quality matters, but so does usefulness for the downstream task. Obtaining a better image with twice the measurements differs from choosing better within the same budget.</p>
+<p>I particularly want to keep attempts that do not help. Did an added measurement repeat information already available? Did another algorithm change the appearance without improving the answer? Did the agent overlook a sensor constraint? Those records would help me decide whether to change the selection strategy, the tool interface, or the question I started with.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

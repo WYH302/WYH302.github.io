@@ -3,137 +3,189 @@ import fs from "node:fs";
 import { createHash } from "node:crypto";
 import test from "node:test";
 
-// User-approved full-length content restored from 21b8e1a^.
-// Update only for intentional, approved changes to these article bodies.
+// Full-length baseline restored from 21b8e1a^, then edited with user approval.
+// The 2026-09-19 pass preserves substance and expands examples; it is not a rollback.
+// Update these snapshots only after reviewing intentional body changes.
 const snapshots = [
   [
+    "posts/academic-hiring-risk-and-research-work/index.html",
+    "9ca30e82dc75ca50b6dbc242e55122c8b704588e9f9996ecdf76c83b59db6b55"
+  ],
+  [
     "posts/ai-audits-power-algorithmic-governance/index.html",
-    "867a92ca648be420b3f63f6bb0cec79500c3e81453f3ff7944aec964d3beaae0"
+    "62303e575e99d29d81b56fe90a1edb0b9df57c1f6b2c18978368e30ee062e8d0"
   ],
   [
     "posts/civil-service-security-and-ambition/index.html",
-    "e951b138a541dd4553372065bf74eb48689c67ebca64ca0f0ca3242a422a58cb"
+    "43f27eaf9f4b44e89a79722d97229761574f0bc68b0f2432a2c18e87b1ee5819"
   ],
   [
     "posts/education-credential-scarcity-demographic-transition/index.html",
-    "033ea5bdd7d1faff3ef41c036cab2fd33397d34bcec092fe6ec568b3648979cb"
+    "f3d41cd273b8e15a5230bcedcfd3ffd729ed377c363b0fbe699894ab52875b91"
   ],
   [
     "posts/grammar-expression-information-structure/index.html",
-    "0692669f0f4adcaae58eee915fd6da1716749dbdcacf71cc0ca38f535d6a85ac"
+    "ec615acdac8bb7160661aca775d1619b48d3bfb7d778803b85413c57b97941c4"
   ],
   [
     "posts/language-as-lossy-compression/index.html",
-    "8953a60c6f7f8d770ca2756d9dc8d639081104da5aa6aec697d3f81c257b9bb9"
+    "114be5157e6db2bb65c3f212be9139c9ddb8c7934f4dee0144815b3fc15c9417"
   ],
   [
     "posts/language-gravity-ai-bias-compression/index.html",
-    "e3541651dca5517785ac0ecfc880b5e7bd5fe7137a701344d88784a9c61f1e36"
+    "d80cd4cd0af81d353dc098cf1b96320fb828709f47ec5b767e2b6ec54691f444"
   ],
   [
     "posts/leakage-controlled-evaluation/index.html",
-    "e504a13af754d3b0c83e5f9c22eff63ab013e505266e1f0c63f36e7eaefd4ae9"
+    "b25da1508d9564ff975e8c9b6eadcc26aab2519805e64ce50019d763bca8e327"
+  ],
+  [
+    "posts/learning-without-context/index.html",
+    "908ab908a633d2553588e7ca64d95de35b661e9f01e22dce3fd9615b7d5a0850"
+  ],
+  [
+    "posts/machine-native-interfaces-human-centered-ai/index.html",
+    "c3ae4863ce16669d2a2d2798bddec450d5f097b8bf6fe6e64293a2293b4519c2"
   ],
   [
     "posts/multimodal-agents-computational-imaging/index.html",
-    "db9e209f1887b61411d5a085e06901ba2e34a3d5230555f2d20203a4a4e68f2d"
+    "3d5bcee14698cd26d35d1a6a29b677d49ae722ed3073ce51e549ab33a278caf7"
   ],
   [
     "posts/population-property-policy-feedback/index.html",
-    "cfae6eadda93bc266cacd1bb355e1a9edacfabb5c7ac56dddb5232feebabcab9"
+    "30de41319d4bf92c76b559fef41834d9a2ada370997aac9c0a35fc1667fc3362"
+  ],
+  [
+    "posts/robots-beyond-human-form-and-hype/index.html",
+    "dd135d6157f8efd40c1828e2f3cac5927729255de5bdc52ed09a1775c399a33e"
   ],
   [
     "posts/tailwinds-headwinds-path-dependence-2026/index.html",
-    "de320cdca3c4d25ae77ee05443de6a39ffb6f3d8719bcb7c024b4d3668f3aed8"
+    "69afac301d4bb683c83a28eeeb8744d20016465ef2ed91f859e0cabdb5667b84"
   ],
   [
     "posts/tenure-review-youth-and-university-renewal/index.html",
-    "274ff559e486582a70d9c188ad6a6895c1ffba76d03e5ec6ce1fa94cc1e15708"
+    "d54b96cc7555ec417f357bfa260c8643be93b7a6ecaf0aaee98985118d8b72a6"
   ],
   [
     "posts/three-pillars-programming-ai-economics/index.html",
-    "8864aa0b130973efa25c3ae1f39fcaf09c387a6f74fe1632fd21057770631a7c"
+    "46a0cc411b499be2bacc6df26cafd673356dbd0b34b327e0c21485c265ecf56e"
   ],
   [
     "posts/two-high-one-low-social-expectations/index.html",
-    "50423bd8f25757f558406b51f3989621c65ef79cc94d4d790274ceefedb4bbcc"
+    "4ec6af34cf0bcbcca0b8e5da705eca19210450f1e08e9ac760b3980f51feabb9"
   ],
   [
     "posts/verifiable-multimodal-engineering/index.html",
-    "833f3bb98b11351e93ed2d69b18bf5c513dd21993d869e619af3cac7b0e3f8fa"
+    "d1bc56dc767baa7f725d9cb2f32b59df7ae622d3ca270d2cb76ec75d607c5838"
   ],
   [
     "posts/youth-defensive-withdrawal-and-social-trust/index.html",
-    "6b5a109f4001d25e0a3abfd5e9c68cceb7dc5812ca5302abba91a85eab453c37"
+    "dfdf52ce3dbc80e8354ed8044d649aab887d40a92f788d0429fb6e9857edb8b7"
+  ],
+  [
+    "zh/posts/academic-hiring-risk-and-research-work/index.html",
+    "b5fb5729c8c70e9b0b23e5fb841c0e67767efcead6a90dcc537fe82693244b0e"
   ],
   [
     "zh/posts/ai-audits-power-algorithmic-governance/index.html",
-    "9464dce612e190ed2b8506e820fb18606b8f860c09f19435292d7654372a6e87"
+    "39c32b7f288432b38178edf5cbb6896a4d87f28c878fd85cef8159eea8e0d50a"
   ],
   [
     "zh/posts/civil-service-security-and-ambition/index.html",
-    "a47d689cb6e34d971d0fe1edf10f8cf156e0f29b49d3b7caefa265ab255c17fc"
+    "e22663ac5f4cfb24eabfc27083718bf3d14dab7c35ad395abd9212db53e14195"
   ],
   [
     "zh/posts/education-credential-scarcity-demographic-transition/index.html",
-    "9d275c67969db3d677f6593b554730f9244699bfce0175d4da3aa8611c76eb44"
+    "9ca960718521c5ba8b7e22c960b592429c99ba886dcc5f1b9e2bf5e86810b5f0"
   ],
   [
     "zh/posts/grammar-expression-information-structure/index.html",
-    "e833dc9d06073d9f8931dcdc00273c94b1012e25f962aff1d0388ab2e3c0d82f"
+    "c9cff9c67a31fdf8e05f2a9bdf05b4e22fa9e0099c7e68ee79a6f368930815b8"
   ],
   [
     "zh/posts/language-as-lossy-compression/index.html",
-    "1033014aeb5f69b5b833c8da7c22700abda307c8bb38b423df948f5f17a09915"
+    "671c11fb19b010270d5f8ef5b402fdb5bc9f4efd4a9866a7bb9c90c5c3b4a316"
   ],
   [
     "zh/posts/language-gravity-ai-bias-compression/index.html",
-    "f7fdb9d66dd0a6feb315d8cd997b47599bf03589b35d90c21102d76ae33e20ca"
+    "a787fa85ef6f0507d63901127409330cf26fbf4f1ef3b1014f6ebfcf41a958fd"
   ],
   [
     "zh/posts/leakage-controlled-evaluation/index.html",
-    "9c087dcea591ad76d11e4189e0d8b2007d35155f76668f18a845fad9d2f19087"
+    "5c98bee086fd420b8eff5aa0d67afc454d6c4a498f747f0c95df34fb395fa8e8"
+  ],
+  [
+    "zh/posts/learning-without-context/index.html",
+    "07a116d8130c6569ee3c7fba45d2890cd73e22a78205b28ec8b8983e0947e065"
+  ],
+  [
+    "zh/posts/machine-native-interfaces-human-centered-ai/index.html",
+    "609bb07ddaed3b0dbd37394621e80020824ff992f18db2c7f245e7d6053ba6c9"
   ],
   [
     "zh/posts/multimodal-agents-computational-imaging/index.html",
-    "24d110ea2d11ff66111b0d81f3f29263016b514b011f90ea44c917ab8278b693"
+    "1941aa7c6a315537ee4514fa35aa783e00a88e523a171e7b67f27d7ec4ab7bf2"
   ],
   [
     "zh/posts/population-property-policy-feedback/index.html",
-    "f6cf63278b50eff2209590c2311d9794aa29f632705859e35f0c21a685384114"
+    "6d7659bb07aabdfe93040e3a65a38820618f5dbccd960caf5bb00ac8a6edc33f"
+  ],
+  [
+    "zh/posts/robots-beyond-human-form-and-hype/index.html",
+    "c4f58d6cc9d9b67c5a382279bb618182984144fbda893fc347939d7a66274b56"
   ],
   [
     "zh/posts/tailwinds-headwinds-path-dependence-2026/index.html",
-    "252b74a56518d43f1556722983f2e6fd7a6cf1b16e7fd83680a0fcc45b441ad1"
+    "ab5028040047fa40d3a1cfbfef0c6789f3417f38047fb92a241a853ab515c098"
   ],
   [
     "zh/posts/tenure-review-youth-and-university-renewal/index.html",
-    "eddbe8dfbad6fc7ca1e9752608ae1d912c7e4d4564254e0be14186796b28f2ca"
+    "90ba63ef6d327104aa4471371d5265e62a2670bd85786aa619477dde44e18d20"
   ],
   [
     "zh/posts/three-pillars-programming-ai-economics/index.html",
-    "3ddb89767c030d78d692b34a7fc48ce76d7622407decb16eaf1ea463f3796474"
+    "2a9bfeed0fd1764184c7e297ab61fd730eb8c7cc11e44c2508714aa625faacbf"
   ],
   [
     "zh/posts/two-high-one-low-social-expectations/index.html",
-    "3601d227cc19c8e2e5b97e2913ded785a20775158412bca70daf5bc51e658c42"
+    "8a75237eca1ca6c899ea4a718ce1e59288fac492c62f595aa6da36d32c8db7f3"
   ],
   [
     "zh/posts/verifiable-multimodal-engineering/index.html",
-    "7c17d0fc04c0223da0583e66a2898e4e3dec2ca35ad84725a17ea220bce756da"
+    "ba9a667fe7d7baffae41daa4dea66dac4ee129dfcb3f11779c1196cd036dde52"
   ],
   [
     "zh/posts/youth-defensive-withdrawal-and-social-trust/index.html",
-    "d7a1050390473f37491147429aa47ba5d8deb7051da25e81e6f692e8c5d0b367"
+    "94239ac9024114bb26b222bffaca6d91583a0cc15659002e18ca808c9a4ec5a0"
   ]
 ];
 
-test("the 15 restored bilingual essays retain their approved full-length content", () => {
-  assert.equal(snapshots.length, 30);
+test("the 19 bilingual essays retain their approved editorial content", () => {
+  assert.equal(snapshots.length, 38);
   for (const [route, expected] of snapshots) {
     const html = fs.readFileSync(new URL("../" + route, import.meta.url), "utf8").replace(/\r\n/g, "\n");
     const body = html.match(/<main\b[^>]*>[\s\S]*?<\/main>/)?.[0];
     assert.ok(body, route);
     assert.equal(createHash("sha256").update(body).digest("hex"), expected, route);
+  }
+});
+
+test("the Chinese result-first example matches its English explanation", () => {
+  const zh = fs.readFileSync(new URL("../zh/posts/grammar-expression-information-structure/index.html", import.meta.url), "utf8");
+  const en = fs.readFileSync(new URL("../posts/grammar-expression-information-structure/index.html", import.meta.url), "utf8");
+  assert.match(zh, /结果在前更有效：“发布取消，因为安全检查没有通过。”/);
+  assert.match(en, /We are cancelling the launch because the safety check\s+failed/);
+});
+
+test("short research notes retain concrete examples and their evidence boundaries", () => {
+  const cases = [
+    ["multimodal-agents-computational-imaging", "待检验的流程设计，并非已有实验结果", "a workflow to test, not a report"],
+    ["leakage-controlled-evaluation", "测试期的分布已经参与了预处理", "test distribution has already influenced preprocessing"],
+    ["verifiable-multimodal-engineering", "假设的石材排样任务", "hypothetical stone-nesting task"],
+  ];
+  for (const [slug, zhText, enText] of cases) {
+    assert.ok(fs.readFileSync(new URL("../zh/posts/" + slug + "/index.html", import.meta.url), "utf8").includes(zhText), slug);
+    assert.ok(fs.readFileSync(new URL("../posts/" + slug + "/index.html", import.meta.url), "utf8").includes(enText), slug);
   }
 });

@@ -54,22 +54,11 @@
       </figure>
 
       <h2>The problem</h2>
-      <p>
-        A model can look better for reasons that have little to do with the
-        proposed method. Normalization statistics may be computed on the full
-        dataset. Retrieval memory may contain future samples. A time-series
-        split may let events from the same storm, market period, or scene leak
-        into both training and evaluation. These details can be small in code
-        and large in interpretation.
-      </p>
+      <p>When a score improves, I first want to know what extra information the model had. Normalization may use the whole dataset; retrieval memory may contain future samples. Observations from one storm, market period, or scene may cross the train–test boundary. Whether this is leakage depends on the question the experiment promises to answer: would that information be available at deployment?</p>
+<p>Consider a forecast of future observations where the mean and variance are first calculated over all years, before the training period is selected. The test distribution has already influenced preprocessing, even if no test labels reach the training function. The <a href="https://scikit-learn.org/1.8/common_pitfalls.html">scikit-learn common pitfalls guide</a> recommends splitting first and fitting preprocessing on the training portion only. The repair here is a change in calculation order, not a more elaborate model.</p>
 
       <h2>Protocol-first habits</h2>
-      <ul class="detail-list">
-        <li>Use train-only statistics for normalization, calibration, and memory construction.</li>
-        <li>Prefer chronological or entity-level splits when samples are temporally or structurally coupled.</li>
-        <li>Document what information is available at prediction time, especially for retrieval and adaptation methods.</li>
-        <li>Report condition-dependent effects instead of forcing every result into a single improvement narrative.</li>
-      </ul>
+      <p>For a conventional train-then-predict setup, I would first separate training, validation, and test data, fit preprocessing and construct memory on the training portion, and use validation to select methods and parameters. Time or entity dependence should guide the split according to deployment: predicting the future differs from handling an unseen storm or scene. Any separate calibration data should also have a declared role apart from the final test.</p><p>Retrieval and adaptation require an additional account of information available at prediction time. Every memory source and update should fit that boundary. If a method improves only under certain conditions, those conditions and the failed cases belong beside the results, rather than being arranged into an uninterrupted story of improvement.</p>
 
       <h2>Why it matters for current work</h2>
       <p>
@@ -81,14 +70,14 @@
         accidentally observe the wrong distributional signal.
       </p>
 
+      <h2>Put a prediction back on its timeline</h2>
+      <p>Suppose a prediction is made at four in the afternoon. A timestamp on every row is not enough: does it record when an event occurred or when the record became available? An event at three that was entered in the evening precedes four in an offline table but was unavailable to the system then. For this hypothetical task, I would keep occurrence and availability times separately instead of sorting by one date column.</p>
+      <p>Replaying old experiments raises a similar question. If a retrieval store now includes later corrections, using today’s store to answer yesterday’s question changes the information available to that prediction. I would retain data versions and memory-construction rules. A run using updated information could be reported as a separate setting, so readers can distinguish a better method from a better-informed one.</p>
+
       <h2>Practical standard</h2>
-      <p>
-        When I read an experiment, I first ask how the data was split, where the
-        normalization statistics came from, and what information the model could
-        see at prediction time. If an improvement disappears under another split,
-        that is worth recording too. Scores are only comparable once these
-        conditions are clear.
-      </p>
+      <p>I would trace a prediction backward: when was the sample observed, which fitted normalizer did it use, what records were in retrieval memory at that point, and did the model update afterward? These records make the information boundary more reproducible than a general assurance that training and test data were strictly separated.</p>
+<p>If an improvement disappears under a different split, I would distinguish the possible reasons. The original split may have leaked information. The new one may instead ask a harder generalization question, such as moving from familiar scenes to unseen ones. Both outcomes deserve reporting, but a lower score alone cannot establish leakage.</p>
+<p>A task allowing test-time adaptation also needs to specify which unlabeled inputs may be used, the update order, and when state is reset. A blanket ban on touching test inputs would not describe that task. I want the protocol stated in advance and each comparison interpreted under its declared information conditions.</p>
 
       <p><a class="button secondary" href="../../blog/">Back to blog</a></p>
     </main>

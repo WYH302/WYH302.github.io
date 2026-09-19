@@ -64,22 +64,20 @@
         Training corpora determine visibility first. Groups with the resources to publish, build databases, and maintain institutional websites leave more records in digital corpora. Dialect conversations, oral accounts, statements from temporary workers, and unarchived family memories rarely enter high-quality training sets. Models begin with a thinner record of these experiences.
       </p>
 
-      <p>
-        Tokenization and probabilistic modeling widen the gap. Common words tend to map to stable token units, while rare names, dialect spellings, and mixed-language phrases may split into many pieces. Models learn language by predicting the next token, so frequent continuations have more influence on the loss function. Common decoding strategies favor high-probability paths, which makes rare expressions harder to preserve.
-      </p>
+      <p>Tokenization and generation strategy deserve separate treatment. A word may be split differently by different tokenizers. Corpus frequency, the particular context, training, and generation settings all influence the output. Rarity alone does not establish that an expression will be deleted.</p>
+<p>The <a href="https://huggingface.co/docs/transformers/generation_strategies">Transformers generation guide</a>, for example, distinguishes greedy selection of the highest-probability next token from sampling a distribution. These do not all follow the same highest-probability path. To establish that a dialect expression is more often lost in rewriting, we would need to compare inputs and outputs under specified tasks and settings. “Language gravity” names the question I want to examine, not an already measured universal law.</p>
 
       <p>
         Human feedback changes the distribution again. If annotators prefer fluent, standard answers that match institutional language, the model learns a narrow definition of “good expression.” That standard can improve readability, but it can also classify hesitation, broken sentences, and unfamiliar narrative forms as low quality.
       </p>
 
       <h2>Compression reduces bandwidth and visibility</h2>
-      <p>
-        The phrase “low-dimensional expression by marginalized people” mistakes a property of the data for a property of the person. Their experiences are no less complex. When those experiences enter digital systems, they often leave shorter, fragmented, and sparsely annotated records. The training data reduces bandwidth, visibility, and context. It does not make the experience itself thinner.
-      </p>
+      <p>A thin record does not imply a simple experience. A conversation recorded only in part, or a form with a few fields, may preserve very little of what happened. That limited record is what the model receives. What it cannot recover should not be taken as evidence that the speaker had little to say or had not thought clearly.</p>
 
       <p>
         Consider a worker describing unpaid wages through dialect, omission, and a broken chronology. AI can turn the account into a polished written complaint, but the rewrite may merge uncertain dates, remove terms tied to local labor relations, or turn speculation into fact. The text looks more like an institutional document, while the status of its evidence has changed.
       </p>
+<p>Take that hypothetical account one step further. “I think it was near the end of the month; he said he would pay in a couple of days” becomes “He promised payment by the end of the month.” The hesitation has disappeared, and the time of the conversation has become the payment deadline. A careful rewrite would retain the uncertainty and ask the speaker to confirm the date. Helping organize language should not quietly decide the facts for its author.</p>
 
       <p>
         Translation and summarization produce similar losses. A kinship term may encode age, responsibility, and social distance, while a standard translation retains only “family member.” A hesitant account may become a firm conclusion in a summary. Readers get smoother prose, but the speaker loses cues that expressed relationships and uncertainty.

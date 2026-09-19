@@ -84,6 +84,7 @@
       <p>
         Machine scanning stops at the boundary of observability. A stack trace cannot reveal missing instrumentation, misleading metrics, cross-team business agreements, or the user impact of a rollback. Valuable debugging work moves earlier in the system: designing observability, deciding when evidence is sufficient, separating cause from correlation, and containing damage under uncertainty.
       </p>
+<p>Consider a hypothetical duplicate-order bug. An agent might locate retry logic, write a deduplication change, and add a test quickly. The team must still decide what makes two requests the same business operation, whether a timeout concealed an external side effect, and how existing orders should behave. Code can arrive in minutes without settling those boundaries. In this example, experience remains concentrated in the decisions that determine whether a repair is safe to release.</p>
 
       <h2>The third pillar: code taste faces commercial pricing</h2>
       <p>
